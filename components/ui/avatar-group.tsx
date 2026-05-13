@@ -30,7 +30,7 @@ const AvatarGroup = ({
           return (
             <div
               key={idx}
-              className="border-4 border-background rounded-full bg-background transition-all duration-300 relative"
+              className="rounded-full transition-all duration-300 relative p-[1.5px] bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]"
               style={{
                 width: size,
                 height: size,
@@ -97,17 +97,18 @@ const AvatarGroup = ({
         })}
         {extraCount > 0 && (
           <div
-            className="flex items-center justify-center bg-primary text-primary-foreground font-semibold border-4 border-background rounded-full"
+            className="rounded-full p-[1.5px] bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]"
             style={{
               width: size,
               height: size,
               marginLeft: -overlap,
               zIndex: 0,
-              fontSize: size * 0.32,
               transition: "margin-left 0.3s cubic-bezier(0.4,0,0.2,1)",
             }}
           >
-            +{extraCount}
+            <div className="flex items-center justify-center w-full h-full bg-primary text-primary-foreground font-semibold rounded-full" style={{ fontSize: size * 0.32 }}>
+              +{extraCount}
+            </div>
           </div>
         )}
       </div>

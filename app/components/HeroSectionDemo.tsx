@@ -12,11 +12,11 @@ export function HeroSectionDemo() {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen text-white flex flex-col items-center justify-center px-4 pt-28 overflow-hidden select-none"
+      className="relative w-full min-h-screen text-white flex flex-col items-center justify-center px-4 pt-28 sm:pt-80 overflow-hidden select-none"
       style={{ background: 'transparent !important', maxWidth: '100vw' }}
     >
       {/* 1. Unicorn Studio Animation (Background Layer) */}
-      <UnicornBackground 
+      <UnicornBackground
         scenePath="/bguni.json"
         className="pointer-events-none opacity-80"
       />
@@ -27,7 +27,7 @@ export function HeroSectionDemo() {
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none z-[2]" />
 
       {/* 🏷️ LOGO NO TOPO */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="absolute top-10 left-1/2 -translate-x-1/2 z-[40]"
@@ -73,7 +73,7 @@ export function HeroSectionDemo() {
         </motion.div>
       </div>
 
-      <div className="relative z-30 w-full max-w-4xl mx-auto text-center px-4">
+      <div className="relative z-30 w-full max-w-6xl mx-auto text-center px-4">
         {/* Superior Technical Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -96,24 +96,26 @@ export function HeroSectionDemo() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center w-full"
         >
-          <h1 className="text-5xl sm:text-7xl md:text-[95px] font-black tracking-tighter leading-[0.85] mb-6 w-full">
-            <span className="block text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.4)]">LANDING</span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 drop-shadow-2xl">
-              PAGES
-            </span>
+          <h1 className="flex flex-col items-center justify-center font-black tracking-tighter leading-[0.85] mb-6 w-full text-center">
+            <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-x-4 text-5xl sm:text-7xl md:text-[80px] sm:whitespace-nowrap">
+              <span className="text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.4)]">LANDING</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 drop-shadow-2xl">
+                PAGES
+              </span>
+            </div>
+            
+            <div className="relative mt-2 sm:mt-4">
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="absolute -bottom-2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"
+              />
+              <span className="text-3xl sm:text-5xl md:text-7xl italic text-white/95 drop-shadow-[0_0_25px_rgba(59,130,246,0.2)] whitespace-nowrap">
+                QUE VENDEM.
+              </span>
+            </div>
           </h1>
-          
-          <div className="relative mt-2">
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="absolute -bottom-2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"
-            />
-            <span className="text-3xl sm:text-5xl md:text-7xl font-black italic tracking-tighter text-white/95 drop-shadow-[0_0_25px_rgba(59,130,246,0.2)]">
-              QUE VENDEM.
-            </span>
-          </div>
         </motion.div>
 
         {/* Description Section */}
@@ -124,15 +126,15 @@ export function HeroSectionDemo() {
           className="mt-12 space-y-6"
         >
           <div className="flex items-center justify-center gap-4">
-             <div className="h-[1px] w-6 sm:w-10 bg-white/10" />
-             <p className="text-base sm:text-xl text-white font-medium tracking-tight">
-               Pronta em <span className="text-blue-400 italic font-bold">Minutos.</span>
-             </p>
-             <div className="h-[1px] w-6 sm:w-10 bg-white/10" />
+            <div className="h-[1px] w-6 sm:w-10 bg-white/10" />
+            <p className="text-base sm:text-xl text-white font-medium tracking-tight">
+              Pronta em <span className="text-blue-400 italic font-bold">Minutos.</span>
+            </p>
+            <div className="h-[1px] w-6 sm:w-10 bg-white/10" />
           </div>
-          
+
           <p className="text-xs sm:text-base text-white/60 leading-relaxed max-w-xl mx-auto font-medium px-4">
-            A união perfeita entre a velocidade do template e a exclusividade do design premium. 
+            A união perfeita entre a velocidade do template e a exclusividade do design premium.
             Crie experiências que convertem visitas em vendas reais.
           </p>
         </motion.div>
@@ -147,7 +149,7 @@ export function HeroSectionDemo() {
           <div className="relative group w-full max-w-[280px] sm:max-w-md">
             {/* Soft Ambient Glow */}
             <div className="absolute -inset-10 bg-blue-500/5 blur-[100px] pointer-events-none" />
-            
+
             <ShinyButton
               onClick={scrollToOferta}
               className="
@@ -172,17 +174,17 @@ export function HeroSectionDemo() {
 
           {/* Social Proof */}
           <div className="flex flex-col items-center gap-6 pb-20">
-            <div className="flex items-center gap-3 px-4 py-2.5 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md">
+            <div className="flex items-center gap-3 px-8 py-2.5 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md">
               <AvatarGroup
                 avatars={[
-                  { src: "https://i.pravatar.cc/150?img=12" },
-                  { src: "https://i.pravatar.cc/150?img=20" },
-                  { src: "https://i.pravatar.cc/150?img=33" },
-                  { src: "https://i.pravatar.cc/150?img=45" },
+                  { src: "/thumbs/ab.webp" },
+                  { src: "/thumbs/cliente1.webp" },
+                  { src: "/thumbs/cliente2.webp" },
+                  { src: "/thumbs/cliente3.webp" },
                 ]}
               />
               <span className="text-[9px] font-black text-white/40 tracking-widest uppercase">
-                458+ MEMBROS ATIVOS
+                + DE 1000 MEMBROS ATIVOS
               </span>
             </div>
           </div>
