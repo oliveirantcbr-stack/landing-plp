@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { ShinyButton } from "@/components/shiny-button";
 import { scrollToOferta } from "@/lib/scrollToOferta";
-import { Sparkles, Puzzle, Zap } from "lucide-react";
+import { Puzzle, Zap } from "lucide-react";
 import UnicornBackground from "./UnicornBackground";
 
 export function HeroSectionDemo() {
@@ -32,10 +32,13 @@ export function HeroSectionDemo() {
         animate={{ opacity: 1, y: 0 }}
         className="absolute top-10 left-1/2 -translate-x-1/2 z-[40]"
       >
-        <img
+        <Image
           src="/logo-160.webp"
           alt="Pack LP Logo"
+          width={160}
+          height={28}
           className="h-7 w-auto opacity-80 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+          priority
         />
       </motion.div>
 

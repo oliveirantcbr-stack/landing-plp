@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, CSSProperties } from "react";
+import React, { useState, useRef, useEffect, useCallback, CSSProperties } from "react";
 
 // --- Interfaces ---
 export interface Testimonial {
@@ -33,9 +33,9 @@ export const TestimonialStack = ({
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const totalCards = testimonials.length;
 
-  const navigate = (index: number) => {
+  const navigate = useCallback((index: number) => {
     setActiveIndex((index + totalCards) % totalCards);
-  };
+  }, [totalCards]);
 
   const handleDragStart = (
     e: React.MouseEvent | React.TouchEvent,
@@ -85,7 +85,7 @@ export const TestimonialStack = ({
       window.removeEventListener("mouseup", handleEnd);
       window.removeEventListener("touchend", handleEnd);
     };
-  }, [isDragging, dragOffset, activeIndex, totalCards]);
+  }, [isDragging, dragOffset, activeIndex, totalCards, navigate]);
 
   if (!testimonials.length) return null;
 

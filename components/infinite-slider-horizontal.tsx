@@ -27,28 +27,9 @@ export function InfiniteSlider({
   const translation = useMotionValue(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [key, setKey] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
   const observerRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-
-    return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     let controls: { stop: () => void } | undefined;

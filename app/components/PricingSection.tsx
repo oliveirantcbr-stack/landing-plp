@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 import {
   Card,
@@ -402,12 +403,11 @@ function PricingCard({
       border border-white/10
       px-4 py-3
     ">
-      <img
+      <Image
         src="/pagamentos.webp"
         alt="Formas de pagamento"
         width={220}
         height={80}
-        loading="lazy"
         className="w-full max-w-[220px] h-auto opacity-90"
       />
     </div>

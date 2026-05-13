@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 type ArcGalleryHeroProps = {
   images: string[];
@@ -124,16 +125,12 @@ export const ArcGalleryHero: React.FC<ArcGalleryHeroProps> = ({
                   "
                   style={{ transform: `rotate(${angle / 4}deg)` }}
                 >
-                  <img
+                  <Image
                     src={src}
                     alt={`Preview ${i + 1}`}
-                    className="block w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                     draggable={false}
-                    loading="lazy"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        "https://placehold.co/400x400/1a1a1a/ffffff?text=IMG";
-                    }}
                   />
                 </div>
               </div>

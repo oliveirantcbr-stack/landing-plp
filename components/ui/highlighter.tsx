@@ -47,12 +47,12 @@ export const TestimonialStack = ({ testimonials, visibleBehind = 2 }: Testimonia
   };
 
   // Usando useCallback para handleDragMove para evitar warning
-  const handleDragMove = (e: MouseEvent | TouchEvent) => {
-  if (!isDragging) return;
-  const clientX =
-    "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
-  setDragOffset(clientX - dragStartRef.current);
-};
+  const handleDragMove = useCallback((e: MouseEvent | TouchEvent) => {
+    if (!isDragging) return;
+    const clientX =
+      "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+    setDragOffset(clientX - dragStartRef.current);
+  }, [isDragging]);
 
 
   const handleDragEnd = useCallback(() => {

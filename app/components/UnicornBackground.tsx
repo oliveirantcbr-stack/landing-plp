@@ -10,10 +10,12 @@ interface UnicornBackgroundProps {
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     UnicornStudio: any;
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let globalPlayerInstance: any = null;
 
 export default function UnicornBackground({
@@ -44,10 +46,12 @@ export default function UnicornBackground({
           fps: 60,
           scale: 1,
           dpi: 1
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }).then((scene: any) => {
           console.log('🚀 SUCESSO: Player inicializado via elementId!');
           globalPlayerInstance = scene;
           if (scene && scene.play) scene.play();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }).catch((err: any) => {
           console.error('Erro no addScene:', err);
         });
