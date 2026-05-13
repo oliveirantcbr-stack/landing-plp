@@ -9,6 +9,14 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   // Opcional: Se você usa o Unicorn Studio, garanta que ele não tente minificar o que já está pronto
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+      },
+    ],
+  },
   swcMinify: true,
 }
 
