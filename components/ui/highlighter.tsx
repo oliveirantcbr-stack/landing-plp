@@ -46,39 +46,36 @@ export const TestimonialStack = ({ testimonials, visibleBehind = 2 }: Testimonia
     // Removido: cardRefs.current[activeIndex]?.classList.add('is-dragging');
   };
 
-  // Usando useCallback para handleDragMove para evitar warning
-  const handleDragMove = useCallback((e: MouseEvent | TouchEvent) => {
-    if (!isDragging) return;
-    const clientX =
-      "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
-    setDragOffset(clientX - dragStartRef.current);
-  }, [isDragging]);
 
-
-  const handleDragEnd = useCallback(() => {
-    if (!isDragging) return;
-    // Removido: cardRefs.current[activeIndex]?.classList.remove('is-dragging');
-    if (Math.abs(dragOffset) > 50) {
-      navigate(activeIndex + (dragOffset < 0 ? 1 : -1));
-    }
-    setIsDragging(false);
-    setDragOffset(0);
-  }, [isDragging, dragOffset, activeIndex, navigate]);
 
   useEffect(() => {
-    if (isDragging) {
-      window.addEventListener('mousemove', handleDragMove);
-      window.addEventListener('touchmove', handleDragMove);
-      window.addEventListener('mouseup', handleDragEnd);
-      window.addEventListener('touchend', handleDragEnd);
-    }
-    return () => {
-      window.removeEventListener('mousemove', handleDragMove);
-      window.removeEventListener('touchmove', handleDragMove);
-      window.removeEventListener('mouseup', handleDragEnd);
-      window.removeEventListener('touchend', handleDragEnd);
+    if (!isDragging) return;
+
+    const onMove = (e: MouseEvent | TouchEvent) => {
+      const clientX = "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+      setDragOffset(clientX - dragStartRef.current);
     };
-  }, [isDragging, handleDragMove, handleDragEnd]);
+
+    const onEnd = () => {
+      if (Math.abs(dragOffset) > 50) {
+        navigate(activeIndex + (dragOffset < 0 ? 1 : -1));
+      }
+      setIsDragging(false);
+      setDragOffset(0);
+    };
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove);
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchend', onEnd);
+
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('mouseup', onEnd);
+      window.removeEventListener('touchend', onEnd);
+    };
+  }, [isDragging, dragOffset, activeIndex, navigate]);
   
   if (!testimonials?.length) return null;
 

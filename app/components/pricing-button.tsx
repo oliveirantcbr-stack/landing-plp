@@ -1,6 +1,6 @@
 type ButtonColor = "white" | "blue" | "orange";
 
-function PricingButton({
+export function PricingButton({
   children,
   color,
   disabled = false,
