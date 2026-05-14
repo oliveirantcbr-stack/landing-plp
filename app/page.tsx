@@ -19,10 +19,7 @@ const TextureOverlay = dynamic(
   { ssr: false }
 );
 
-const ArcGallerySection = dynamic(
-  () => import("@/app/components/ArcGallerySection").then(mod => mod.ArcGallerySection),
-  { ssr: false }
-);
+
 
 export default function Page() {
   return (

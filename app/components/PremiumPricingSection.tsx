@@ -205,7 +205,7 @@ export function PremiumPricingSection() {
               onClick={() => window.open('https://pay.cakto.com.br/yzbek9g', '_blank')}
               highlightColor="#a855f7"
               highlightSubtleColor="#c084fc"
-              style={{ "--padding": "1.25rem 2rem", "--font-size": "13px" } as any}
+              style={{ "--padding": "1.25rem 2rem", "--font-size": "13px" } as React.CSSProperties}
               className="w-full bg-purple-600 border-purple-400 hover:bg-purple-500 text-white font-black tracking-[0.2em] md:tracking-[0.3em] uppercase rounded-xl md:rounded-[24px] shadow-xl group"
             >
               <div className="flex items-center justify-center gap-2">

@@ -4,6 +4,7 @@ import React from "react";
 import { InfiniteSlider } from "@/components/infinite-slider-horizontal";
 import { testimonialsPLP } from "./testimonials-data";
 import { Star, Quote } from "lucide-react";
+import { Testimonial } from "./TestimonialsStack";
 
 export function TestimonialsSection() {
   const row1 = testimonialsPLP.slice(0, 3);
@@ -59,7 +60,7 @@ export function TestimonialsSection() {
   );
 }
 
-function TestimonialCard({ testimonial }: { testimonial: any }) {
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div className="w-[300px] md:w-[400px] p-6 md:p-8 rounded-[32px] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex flex-col gap-6 hover:bg-white/[0.04] transition-all duration-300 group">
       {/* Stars & Quote Icon */}
@@ -72,9 +73,8 @@ function TestimonialCard({ testimonial }: { testimonial: any }) {
         <Quote className="text-white/10 group-hover:text-purple-500/20 transition-colors" size={24} />
       </div>
 
-      {/* Quote */}
       <p className="text-sm md:text-base text-white/80 leading-relaxed font-medium italic">
-        "{testimonial.quote}"
+        &quot;{testimonial.quote}&quot;
       </p>
 
       {/* Author */}

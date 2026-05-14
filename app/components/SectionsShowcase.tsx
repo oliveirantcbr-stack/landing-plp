@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { scrollToOferta } from "@/lib/scrollToOferta";
-import { isMobile } from "@/lib/isMobile";
 
 import { InfiniteSlider } from "@/components/infinite-slider-horizontal";
 import { CallToAction } from "@/components/cta-3";
@@ -50,7 +49,7 @@ export function SectionsShowcase() {
       window.removeEventListener("resize", checkIsMobile);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [mouseX, mouseY]);
 
   return (
     <section id="beneficios" className="relative w-full py-16 md:py-48 text-white bg-black">

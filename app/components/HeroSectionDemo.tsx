@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { ShinyButton } from "@/components/shiny-button";
 import { scrollToOferta } from "@/lib/scrollToOferta";
-import { Puzzle, Zap } from "lucide-react";
 import UnicornBackground from "./UnicornBackground";
 
 export function HeroSectionDemo() {
@@ -18,7 +17,7 @@ export function HeroSectionDemo() {
       setIndex((prev) => (prev + 1) % words.length);
     }, 2500);
     return () => clearInterval(timer);
-  }, []);
+  }, [words.length]);
 
   return (
     <section
@@ -117,7 +116,7 @@ export function HeroSectionDemo() {
                 onClick={scrollToOferta}
                 highlightColor="#a855f7"
                 highlightSubtleColor="#c084fc"
-                style={{ "--padding": "1.25rem 2.5rem", "--font-size": "11px" } as any}
+                style={{ "--padding": "1.25rem 2.5rem", "--font-size": "11px" } as React.CSSProperties}
                 className="font-black tracking-[0.2em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300"
               >
                 EXPERIMENTE POR 7 DIAS
@@ -148,7 +147,7 @@ export function HeroSectionDemo() {
               onClick={scrollToOferta}
               highlightColor="#a855f7"
               highlightSubtleColor="#c084fc"
-              style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as any}
+              style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
               className="w-full max-w-[280px] font-black tracking-[0.1em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 whitespace-nowrap"
             >
               EXPERIMENTE POR 7 DIAS

@@ -11,7 +11,10 @@ export function TextureOverlay() {
   const opacity = useTransform(scrollY, [0, 600], [0, 0.12]);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   if (!mounted) return null;

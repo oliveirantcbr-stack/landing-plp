@@ -76,7 +76,7 @@ export function Navbar() {
                 onClick={scrollToOferta}
                 highlightColor="#a855f7"
                 highlightSubtleColor="#c084fc"
-                style={{ "--padding": "0.7rem 1.4rem", "--font-size": "9px" } as any}
+                style={{ "--padding": "0.7rem 1.4rem", "--font-size": "9px" } as React.CSSProperties}
                 className="font-black tracking-widest uppercase rounded-full bg-purple-600 border-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.3)]"
               >
                 COMEÇAR AGORA
@@ -125,7 +125,7 @@ export function Navbar() {
                 }}
                 highlightColor="#a855f7"
                 highlightSubtleColor="#c084fc"
-                style={{ "--padding": "1.2rem 2rem", "--font-size": "11px" } as any}
+                style={{ "--padding": "1.2rem 2rem", "--font-size": "11px" } as React.CSSProperties}
                 className="w-full font-black tracking-widest uppercase rounded-2xl bg-purple-600 border-purple-400 shadow-[0_15px_30px_rgba(147,51,234,0.3)]"
               >
                 COMEÇAR AGORA

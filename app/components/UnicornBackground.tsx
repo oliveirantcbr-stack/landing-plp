@@ -62,7 +62,7 @@ export default function UnicornBackground({
         console.error("Erro crítico:", err);
       }
     }
-  }, [scriptLoaded, scenePath]);
+  }, [scriptLoaded, scenePath, scale]);
 
   return (
     <>
