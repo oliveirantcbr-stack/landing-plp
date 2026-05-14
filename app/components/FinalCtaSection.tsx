@@ -22,7 +22,7 @@ export default function FinalCtaSection() {
             text-center
           "
         >
-          {/* 🔵 BLOB AZUL — CANTO SUPERIOR ESQUERDO DO CARD */}
+          {/* 🟣 BLOB ROXO — CANTO SUPERIOR ESQUERDO DO CARD */}
           <div
             aria-hidden
             className="
@@ -30,7 +30,7 @@ export default function FinalCtaSection() {
               -top-20
               -left-20
               w-60 h-60
-              bg-blue-500/25
+              bg-purple-500/25
               rounded-full
               blur-[110px]
               pointer-events-none
@@ -99,7 +99,7 @@ export default function FinalCtaSection() {
               </div>
 
               <div className="flex items-center gap-2">
-                <RefreshCw className="size-4 text-blue-400" />
+                <RefreshCw className="size-4 text-purple-400" />
                 Cancelamento simples
               </div>
 

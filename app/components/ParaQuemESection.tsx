@@ -53,7 +53,7 @@ export function ParaQuemESection() {
           <div className="max-w-5xl mx-auto">
             {/* Badge */}
             <div
-  className="
+              className="
     inline-flex items-center gap-2.5
     px-4 py-2
     rounded-full
@@ -61,7 +61,7 @@ export function ParaQuemESection() {
     border border-gray-700
     mb-8
   "
->
+            >
               <div className="relative">
                 {/* Dot vermelho pulsando */}
                 <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_6px_#ff0000]"></div>
@@ -157,7 +157,7 @@ export function ParaQuemESection() {
       {/* SEGUNDA SEÇÃO - BENEFÍCIOS (ÍCONES VERDES) */}
       <section className="w-full py-28 relative">
         {/* BLOB CENTRAL VERDE - ABSOLUTO E VISÍVEL */}
-        <div 
+        <div
           className="
             absolute
             top-1/2
@@ -179,12 +179,12 @@ export function ParaQuemESection() {
             pointer-events-none
           "
         ></div>
-        
+
         <div className="text-center px-4 mb-16 sm:mb-20 md:mb-24 relative z-10">
           <div className="max-w-5xl mx-auto">
             {/* Badge */}
             <div
-  className="
+              className="
     inline-flex items-center gap-2.5
     px-4 py-2
     rounded-full
@@ -192,7 +192,7 @@ export function ParaQuemESection() {
     border border-gray-700
     mb-8
   "
->
+            >
               <div className="relative">
                 {/* Dot esmeralda pulsando */}
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_6px_#10b981]"></div>
@@ -310,15 +310,15 @@ interface GridItemProps {
 const GridItem = ({ area, icon: Icon, title, iconColor = "#ef4444" }: GridItemProps) => {
   // Detectar se é dispositivo móvel
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkIsMobile();
     window.addEventListener('resize', checkIsMobile);
-    
+
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
 
@@ -331,7 +331,7 @@ const GridItem = ({ area, icon: Icon, title, iconColor = "#ef4444" }: GridItemPr
 
   function handleMove(e: React.MouseEvent<HTMLDivElement>) {
     if (isMobile) return;
-    
+
     const rect = e.currentTarget.getBoundingClientRect();
     x.set(e.clientX - (rect.left + rect.width / 2));
     y.set(e.clientY - (rect.top + rect.height / 2));
@@ -400,15 +400,15 @@ interface BenefitGridItemProps {
 const BenefitGridItem = ({ area, icon: Icon, title, description, iconColor = "#10b981" }: BenefitGridItemProps) => {
   // Detectar se é dispositivo móvel
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkIsMobile();
     window.addEventListener('resize', checkIsMobile);
-    
+
     return () => window.removeEventListener('resize', checkIsMobile);
   }, []);
 
@@ -421,7 +421,7 @@ const BenefitGridItem = ({ area, icon: Icon, title, description, iconColor = "#1
 
   function handleMove(e: React.MouseEvent<HTMLDivElement>) {
     if (isMobile) return;
-    
+
     const rect = e.currentTarget.getBoundingClientRect();
     x.set(e.clientX - (rect.left + rect.width / 2));
     y.set(e.clientY - (rect.top + rect.height / 2));

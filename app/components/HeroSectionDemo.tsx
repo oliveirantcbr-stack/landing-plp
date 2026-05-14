@@ -1,7 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { ShinyButton } from "@/components/shiny-button";
 import { scrollToOferta } from "@/lib/scrollToOferta";
@@ -9,186 +10,162 @@ import { Puzzle, Zap } from "lucide-react";
 import UnicornBackground from "./UnicornBackground";
 
 export function HeroSectionDemo() {
+  const words = ["Minutos.", "Horas.", "Segundos."];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen text-white flex flex-col items-center justify-center px-4 pt-28 sm:pt-80 overflow-hidden select-none"
+      className="relative w-full min-h-screen text-white flex flex-col items-center overflow-hidden select-none"
       style={{ background: 'transparent !important', maxWidth: '100vw' }}
     >
       {/* 1. Unicorn Studio Animation (Background Layer) */}
       <UnicornBackground
         scenePath="/bguni.json"
-        className="pointer-events-none opacity-80"
+        className="absolute inset-0 pointer-events-none opacity-80"
+        scale={0.8}
       />
 
       {/* 🌑 Premium Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/90 pointer-events-none z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/95 pointer-events-none z-[1]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] pointer-events-none z-[1]" />
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none z-[2]" />
 
-      {/* 🏷️ LOGO NO TOPO */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="absolute top-10 left-1/2 -translate-x-1/2 z-[40]"
-      >
+      {/* 🏷️ LOGO (Desktop) - Restored with opacity-0 as requested */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-[50] hidden md:block opacity-0 pointer-events-none">
         <Image
           src="/logo-160.webp"
           alt="Pack LP Logo"
-          width={160}
-          height={28}
-          className="h-7 w-auto opacity-80 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+          width={130}
+          height={22}
+          className="h-5 w-auto"
           priority
         />
-      </motion.div>
-
-      {/* Floating Badges (Desktop Only) */}
-      <div className="absolute inset-0 z-20 pointer-events-none hidden xl:block">
-        <motion.div
-          animate={{ y: [0, -15, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[35%] left-[10%] flex items-center gap-3 px-4 py-2.5 bg-white/[0.02] backdrop-blur-3xl border border-white/5 rounded-xl"
-        >
-          <div className="p-1.5 bg-blue-500/10 rounded-lg border border-blue-500/20">
-            <Zap size={14} className="text-blue-400" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] uppercase tracking-widest text-white/30 font-bold">LP GENERATOR (NOVO)</span>
-            <span className="text-xs font-bold text-white/80 tracking-tight">Gere páginas completas</span>
-          </div>
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-[40%] right-[10%] flex items-center gap-3 px-4 py-2.5 bg-white/[0.02] backdrop-blur-3xl border border-white/5 rounded-xl"
-        >
-          <div className="p-1.5 bg-green-500/10 rounded-lg border border-green-500/20">
-            <Puzzle size={14} className="text-green-400" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[9px] uppercase tracking-widest text-white/30 font-bold">Plugins</span>
-            <span className="text-xs font-bold text-white/80 tracking-tight">WordPress Pro</span>
-          </div>
-        </motion.div>
       </div>
 
-      <div className="relative z-30 w-full max-w-6xl mx-auto text-center px-4">
-        {/* Superior Technical Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/[0.02] border border-white/10 mb-8 backdrop-blur-xl"
-        >
-          <div className="flex gap-1.5">
-            <div className="w-1 h-1 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]" />
-            <div className="w-1 h-1 rounded-full bg-purple-500 shadow-[0_0_8px_#a855f7]" />
+      {/* Main Layout Container - pt-32 on mobile to lower the headline */}
+      <div className="relative z-30 w-full min-h-screen flex flex-col items-center justify-between pt-32 pb-12 md:justify-center md:items-start md:px-24 md:pt-0 md:pb-0">
+        
+        {/* TOP GROUP: Headline & Typing Effect */}
+        <div className="flex flex-col items-center md:items-start w-full md:max-w-md lg:max-w-lg md:bg-black/30 md:backdrop-blur-3xl md:border md:border-white/10 md:p-10 md:rounded-[40px] md:shadow-2xl">
+          
+          {/* Version Badge - Animated Purple Border ONLY */}
+          <div className="relative p-[1px] rounded-full overflow-hidden mb-6 hidden md:inline-flex group">
+             <motion.div 
+               animate={{ rotate: 360 }}
+               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+               className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_150deg,#a855f7_180deg,transparent_210deg,transparent_360deg)] opacity-100"
+             />
+             <div className="relative px-3 py-1 rounded-full bg-black/90 flex items-center justify-center">
+                <span className="text-[8px] font-black tracking-[0.3em] text-purple-500 uppercase">Versão 2.0</span>
+             </div>
           </div>
-          <span className="text-[9px] uppercase tracking-[0.3em] font-black text-white/60">
-            NOVA VERSÃO 2.0
-          </span>
-        </motion.div>
 
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-center w-full"
-        >
-          <h1 className="flex flex-col items-center justify-center font-black tracking-tighter leading-[0.85] mb-6 w-full text-center">
-            <div className="flex flex-col sm:flex-row items-center justify-center sm:gap-x-4 text-5xl sm:text-7xl md:text-[80px] sm:whitespace-nowrap">
-              <span className="text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.4)]">LANDING</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 drop-shadow-2xl">
-                PAGES
+          {/* Headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center md:items-start w-full"
+          >
+            <h1 className="flex flex-col text-center md:text-left font-black tracking-tighter leading-[0.85] mb-4 w-full">
+              <span className="text-3xl sm:text-5xl md:text-[42px] lg:text-[48px] text-white uppercase drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                Landing Pages
               </span>
-            </div>
-            
-            <div className="relative mt-2 sm:mt-4">
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute -bottom-2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"
-              />
-              <span className="text-3xl sm:text-5xl md:text-7xl italic text-white/95 drop-shadow-[0_0_25px_rgba(59,130,246,0.2)] whitespace-nowrap">
-                QUE VENDEM.
+              <span className="text-2xl sm:text-4xl md:text-[34px] lg:text-[40px] italic text-white/95 mt-1 uppercase drop-shadow-[0_10px_20px_rgba(0,0,0,0.3)]">
+                Que Vendem.
               </span>
-            </div>
-          </h1>
-        </motion.div>
+            </h1>
 
-        {/* Description Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-12 space-y-6"
-        >
-          <div className="flex items-center justify-center gap-4">
-            <div className="h-[1px] w-6 sm:w-10 bg-white/10" />
-            <p className="text-base sm:text-xl text-white font-medium tracking-tight">
-              Pronta em <span className="text-blue-400 italic font-bold">Minutos.</span>
+            {/* Cycling Effect - Purple Color */}
+            <div className="flex items-center justify-center md:justify-start gap-2 mt-2 h-6">
+              <p className="text-xs sm:text-sm md:text-base text-white/60 font-bold tracking-tight">
+                Pronta em
+              </p>
+              <div className="min-w-[80px]">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={words[index]}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xs sm:text-sm md:text-base text-purple-500 italic font-black block"
+                  >
+                    {words[index]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Desktop Content Only (Social Proof) */}
+          <div className="hidden md:flex flex-col items-start mt-10 gap-8">
+            <p className="text-sm text-white/40 leading-relaxed max-w-sm font-medium">
+              A união perfeita entre a velocidade do template e a exclusividade do design premium. 
+              Crie experiências que convertem visitas em vendas reais.
             </p>
-            <div className="h-[1px] w-6 sm:w-10 bg-white/10" />
-          </div>
+            
+            <div className="flex flex-col items-start gap-8">
+              <ShinyButton
+                onClick={scrollToOferta}
+                highlightColor="#a855f7"
+                highlightSubtleColor="#c084fc"
+                style={{ "--padding": "1.25rem 2.5rem", "--font-size": "11px" } as any}
+                className="font-black tracking-[0.2em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300"
+              >
+                EXPERIMENTE POR 7 DIAS
+              </ShinyButton>
 
-          <p className="text-xs sm:text-base text-white/60 leading-relaxed max-w-xl mx-auto font-medium px-4">
-            A união perfeita entre a velocidade do template e a exclusividade do design premium.
-            Crie experiências que convertem visitas em vendas reais.
-          </p>
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-12 sm:mt-16 flex flex-col items-center gap-10"
-        >
-          <div className="relative group w-full max-w-[280px] sm:max-w-md">
-            {/* Soft Ambient Glow */}
-            <div className="absolute -inset-10 bg-blue-500/5 blur-[100px] pointer-events-none" />
-
-            <ShinyButton
-              onClick={scrollToOferta}
-              className="
-                w-full
-                relative
-                whitespace-nowrap
-                px-4 py-4 
-                sm:px-12 sm:py-6 
-                text-[9px] sm:text-xs 
-                font-black tracking-tighter sm:tracking-[0.2em] 
-                uppercase 
-                rounded-full
-                border border-white/10 
-                bg-white/[0.03]
-                hover:bg-white/10
-                transition-all duration-300
-              "
-            >
-              EXPERIMENTE POR 7 DIAS
-            </ShinyButton>
-          </div>
-
-          {/* Social Proof */}
-          <div className="flex flex-col items-center gap-6 pb-20">
-            <div className="flex items-center gap-3 px-8 py-2.5 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md">
-              <AvatarGroup
-                avatars={[
+              <div className="flex items-center gap-4 px-6 py-3 bg-white/[0.02] border border-white/5 rounded-2xl">
+                <AvatarGroup avatars={[
                   { src: "/thumbs/ab.webp" },
                   { src: "/thumbs/cliente1.webp" },
                   { src: "/thumbs/cliente2.webp" },
-                  { src: "/thumbs/cliente3.webp" },
-                ]}
-              />
-              <span className="text-[9px] font-black text-white/40 tracking-widest uppercase">
-                + DE 1000 MEMBROS ATIVOS
-              </span>
+                  { src: "/thumbs/cliente3.webp" }
+                ]} />
+                <span className="text-[10px] font-black text-white/40 tracking-widest uppercase">+1.000 MEMBROS</span>
+              </div>
             </div>
           </div>
-        </motion.div>
+        </div>
+
+        {/* BOTTOM GROUP (Mobile Only) */}
+        <div className="md:hidden flex flex-col items-center w-full px-8 gap-10 mt-20">
+          <p className="text-[11px] text-white/40 leading-relaxed text-center font-medium">
+            A união perfeita entre a velocidade do template e a exclusividade do design premium. 
+            Crie experiências que convertem visitas em vendas reais.
+          </p>
+          
+          <div className="flex flex-col items-center gap-6 w-full">
+            <ShinyButton
+              onClick={scrollToOferta}
+              highlightColor="#a855f7"
+              highlightSubtleColor="#c084fc"
+              style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as any}
+              className="w-full max-w-[280px] font-black tracking-[0.1em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 whitespace-nowrap"
+            >
+              EXPERIMENTE POR 7 DIAS
+            </ShinyButton>
+
+            <div className="flex items-center gap-3 px-5 py-2.5 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md">
+              <AvatarGroup avatars={[
+                { src: "/thumbs/ab.webp" },
+                { src: "/thumbs/cliente1.webp" },
+                { src: "/thumbs/cliente2.webp" },
+                { src: "/thumbs/cliente3.webp" }
+              ]} />
+              <span className="text-[9px] font-black text-white/20 tracking-[0.3em] uppercase">+1000 MEMBROS ATIVOS</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

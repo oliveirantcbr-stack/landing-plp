@@ -143,15 +143,15 @@ export function BonusSection() {
         </p>
 
         <ShinyButton
-  onClick={scrollToOferta}
-  aria-label="Experimentar o Pack Landing Page por 7 dias"
-  className="
+          onClick={scrollToOferta}
+          aria-label="Experimentar o Pack Landing Page por 7 dias"
+          className="
     transition-transform duration-300 ease-out 
     hover:scale-105
   "
->
-  QUERO COMEÇAR AGORA MESMO
-</ShinyButton>
+        >
+          QUERO COMEÇAR AGORA MESMO
+        </ShinyButton>
 
       </div>
     </section>

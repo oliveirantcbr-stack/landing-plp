@@ -6,6 +6,7 @@ import Script from "next/script";
 interface UnicornBackgroundProps {
   scenePath: string;
   className?: string;
+  scale?: number;
 }
 
 declare global {
@@ -21,6 +22,7 @@ let globalPlayerInstance: any = null;
 export default function UnicornBackground({
   scenePath,
   className = "",
+  scale = 1,
 }: UnicornBackgroundProps) {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,7 +46,7 @@ export default function UnicornBackground({
           production: false,
           lazyLoad: false,
           fps: 60,
-          scale: 1,
+          scale: scale,
           dpi: 1
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }).then((scene: any) => {

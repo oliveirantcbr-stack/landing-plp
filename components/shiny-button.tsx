@@ -6,14 +6,22 @@ interface ShinyButtonProps {
   children: React.ReactNode
   onClick?: () => void
   className?: string
+  style?: React.CSSProperties
+  highlightColor?: string
+  highlightSubtleColor?: string
 }
 
-export function ShinyButton({ children, onClick, className = "" }: ShinyButtonProps) {
+export function ShinyButton({ 
+  children, 
+  onClick, 
+  className = "", 
+  style = {},
+  highlightColor = "#a855f7", 
+  highlightSubtleColor = "#c084fc" 
+}: ShinyButtonProps) {
   return (
     <>
       <style jsx>{`
-
-
         @property --gradient-angle {
           syntax: "<angle>";
           initial-value: 0deg;
@@ -42,8 +50,8 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
           --shiny-cta-bg: #000000;
           --shiny-cta-bg-subtle: #1a1818;
           --shiny-cta-fg: #ffffff;
-          --shiny-cta-highlight: blue;
-          --shiny-cta-highlight-subtle: #8484ff;
+          --shiny-cta-highlight: ${highlightColor};
+          --shiny-cta-highlight-subtle: ${highlightSubtleColor};
           --animation: gradient-angle linear infinite;
           --duration: 3s;
           --shadow-size: 2px;
@@ -57,11 +65,11 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
           overflow: hidden;
           cursor: pointer;
           outline-offset: 4px;
-          padding: 1.25rem 2.5rem;
-          font-family: "Inter", sans-serif;
-          font-size: 1.125rem;
+          padding: var(--padding, 1.25rem 2.5rem);
+          font-family: var(--font-family, "Inter", sans-serif);
+          font-size: var(--font-size, 1.125rem);
           line-height: 1.2;
-          font-weight: 500;
+          font-weight: var(--font-weight, 500);
           border: 1px solid transparent;
           border-radius: 360px;
           color: var(--shiny-cta-fg);
@@ -196,7 +204,7 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
         }
       `}</style>
 
-      <button className={`shiny-cta ${className}`} onClick={onClick}>
+      <button className={`shiny-cta ${className}`} onClick={onClick} style={style}>
         <span>{children}</span>
       </button>
     </>

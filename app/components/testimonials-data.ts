@@ -28,7 +28,7 @@ export const testimonialsPLP: Testimonial[] = [
       { icon: ThumbsUp, text: "95%" },
       { icon: Eye, text: "1.5k+" }
     ],
-    avatarGradient: "linear-gradient(135deg,#f472b6,#ec4899)",
+    avatarGradient: "linear-gradient(135deg,#c084fc,#a855f7)",
   },
   {
     id: 3,
