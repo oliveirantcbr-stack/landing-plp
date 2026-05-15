@@ -6,106 +6,89 @@ import { scrollToOferta } from "@/lib/scrollToOferta";
 
 export default function FinalCtaSection() {
   return (
-    <section className="relative py-24 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
+    <section className="relative py-24 md:py-40 bg-[#0a0a0a] overflow-visible">
+      {/* 🔮 OVERLAPPING PURPLE BLOB (Bleeds to section above) */}
+      <div
+        aria-hidden
+        className="
+          absolute
+          -top-32
+          left-1/2
+          -translate-x-1/2
+          w-full
+          max-w-4xl
+          h-80
+          bg-purple-600/15
+          rounded-full
+          blur-[130px]
+          pointer-events-none
+          z-0
+        "
+      />
+
+      <div className="mx-auto max-w-5xl px-6 relative z-10">
         {/* CARD */}
         <div
           className="
             relative
-            overflow-visible
-            rounded-3xl
-            border border-white/10
-            bg-black/40
-            backdrop-blur-2xl
-            px-8 py-16
-            md:px-16
+            overflow-hidden
+            rounded-[40px]
+            border border-white/5
+            bg-zinc-950/40
+            backdrop-blur-3xl
+            px-8 py-20
+            md:px-20
             text-center
+            shadow-2xl
           "
         >
-          {/* 🟣 BLOB ROXO — CANTO SUPERIOR ESQUERDO DO CARD */}
-          <div
-            aria-hidden
-            className="
-              absolute
-              -top-20
-              -left-20
-              w-60 h-60
-              bg-purple-500/25
-              rounded-full
-              blur-[110px]
-              pointer-events-none
-            "
-          />
-
-          {/* 🟠 BLOB LARANJA — CANTO INFERIOR DIREITO DO CARD */}
-          <div
-            aria-hidden
-            className="
-              absolute
-              -bottom-20
-              -right-20
-              w-60 h-60
-              bg-orange-500/25
-              rounded-full
-              blur-[110px]
-              pointer-events-none
-            "
-          />
-
-          {/* REFLEXO GLASS */}
-          <div
-            aria-hidden
-            className="
-              absolute inset-0
-              rounded-3xl
-              bg-gradient-to-b
-              from-white/10
-              via-white/5
-              to-transparent
-              pointer-events-none
-            "
-          />
-
+          {/* INTERIOR DECORATION */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/5 blur-[100px] -mr-32 -mt-32" />
+          
           {/* CONTEÚDO */}
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl font-semibold leading-tight text-white">
-              Comece agora e acelere seus projetos
-            </h2>
-
-            <p className="mt-6 text-white/70 max-w-2xl mx-auto text-lg">
-              Tenha acesso imediato à biblioteca completa de seções, códigos e botões
-              com Elementor Pro, IA e atualizações semanais.
-            </p>
-
-            <div className="mt-12 flex justify-center">
-              <ShinyButton
-  onClick={scrollToOferta}
-  aria-label="Experimentar o Pack Landing Page por 7 dias"
-  className="
-    transition-transform duration-300 ease-out 
-    hover:scale-105
-  "
->
-  QUERO COMEÇAR AGORA MESMO
-</ShinyButton>
-
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="flex items-center gap-3 mb-8">
+               <div className="size-1.5 rounded-full bg-purple-500 shadow-[0_0_8px_#a855f7]" />
+               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40">Passo Final</span>
             </div>
 
-            {/* TRUST */}
-            <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-white/70">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="size-4 text-emerald-400" />
-                Garantia incondicional de 7 dias
+            <h2 className="text-4xl md:text-6xl font-black leading-none text-white uppercase tracking-tighter">
+              ACELERE SEUS <br />
+              <span className="text-purple-500 italic">PROJETOS AGORA.</span>
+            </h2>
+
+            <p className="mt-8 text-zinc-400 max-w-2xl mx-auto text-sm md:text-base font-medium leading-relaxed">
+              Tenha acesso imediato à biblioteca completa de seções, códigos e botões
+              com Elementor Pro, IA e atualizações semanais. O domínio técnico que você precisa está a um clique.
+            </p>
+
+            <div className="mt-12 flex justify-center w-full">
+              <ShinyButton
+                onClick={scrollToOferta}
+                highlightColor="#a855f7"
+                highlightSubtleColor="#c084fc"
+                style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
+                className="w-full md:w-auto max-w-[280px] md:max-w-none font-black tracking-widest uppercase rounded-full shadow-2xl shadow-purple-500/20"
+              >
+                COMEÇAR AGORA MESMO
+              </ShinyButton>
+            </div>
+
+            {/* TRUST BAR */}
+            <div className="mt-16 flex flex-wrap justify-center gap-8 md:gap-12 text-[10px] font-black text-white/30 uppercase tracking-widest border-t border-white/5 pt-10 w-full">
+              <div className="flex items-center gap-3 group hover:text-white/60 transition-colors">
+                <ShieldCheck className="size-4 text-emerald-500/50 group-hover:text-emerald-500" />
+                Garantia de 7 dias
               </div>
 
-              <div className="flex items-center gap-2">
-                <RefreshCw className="size-4 text-purple-400" />
-                Cancelamento simples
+              <div className="flex items-center gap-3 group hover:text-white/60 transition-colors">
+                <RefreshCw className="size-4 text-purple-500/50 group-hover:text-purple-500" />
+                Cancelamento Simples
               </div>
 
-              <div className="flex items-center gap-2">
-                <Zap className="size-4 text-yellow-400" />
-                Acesso imediato
+              <div className="flex items-center gap-3 group hover:text-white/60 transition-colors">
+                <Zap className="size-4 text-yellow-500/50 group-hover:text-yellow-500" />
+                Acesso Imediato
               </div>
             </div>
           </div>

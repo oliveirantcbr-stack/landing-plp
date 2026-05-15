@@ -11,7 +11,7 @@ export function TestimonialsSection() {
   const row2 = testimonialsPLP.slice(3, 6);
 
   return (
-    <section id="depoimentos" className="relative w-full py-24 md:py-32 overflow-hidden bg-black">
+    <section id="depoimentos" className="relative w-full py-24 md:py-32 overflow-hidden bg-[#0a0a0a]">
       {/* Background gradients with purple/blue theme */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/30 blur-[120px] rounded-full" />
@@ -24,7 +24,7 @@ export function TestimonialsSection() {
           bg-white/[0.03] border border-white/10 mb-4">
           <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
           <span className="text-xs sm:text-sm text-white/50 tracking-[0.2em] uppercase font-bold">
-            Social Proof
+            Prova Social
           </span>
         </div>
 
@@ -54,8 +54,8 @@ export function TestimonialsSection() {
       </div>
 
       {/* Side gradients for smooth transition */}
-      <div className="absolute inset-y-0 left-0 w-20 md:w-60 bg-gradient-to-r from-black to-transparent z-30 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-20 md:w-60 bg-gradient-to-l from-black to-transparent z-30 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-20 md:w-60 bg-gradient-to-r from-[#0a0a0a] to-transparent z-30 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-20 md:w-60 bg-gradient-to-l from-[#0a0a0a] to-transparent z-30 pointer-events-none" />
     </section>
   );
 }

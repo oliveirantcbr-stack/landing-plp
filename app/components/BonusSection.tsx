@@ -20,71 +20,73 @@ export function BonusSection() {
     {
       icon: Crown,
       title: "Elementor Pro",
-      desc: "Tenha acesso a recursos premium para criar páginas profissionais.",
+      desc: "Recursos premium para criar páginas profissionais.",
     },
     {
       icon: Settings,
-      title: "Aulas de Personalização",
-      desc: "Domine ajustes visuais e estilização avançada no Elementor.",
+      title: "Customização",
+      desc: "Domine ajustes visuais e estilização avançada.",
     },
     {
       icon: Sparkles,
-      title: "Aulas de Otimização",
-      desc: "Melhore performance, carregamento e usabilidade das páginas.",
+      title: "Otimização",
+      desc: "Melhore performance e carregamento das suas páginas.",
     },
     {
       icon: Package,
-      title: "Pack do Designer (NOVO)",
-      desc: "Elementos e estilos exclusivos para elevar o design das suas páginas.",
+      title: "Pack Designer",
+      desc: "Elementos exclusivos para elevar o design das páginas.",
     },
     {
       icon: Layers,
-      title: "Plugin Clonador de Página (NOVO)",
-      desc: "Clone páginas inteiras com um clique e acelere seu workflow.",
+      title: "Plugin Clonador",
+      desc: "Clone páginas inteiras com um clique no WordPress.",
     },
     {
       icon: Gift,
-      title: "Kit do Digital (NOVO)",
-      desc: "Materiais, ferramentas e utilitários essenciais para o dia a dia.",
+      title: "Kit Digital",
+      desc: "Materiais e ferramentas essenciais para o dia a dia.",
     },
     {
       icon: Bot,
-      title: "Assistente IA (NOVO)",
+      title: "Assistente IA",
       desc: "Gere ideias, textos e otimizações automaticamente.",
     },
     {
       icon: Zap,
-      title: "LP Generator (NOVO)",
-      desc: "Gere páginas completas em poucos cliques diretamente no Elementor.",
+      title: "LP Generator",
+      desc: "Gere seções completas diretamente no Elementor.",
     },
     {
       icon: Puzzle,
-      title: "Diversos Plugins Úteis",
-      desc: "Ferramentas selecionadas para aumentar produtividade no WordPress.",
+      title: "Plugins Elite",
+      desc: "Ferramentas selecionadas para aumentar produtividade.",
     },
   ];
 
   return (
-    <section className="w-full py-16 sm:py-20 md:py-28">
+    <section className="w-full py-12 md:py-20 relative overflow-hidden bg-[#0a0a0a]">
       {/* HEADER */}
-      <div className="text-center px-4 mb-12 sm:mb-14 md:mb-16 relative z-10">
+      <div className="text-center px-4 mb-10 md:mb-14 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-900/60 border border-gray-800 mb-5">
-            <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
-            <span className="text-xs sm:text-sm text-gray-300 tracking-wide">
-              BÔNUS INCLUÍDOS
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10 mb-5"
+          >
+            <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)] animate-pulse" />
+            <span className="text-[10px] text-white/60 font-black uppercase tracking-[0.2em]">
+              Ecossistema Elite
             </span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
-            Tudo que você precisa para criar páginas de alto nível
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white leading-[1.1] tracking-tighter uppercase mb-4">
+            Bônus que aceleram seu <span className="text-white/40 italic">Sucesso.</span>
           </h2>
 
-          <div className="w-24 sm:w-32 md:w-40 h-[2px] bg-white/30 mx-auto mt-6 sm:mt-8 rounded-full" />
-
-          <p className="text-gray-400 mt-4 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Recursos exclusivos que aumentam sua produtividade e aceleram seus
-            resultados.
+          <p className="text-white/30 text-sm md:text-base font-medium max-w-xl mx-auto leading-relaxed">
+            Ferramentas exclusivas integradas para elevar seu nível de entrega e produtividade.
           </p>
         </div>
       </div>
@@ -93,7 +95,7 @@ export function BonusSection() {
       <div
         className="
           max-w-6xl mx-auto px-4
-          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4
           relative z-10
         "
       >
@@ -103,31 +105,32 @@ export function BonusSection() {
           return (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.06 }}
-              className="p-[2px] rounded-2xl bg-gradient-to-br from-white/15 via-transparent to-transparent"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className="group"
             >
-              <div className="rounded-2xl bg-black/70 p-6 border border-white/10 backdrop-blur-xl h-full">
-                <motion.div
-                  whileHover={{
-                    scale: 1.1,
-                    filter:
-                      "drop-shadow(0 0 12px rgba(255,255,255,0.45))",
+              <div className="rounded-2xl bg-zinc-950/50 p-6 border border-white/[0.03] hover:border-white/10 hover:bg-zinc-900/50 transition-all duration-500 h-full flex flex-col gap-4 relative overflow-hidden">
+                {/* Noise Texture Overlay */}
+                <div
+                  className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
                   }}
-                  transition={{ duration: 0.25 }}
-                  className="mb-4 w-fit"
-                >
-                  <Icon className="h-8 w-8 text-white/85" />
-                </motion.div>
+                />
+                <div className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 transition-transform duration-500 group-hover:scale-110">
+                  <Icon className="h-5 w-5 text-white/90" />
+                </div>
 
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  {b.title}
-                </h3>
-
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {b.desc}
-                </p>
+                <div className="space-y-1.5">
+                  <h3 className="text-sm md:text-base font-black text-white uppercase tracking-tight">
+                    {b.title}
+                  </h3>
+                  <p className="text-white/40 text-[11px] md:text-xs font-medium leading-relaxed">
+                    {b.desc}
+                  </p>
+                </div>
               </div>
             </motion.div>
           );
@@ -135,25 +138,26 @@ export function BonusSection() {
       </div>
 
       {/* CTA FINAL */}
-      <div className="mt-16 flex flex-col items-center text-center relative z-10 max-w-xl mx-auto px-4">
-        <p className="text-gray-300 text-base mb-6">
-          Não perca tempo no design, foque no que importa: conversão.
-          <br />
-          Experimente o Pack Landing Page hoje.
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="mt-14 flex flex-col items-center text-center relative z-10 max-w-xl mx-auto px-4"
+      >
+        <p className="text-white/40 text-[12px] md:text-sm font-medium mb-8 leading-relaxed uppercase tracking-wider">
+          Domine o mercado com o arsenal completo.
         </p>
 
         <ShinyButton
           onClick={scrollToOferta}
-          aria-label="Experimentar o Pack Landing Page por 7 dias"
-          className="
-    transition-transform duration-300 ease-out 
-    hover:scale-105
-  "
+          highlightColor="#a855f7"
+          highlightSubtleColor="#c084fc"
+          style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
+          className="w-full md:w-auto max-w-[280px] md:max-w-none font-black tracking-widest uppercase rounded-full shadow-2xl shadow-purple-500/10"
         >
-          QUERO COMEÇAR AGORA MESMO
+          QUERO MEU ACESSO AGORA
         </ShinyButton>
-
-      </div>
+      </motion.div>
     </section>
   );
 }

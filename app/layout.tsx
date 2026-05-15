@@ -6,6 +6,7 @@ import Script from "next/script";
 
 import FloatingCTA from "@/app/components/FloatingCTA";
 import ScrollLockOnLoad from "@/app/components/ScrollLockOnLoad";
+import { Preloader } from "@/app/components/Preloader";
 
 /* ============================
    FONTE INTER (AUTO-HOSPEDADA)
@@ -61,6 +62,9 @@ export default function RootLayout({
             `,
           }}
         />
+
+        {/* 🚀 PRELOADER PREMIUM */}
+        <Preloader />
 
         {/* 🔒 FIX DEFINITIVO DO AUTO-SCROLL MOBILE */}
         <ScrollLockOnLoad />

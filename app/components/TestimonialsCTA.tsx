@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 
 export function TestimonialsCTA() {
   return (
-    <section className="relative w-full py-12 md:py-20 bg-black overflow-hidden flex flex-col items-center">
+    <section className="relative w-full py-12 md:py-20 bg-[#0a0a0a] overflow-hidden flex flex-col items-center">
 
       {/* 🔮 CONNECTING GRADIENTS */}
       <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-zinc-900/10 to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 inset-x-0 h-full bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-[5]" />
+      <div className="absolute bottom-0 inset-x-0 h-full bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent pointer-events-none z-[5]" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-6">
 

@@ -5,7 +5,7 @@ import { ShieldCheck, Lock, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/10 bg-black/50 backdrop-blur-xl">
+    <footer className="relative border-t border-white/10 bg-[#0a0a0a]/50 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-3">
 

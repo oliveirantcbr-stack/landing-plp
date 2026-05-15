@@ -23,12 +23,12 @@ const TextureOverlay = dynamic(
 
 export default function Page() {
   return (
-    <main className="bg-black min-h-screen">
+    <main className="bg-[#0a0a0a] min-h-screen">
       <Navbar />
-      
+
       {/* Fixed Grid Overlay that fades in after Hero */}
       <TextureOverlay />
-      
+
       {/* Hero Section - Elevated z-index to ensure visibility over any background grid */}
       <div className="relative z-10">
         <HeroSectionDemo />
@@ -37,7 +37,7 @@ export default function Page() {
       {/* Subsequent Sections - Standard relative z-10 */}
       <div className="relative z-10 bg-transparent">
         <SectionsShowcase />
-        <ParaVoceSection />   
+        <ParaVoceSection />
         <ParaQuemESection />
         <BonusSection />
         <TestimonialsSection />

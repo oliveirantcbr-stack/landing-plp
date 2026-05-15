@@ -62,7 +62,6 @@ export function SectionsShowcase() {
 
       {/* 🌑 SECTION FADES */}
       <div className="absolute top-0 left-0 right-0 h-48 md:h-72 bg-gradient-to-b from-black via-black/80 to-transparent z-20 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent z-20 pointer-events-none" />
 
       {/* HEADER CTA */}
       <div className="relative z-30 max-w-4xl mx-auto mb-12 md:mb-20 px-4">
@@ -222,7 +221,6 @@ export function SectionsShowcase() {
 
         {/* GRADIENT FADES TOP & BOTTOM */}
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-[2]" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-[2]" />
 
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-12 lg:gap-20">
 
@@ -276,7 +274,7 @@ export function SectionsShowcase() {
               </div>
 
               <div className="mt-6 md:mt-8 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-[7px] md:text-[8px] font-black text-white/20 uppercase tracking-[0.2em] group-hover:text-purple-400 group-hover:border-purple-500/30 transition-all">
-                STAGE 0{i + 1}
+                ETAPA 0{i + 1}
               </div>
             </motion.div>
           ))}
