@@ -49,22 +49,22 @@ export function HeroSectionDemo() {
       </div>
 
       {/* Main Layout Container - pt-32 on mobile to lower the headline */}
-      <div className="relative z-30 w-full min-h-screen flex flex-col items-center justify-between pt-32 pb-12 md:justify-center md:items-start md:px-24 md:pt-0 md:pb-0">
-        
+      <div className="relative z-30 w-full min-h-screen flex flex-col items-center justify-between md:justify-end lg:justify-center lg:items-start lg:px-24 pt-32 pb-12 lg:pt-0 lg:pb-0">
+
         {/* TOP GROUP: Headline & Typing Effect */}
-        <div className="flex flex-col items-center md:items-start w-full md:max-w-md lg:max-w-lg md:bg-black/30 md:backdrop-blur-3xl md:border md:border-white/10 md:p-10 md:rounded-[40px] md:shadow-2xl">
-          
+        <div className="flex flex-col items-center lg:items-start w-full md:max-w-2xl lg:max-w-lg md:bg-black/30 md:backdrop-blur-3xl md:border md:border-white/10 md:p-10 md:rounded-[40px] md:shadow-2xl">
+
           {/* Version Badge - Technical Square */}
           <div className="relative mb-6 hidden md:inline-flex group">
-             <div className="relative px-3 py-1 bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center">
-                {/* CORNER SQUARES */}
-                <div className="absolute -top-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
-                <div className="absolute -top-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
-                <div className="absolute -bottom-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
-                <div className="absolute -bottom-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
-                
-                <span className="text-[8px] font-black tracking-[0.3em] text-white/80 uppercase">Versão 2.0</span>
-             </div>
+            <div className="relative px-3 py-1 bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center">
+              {/* CORNER SQUARES */}
+              <div className="absolute -top-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+              <div className="absolute -top-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+              <div className="absolute -bottom-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+              <div className="absolute -bottom-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+
+              <span className="text-[8px] font-black tracking-[0.3em] text-white/80 uppercase">Versão 2.0</span>
+            </div>
           </div>
 
           {/* Headline */}
@@ -72,9 +72,9 @@ export function HeroSectionDemo() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center md:items-start w-full"
+            className="flex flex-col items-center lg:items-start w-full"
           >
-            <h1 className="flex flex-col text-center md:text-left font-black tracking-tighter leading-[0.85] mb-4 w-full">
+            <h1 className="flex flex-col text-center lg:text-left font-black tracking-tighter leading-[0.85] mb-2 w-full">
               <span className="text-3xl sm:text-5xl md:text-[42px] lg:text-[48px] text-white uppercase drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
                 Landing Pages
               </span>
@@ -84,7 +84,7 @@ export function HeroSectionDemo() {
             </h1>
 
             {/* Cycling Effect - Purple Color */}
-            <div className="flex items-center justify-center md:justify-start gap-2 mt-2 h-6">
+            <div className="flex items-center justify-center lg:justify-start gap-2 mt-1 h-6">
               <p className="text-xs sm:text-sm md:text-base text-white/60 font-bold tracking-tight">
                 Pronta em
               </p>
@@ -96,7 +96,7 @@ export function HeroSectionDemo() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="text-xs sm:text-sm md:text-base text-purple-500 italic font-black block"
+                    className="text-xs sm:text-sm md:text-base text-purple-500 italic font-black block text-center lg:text-left"
                   >
                     {words[index]}
                   </motion.span>
@@ -105,7 +105,7 @@ export function HeroSectionDemo() {
             </div>
 
             {/* 🛠️ TECH STACK HORIZONTAL (Mobile Only) */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -119,18 +119,18 @@ export function HeroSectionDemo() {
                 <div className="absolute -bottom-[3px] -right-[3px] size-1 bg-white shadow-[0_0_5px_#fff]" />
 
                 {/* ELEMENTOR */}
-                <div className="size-10 border-r border-white/10 flex items-center justify-center">
-                  <Image src="/elementor.svg" alt="Elementor" width={16} height={16} className="brightness-0 invert opacity-60" />
+                <div className="size-8 border-r border-white/10 flex items-center justify-center">
+                  <Image src="/elementor.svg" alt="Elementor" width={12} height={12} className="brightness-0 invert opacity-60" />
                 </div>
 
                 {/* WORDPRESS */}
-                <div className="size-10 border-r border-white/10 flex items-center justify-center">
-                  <Image src="/wordpress.svg" alt="WordPress" width={16} height={16} className="brightness-0 invert opacity-60" />
+                <div className="size-8 border-r border-white/10 flex items-center justify-center">
+                  <Image src="/wordpress.svg" alt="WordPress" width={12} height={12} className="brightness-0 invert opacity-60" />
                 </div>
 
                 {/* ITEMS COUNT */}
-                <div className="px-3 h-10 flex flex-col items-center justify-center">
-                  <span className="text-white font-black text-[10px] tracking-tighter">+250</span>
+                <div className="px-2 h-8 flex flex-col items-center justify-center">
+                  <span className="text-white font-black text-[9px] tracking-tighter">+250</span>
                   <span className="text-white/40 font-black text-[4px] uppercase tracking-[0.2em]">Itens</span>
                 </div>
               </div>
@@ -138,12 +138,13 @@ export function HeroSectionDemo() {
           </motion.div>
 
           {/* Desktop Content Only (Social Proof) */}
-          <div className="hidden md:flex flex-col items-start mt-10 gap-8">
-            <p className="text-sm text-white/40 leading-relaxed max-w-sm font-medium">
-              A união perfeita entre a velocidade do template e a exclusividade do design premium. 
+          <div className="hidden md:flex flex-col items-center lg:items-start mt-10 gap-8">
+            <p className="text-sm text-white/40 leading-relaxed max-w-sm font-medium text-balance">
+              A união perfeita entre a velocidade do template <br />
+              e a exclusividade do design premium. <br />
               Crie experiências que convertem visitas em vendas reais.
             </p>
-            
+
             <div className="flex flex-col items-start gap-8">
               <ShinyButton
                 onClick={scrollToOferta}
@@ -170,11 +171,12 @@ export function HeroSectionDemo() {
 
         {/* BOTTOM GROUP (Mobile Only) */}
         <div className="md:hidden flex flex-col items-center w-full px-8 gap-10 mt-20">
-          <p className="text-[11px] text-white/40 leading-relaxed text-center font-medium">
-            A união perfeita entre a velocidade do template e a exclusividade do design premium. 
+          <p className="text-[11px] text-white/40 leading-relaxed text-center font-medium text-balance">
+            A união perfeita entre a velocidade do template <br />
+            e a exclusividade do design premium. <br />
             Crie experiências que convertem visitas em vendas reais.
           </p>
-          
+
           <div className="flex flex-col items-center gap-6 w-full">
             <ShinyButton
               onClick={scrollToOferta}
@@ -199,7 +201,7 @@ export function HeroSectionDemo() {
         </div>
 
         {/* 🛠️ TECH STACK VERTICAL CARD (Desktop Only) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -207,7 +209,7 @@ export function HeroSectionDemo() {
         >
           {/* Main Container - Square & Technical */}
           <div className="relative bg-black/60 backdrop-blur-2xl border border-white/20 flex flex-col">
-            
+
             {/* CORNER SQUARES */}
             <div className="absolute -top-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
             <div className="absolute -top-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
@@ -216,23 +218,23 @@ export function HeroSectionDemo() {
 
             {/* ELEMENTOR */}
             <div className="size-20 border-b border-white/10 flex items-center justify-center group hover:bg-white/5 transition-colors cursor-default">
-              <Image 
-                src="/elementor.svg" 
-                alt="Elementor" 
-                width={32} 
-                height={32} 
-                className="brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" 
+              <Image
+                src="/elementor.svg"
+                alt="Elementor"
+                width={32}
+                height={32}
+                className="brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
               />
             </div>
 
             {/* WORDPRESS */}
             <div className="size-20 border-b border-white/10 flex items-center justify-center group hover:bg-white/5 transition-colors cursor-default">
-              <Image 
-                src="/wordpress.svg" 
-                alt="WordPress" 
-                width={32} 
-                height={32} 
-                className="brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" 
+              <Image
+                src="/wordpress.svg"
+                alt="WordPress"
+                width={32}
+                height={32}
+                className="brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
               />
             </div>
 

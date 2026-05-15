@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Check, Sparkles, ShieldCheck, ArrowRight, Zap, Trophy, Rocket } from "lucide-react";
 import { ShinyButton } from "@/components/shiny-button";
 import { Spotlight } from "@/components/spotlight-new";
+import { cn } from "@/lib/utils";
 
 const SHARED_FEATURES = [
   "Gerador Landing Page ( exclusivo )",
@@ -24,7 +25,7 @@ const SHARED_FEATURES = [
 /* 🛠️ REFINED TECHNICAL BADGE */
 function TechBadge({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`relative inline-flex items-center px-4 py-1.5 bg-white/[0.03] border border-white/10 whitespace-nowrap ${className}`}>
+    <div className={cn("relative px-4 py-1.5 bg-zinc-900 border border-white/20 flex items-center justify-center", className)}>
       <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
       <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
       <div className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 w-1.5 h-1.5 bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
@@ -39,7 +40,7 @@ function TechBadge({ children, className = "" }: { children: React.ReactNode; cl
 
 export function PremiumPricingSection() {
   return (
-    <section id="oferta" className="relative w-full py-16 md:py-32 overflow-hidden bg-[#0a0a0a] flex flex-col items-center">
+    <section id="oferta" className="relative w-full py-12 md:py-20 bg-[#0a0a0a] overflow-hidden flex flex-col items-center">
 
       {/* 🔮 ULTRA PREMIUM BACKGROUND */}
       <div className="absolute inset-0 z-0">
@@ -50,6 +51,11 @@ export function PremiumPricingSection() {
           className="object-cover opacity-70 mix-blend-screen"
           priority
         />
+
+        {/* Seamless background glows to match TestimonialsSection */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-purple-500/20 blur-[100px] rounded-full" />
+        </div>
 
         {/* ⚡ FLASH EFFECT - Animated subtle flash every 5 seconds */}
         <motion.div
@@ -66,11 +72,11 @@ export function PremiumPricingSection() {
           className="absolute inset-0 bg-purple-500/10 pointer-events-none"
         />
 
-        {/* Superior and Inferior Gradients */}
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent" />
-
         {/* Subtle center overlay */}
         <div className="absolute inset-0 bg-[#0a0a0a]/40" />
+
+        {/* 🏔️ TOP GRADIENT TRANSITION - SEAMLESS MATCH WITH CTA */}
+        <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a] to-transparent z-10" />
 
         <Spotlight
           gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(270, 100%, 60%, .12) 0, hsla(270, 100%, 50%, .04) 50%, transparent 80%)"
@@ -89,10 +95,10 @@ export function PremiumPricingSection() {
             viewport={{ once: true }}
             className="mb-6"
           >
-            <TechBadge className="bg-purple-500/10 border-purple-500/20 px-6 py-2">
+            <TechBadge className="bg-purple-500/10 border-purple-500/20 px-6 py-2 w-fit mx-auto">
               <div className="flex items-center gap-2">
                 <Sparkles className="size-3 text-purple-400" />
-                Acesso Exclusivo
+                <span className="text-[10px] font-black uppercase tracking-[0.2em]">Acesso Exclusivo</span>
               </div>
             </TechBadge>
           </motion.div>
@@ -156,11 +162,17 @@ export function PremiumPricingSection() {
             viewport={{ once: true }}
             className="w-full md:w-[60%] bg-zinc-900 border-2 border-purple-500/40 p-8 md:p-12 rounded-[30px] md:rounded-[40px] relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(147,51,234,0.1)] flex flex-col"
           >
-            {/* Top Badge */}
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30">
-              <TechBadge className="bg-purple-600 border-purple-400 py-2.5 px-6 shadow-xl shadow-purple-600/30">
-                <span className="tracking-[0.15em] md:tracking-[0.3em] text-white font-black">MELHOR CUSTO-BENEFÍCIO</span>
-              </TechBadge>
+            {/* Top Badge - Solid White Technical Block */}
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30">
+              <div className="relative bg-white border border-white px-8 py-3 shadow-[0_20px_40px_rgba(255,255,255,0.15)] flex items-center justify-center">
+                {/* TECHNICAL CORNER SQUARES */}
+                <div className="absolute -top-[2px] -left-[2px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
+                <div className="absolute -top-[2px] -right-[2px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
+                <div className="absolute -bottom-[2px] -left-[2px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
+                <div className="absolute -bottom-[2px] -right-[2px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
+                
+                <span className="tracking-[0.2em] md:tracking-[0.3em] text-black font-black text-[10px] md:text-[11px] whitespace-nowrap">MELHOR CUSTO-BENEFÍCIO</span>
+              </div>
             </div>
 
             {/* TOP HEADER AREA */}
