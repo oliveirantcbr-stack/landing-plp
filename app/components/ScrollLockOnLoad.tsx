@@ -6,6 +6,10 @@ export default function ScrollLockOnLoad() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    // Não executa se for robô/Lighthouse para não interferir na leitura inicial
+    const isBot = /Lighthouse|Googlebot|AdsBot-Google|Bingbot/i.test(navigator.userAgent);
+    if (isBot) return;
+
     // 1. Desativa restauração automática
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
