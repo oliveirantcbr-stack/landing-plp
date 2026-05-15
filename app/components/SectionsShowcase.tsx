@@ -176,10 +176,16 @@ export function SectionsShowcase() {
             <div className="block md:hidden w-full max-w-[320px] mx-auto relative z-20">
               <div className="relative bg-[#1a1a1a] rounded-[24px] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden">
                 <div className="rounded-[18px] overflow-hidden bg-black">
-                  <div className="h-6 bg-[#262626] flex items-center px-4 gap-1.5">
-                    <div className="size-2 rounded-full bg-[#ff5f56]" />
-                    <div className="size-2 rounded-full bg-[#ffbd2e]" />
-                    <div className="size-2 rounded-full bg-[#27c93f]" />
+                  <div className="h-6 bg-[#262626] flex items-center justify-between px-4">
+                    <div className="flex gap-1.5">
+                      <div className="size-2 rounded-full bg-[#ff5f56]" />
+                      <div className="size-2 rounded-full bg-[#ffbd2e]" />
+                      <div className="size-2 rounded-full bg-[#27c93f]" />
+                    </div>
+                    <div className="flex-1 flex justify-center">
+                      <span className="text-[7px] text-white/30 font-medium tracking-tight">app.packlp.com</span>
+                    </div>
+                    <div className="w-[30px]" /> {/* Spacer to balance the dots */}
                   </div>
                   <video autoPlay loop muted playsInline poster="/thumbs/1.webp" className="w-full h-auto object-cover">
                     <source src="/plp.webm" type="video/webm" />

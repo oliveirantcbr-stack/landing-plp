@@ -9,15 +9,39 @@ import { scrollToOferta } from "@/lib/scrollToOferta";
 import UnicornBackground from "./UnicornBackground";
 
 export function HeroSectionDemo() {
-  const words = ["Minutos.", "Horas.", "Segundos."];
-  const [index, setIndex] = useState(0);
+  const words = ["Minutos.", "Segundos.", "Horas."];
+  const [currentText, setCurrentText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [speed, setSpeed] = useState(150);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % words.length);
-    }, 2500);
-    return () => clearInterval(timer);
-  }, [words.length]);
+    const handleTyping = () => {
+      const fullText = words[wordIndex];
+      
+      if (!isDeleting) {
+        setCurrentText(fullText.substring(0, currentText.length + 1));
+        setSpeed(150);
+        
+        if (currentText === fullText) {
+          setIsDeleting(true);
+          setSpeed(2000); // Pause at end
+        }
+      } else {
+        setCurrentText(fullText.substring(0, currentText.length - 1));
+        setSpeed(100);
+        
+        if (currentText === "") {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % words.length);
+          setSpeed(500); // Pause before next word
+        }
+      }
+    };
+
+    const timer = setTimeout(handleTyping, speed);
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, wordIndex, words, speed]);
 
   return (
     <section
@@ -84,23 +108,19 @@ export function HeroSectionDemo() {
             </h1>
 
             {/* Cycling Effect - Purple Color */}
-            <div className="flex items-center justify-center lg:justify-start gap-2 mt-1 h-6">
+            <div className="flex items-center justify-center lg:justify-start gap-1 mt-1 h-6">
               <p className="text-xs sm:text-sm md:text-base text-white/60 font-bold tracking-tight">
                 Pronta em
               </p>
               <div className="min-w-[80px]">
-                <AnimatePresence mode="wait">
+                <span className="text-xs sm:text-sm md:text-base text-purple-500 italic font-black block text-center lg:text-left min-h-[1.5em] flex items-center justify-center lg:justify-start">
+                  {currentText}
                   <motion.span
-                    key={words[index]}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-xs sm:text-sm md:text-base text-purple-500 italic font-black block text-center lg:text-left"
-                  >
-                    {words[index]}
-                  </motion.span>
-                </AnimatePresence>
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="inline-block w-[2px] h-[1em] bg-purple-500 ml-1"
+                  />
+                </span>
               </div>
             </div>
 
@@ -109,7 +129,7 @@ export function HeroSectionDemo() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
-              className="flex md:hidden mt-6 mb-2"
+              className="flex md:hidden mt-1 mb-2 justify-center w-full"
             >
               <div className="relative bg-black/60 backdrop-blur-2xl border border-white/20 flex items-center">
                 {/* CORNER SQUARES */}

@@ -80,8 +80,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
       {/* Author */}
       <div className="flex items-center gap-4 mt-auto">
         <div 
-          className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg border border-white/10 shadow-lg"
-          style={{ background: testimonial.avatarGradient }}
+          className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg bg-black/60 backdrop-blur-md border border-purple-500/50 shadow-lg shadow-purple-500/10"
         >
           {testimonial.initials}
         </div>
