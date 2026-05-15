@@ -11,7 +11,7 @@ Design premium e performance extrema para quem não aceita o comum.
 
 Gostou do que viu por baixo do capô? 
 Garanta seu acesso agora e leve seus projetos para outro nível:
-👉 https://packplp.com.br
+👉 https://lp.packlp.com
 
 `;
 
