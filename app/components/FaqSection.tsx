@@ -44,7 +44,7 @@ export default function FaqSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="relative py-20 md:py-32 bg-[#0a0a0a]">
+    <section id="faq" className="relative py-20 md:py-32 bg-[#0a0a0a]">
       <div className="mx-auto max-w-5xl px-6 relative z-10">
         
         {/* HEADER */}
@@ -71,11 +71,14 @@ export default function FaqSection() {
                   relative rounded-2xl overflow-hidden transition-all duration-500 h-fit
                   ${
                     isOpen
-                      ? "border border-purple-500/30 bg-white/[0.05]"
-                      : "border border-white/5 bg-white/[0.02] hover:bg-white/[0.04]"
+                      ? "border border-purple-500/40 bg-white/[0.08]"
+                      : "border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20"
                   }
+                  backdrop-blur-xl shadow-2xl
                 `}
               >
+                {/* Subtle Inner Highlight */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none" />
                 {/* QUESTION */}
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}

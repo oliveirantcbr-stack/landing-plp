@@ -20,10 +20,10 @@ export function TestimonialsSection() {
 
       {/* HEADER */}
       <div className="relative z-20 text-center mb-16 md:mb-24 px-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full 
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full 
           bg-white/[0.03] border border-white/10 mb-4">
-          <div className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
-          <span className="text-xs sm:text-sm text-white/50 tracking-[0.2em] uppercase font-bold">
+          <div className="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
+          <span className="text-[10px] text-white/50 tracking-[0.2em] uppercase font-black">
             Prova Social
           </span>
         </div>

@@ -19,8 +19,14 @@ export function BonusSection() {
   const bonuses = [
     {
       icon: Crown,
-      title: "Elementor Pro",
+      title: "PRO",
       desc: "Recursos premium para criar páginas profissionais.",
+    },
+    {
+      icon: Zap,
+      title: "Gerador de Landing Page",
+      desc: "Gere paginas inteiras em poucos cliques",
+      exclusive: true,
     },
     {
       icon: Settings,
@@ -51,11 +57,6 @@ export function BonusSection() {
       icon: Bot,
       title: "Assistente IA",
       desc: "Gere ideias, textos e otimizações automaticamente.",
-    },
-    {
-      icon: Zap,
-      title: "LP Generator",
-      desc: "Gere seções completas diretamente no Elementor.",
     },
     {
       icon: Puzzle,
@@ -111,7 +112,10 @@ export function BonusSection() {
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className="group"
             >
-              <div className="rounded-2xl bg-zinc-950/50 p-6 border border-white/[0.03] hover:border-white/10 hover:bg-zinc-900/50 transition-all duration-500 h-full flex flex-col gap-4 relative overflow-hidden">
+              <div className="rounded-2xl bg-zinc-950/40 p-6 border border-white/10 hover:border-purple-500/30 hover:bg-zinc-900/60 transition-all duration-500 h-full flex flex-col gap-4 relative overflow-hidden backdrop-blur-xl shadow-2xl">
+                {/* Subtle Inner Highlight */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none" />
+                
                 {/* Noise Texture Overlay */}
                 <div
                   className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -124,9 +128,16 @@ export function BonusSection() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <h3 className="text-sm md:text-base font-black text-white uppercase tracking-tight">
-                    {b.title}
-                  </h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm md:text-base font-black text-white uppercase tracking-tight">
+                      {b.title}
+                    </h3>
+                    {b.exclusive && (
+                      <span className="text-[7px] font-black bg-purple-500/20 text-purple-400 px-1.5 py-0.5 rounded-sm border border-purple-500/30 animate-pulse">
+                        EXCLUSIVO
+                      </span>
+                    )}
+                  </div>
                   <p className="text-white/40 text-[11px] md:text-xs font-medium leading-relaxed">
                     {b.desc}
                   </p>

@@ -1,43 +1,39 @@
 
 export function CallToAction() {
   return (
-    <div className="relative mx-auto w-full max-w-3xl">
-      {/* Container principal com efeito de fundo preto e opacidade */}
-      <div className="relative flex flex-col justify-between gap-y-6 border border-gray-800 px-6 py-10 rounded-xl bg-black/50 backdrop-blur-lg">
+    <div className="relative mx-auto w-full max-w-3xl px-4">
+      {/* Main Container - Technical Square Aesthetic */}
+      <div className="relative flex flex-col justify-between gap-y-8 border border-white/20 px-8 py-14 md:py-20 bg-black/40 backdrop-blur-3xl overflow-hidden">
 
-        {/* Pontos nos cantos com brilho branco (glow) */}
-        <div className="absolute top-[-6px] left-[-6px] w-3 h-3 rounded-full bg-white/70 shadow-lg" />
-        <div className="absolute top-[-6px] right-[-6px] w-3 h-3 rounded-full bg-white/70 shadow-lg" />
-        <div className="absolute bottom-[-6px] left-[-6px] w-3 h-3 rounded-full bg-white/70 shadow-lg" />
-        <div className="absolute bottom-[-6px] right-[-6px] w-3 h-3 rounded-full bg-white/70 shadow-lg" />
+        {/* CORNER ACCENTS - TECHNICAL SQUARES */}
+        <div className="absolute -top-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
+        <div className="absolute -top-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
+        <div className="absolute -bottom-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
+        <div className="absolute -bottom-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
 
-        {/* Linhas divisórias sutis */}
-        <div className="absolute inset-y-4 left-4 w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent" />
-        <div className="absolute inset-y-4 right-4 w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent" />
-        <div className="absolute inset-x-4 top-4 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
-        <div className="absolute inset-x-4 bottom-4 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+        {/* SUBTLE INNER BORDERS */}
+        <div className="absolute inset-x-6 top-6 h-px bg-white/5" />
+        <div className="absolute inset-x-6 bottom-6 h-px bg-white/5" />
+        <div className="absolute inset-y-6 left-6 w-px bg-white/5" />
+        <div className="absolute inset-y-6 right-6 w-px bg-white/5" />
 
-        {/* Conteúdo */}
-        <div className="space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
-           Uma Plataforma de{' '}
-            <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
-              Seções
-            </span>
-            ,{' '}
-            <span className="bg-gradient-to-r from-gray-300 to-gray-400 bg-clip-text text-transparent">
-              Códigos
-            </span>{' '}
-            e Botões.
+        {/* CONTENT */}
+        <div className="space-y-6 text-center relative z-10">
+          <h2 className="text-3xl font-black tracking-tighter text-white sm:text-5xl md:text-6xl uppercase leading-[0.95] flex flex-col">
+           <span>Uma Plataforma de</span>
+           <span className="bg-gradient-to-r from-purple-500 to-white bg-clip-text text-transparent pb-2">
+            Seções, Códigos e Botões.
+           </span>
           </h2>
-          <p className="text-base text-gray-400 md:text-xl leading-relaxed max-w-2xl mx-auto">
+          
+          <p className="text-sm md:text-lg text-white/40 font-medium leading-relaxed max-w-xl mx-auto uppercase tracking-widest">
             Mais de 250 Itens para você copiar e colar no seu Elementor. Botões, Códigos CSS e Seções, em um só lugar!
           </p>
         </div>
 
-        {/* Efeitos de luz branca sutil */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+        {/* PREMIUM BACKGROUND GLOWS */}
+        <div className="absolute -top-24 -right-24 w-64 h-64 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none" />
       </div>
     </div>
   );

@@ -308,10 +308,13 @@ const GridItem = ({ area, icon: Icon, title, description, iconColor = "#ef4444" 
           onMouseLeave={handleLeave}
           className="
             relative flex h-full flex-col justify-center gap-4
-            rounded-2xl bg-zinc-950/80 backdrop-blur-sm overflow-hidden
+            rounded-2xl bg-zinc-950/60 backdrop-blur-xl overflow-hidden
             p-6 md:p-8 transition-colors group-hover:bg-zinc-900/80
+            border border-red-500/20 shadow-2xl
           "
         >
+          {/* Subtle Red Inner Highlight */}
+          <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-transparent pointer-events-none" />
           {/* Noise Texture Overlay */}
           <div
             className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -397,10 +400,13 @@ const BenefitGridItem = ({ area, icon: Icon, title, description, iconColor = "#1
           onMouseLeave={handleLeave}
           className="
             relative flex h-full flex-col justify-center gap-4
-            rounded-2xl bg-zinc-950/80 backdrop-blur-sm overflow-hidden
-            p-6 md:p-8 transition-colors group-hover:bg-zinc-900/80
+            rounded-2xl bg-zinc-900/60 backdrop-blur-xl overflow-hidden
+            p-6 md:p-8 transition-colors group-hover:bg-zinc-800/80
+            border border-emerald-500/20 shadow-[0_15px_30px_rgba(16,185,129,0.05)]
           "
         >
+          {/* Softer Emerald Inner Highlight */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent pointer-events-none" />
           {/* Noise Texture Overlay */}
           <div
             className="absolute inset-0 opacity-[0.03] pointer-events-none"

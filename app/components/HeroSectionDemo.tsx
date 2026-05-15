@@ -54,15 +54,16 @@ export function HeroSectionDemo() {
         {/* TOP GROUP: Headline & Typing Effect */}
         <div className="flex flex-col items-center md:items-start w-full md:max-w-md lg:max-w-lg md:bg-black/30 md:backdrop-blur-3xl md:border md:border-white/10 md:p-10 md:rounded-[40px] md:shadow-2xl">
           
-          {/* Version Badge - Animated Purple Border ONLY */}
-          <div className="relative p-[1px] rounded-full overflow-hidden mb-6 hidden md:inline-flex group">
-             <motion.div 
-               animate={{ rotate: 360 }}
-               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-               className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_150deg,#a855f7_180deg,transparent_210deg,transparent_360deg)] opacity-100"
-             />
-             <div className="relative px-3 py-1 rounded-full bg-black/90 flex items-center justify-center">
-                <span className="text-[8px] font-black tracking-[0.3em] text-purple-500 uppercase">Versão 2.0</span>
+          {/* Version Badge - Technical Square */}
+          <div className="relative mb-6 hidden md:inline-flex group">
+             <div className="relative px-3 py-1 bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center">
+                {/* CORNER SQUARES */}
+                <div className="absolute -top-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -top-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -bottom-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -bottom-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                
+                <span className="text-[8px] font-black tracking-[0.3em] text-white/80 uppercase">Versão 2.0</span>
              </div>
           </div>
 
@@ -102,6 +103,38 @@ export function HeroSectionDemo() {
                 </AnimatePresence>
               </div>
             </div>
+
+            {/* 🛠️ TECH STACK HORIZONTAL (Mobile Only) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="flex md:hidden mt-6 mb-2"
+            >
+              <div className="relative bg-black/60 backdrop-blur-2xl border border-white/20 flex items-center">
+                {/* CORNER SQUARES */}
+                <div className="absolute -top-[3px] -left-[3px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -top-[3px] -right-[3px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -bottom-[3px] -left-[3px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -bottom-[3px] -right-[3px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+
+                {/* ELEMENTOR */}
+                <div className="size-10 border-r border-white/10 flex items-center justify-center">
+                  <Image src="/elementor.svg" alt="Elementor" width={16} height={16} className="brightness-0 invert opacity-60" />
+                </div>
+
+                {/* WORDPRESS */}
+                <div className="size-10 border-r border-white/10 flex items-center justify-center">
+                  <Image src="/wordpress.svg" alt="WordPress" width={16} height={16} className="brightness-0 invert opacity-60" />
+                </div>
+
+                {/* ITEMS COUNT */}
+                <div className="px-3 h-10 flex flex-col items-center justify-center">
+                  <span className="text-white font-black text-[10px] tracking-tighter">+250</span>
+                  <span className="text-white/40 font-black text-[4px] uppercase tracking-[0.2em]">Itens</span>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Desktop Content Only (Social Proof) */}
@@ -119,7 +152,7 @@ export function HeroSectionDemo() {
                 style={{ "--padding": "1.25rem 2.5rem", "--font-size": "11px" } as React.CSSProperties}
                 className="font-black tracking-[0.2em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300"
               >
-                EXPERIMENTE POR 7 DIAS
+                ACESSO IMEDIATO
               </ShinyButton>
 
               <div className="flex items-center gap-4 px-6 py-3 bg-white/[0.02] border border-white/5 rounded-2xl">
@@ -150,7 +183,7 @@ export function HeroSectionDemo() {
               style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
               className="w-full max-w-[280px] font-black tracking-[0.1em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 whitespace-nowrap"
             >
-              EXPERIMENTE POR 7 DIAS
+              ACESSO IMEDIATO
             </ShinyButton>
 
             <div className="flex items-center gap-3 px-5 py-2.5 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md">
@@ -164,6 +197,52 @@ export function HeroSectionDemo() {
             </div>
           </div>
         </div>
+
+        {/* 🛠️ TECH STACK VERTICAL CARD (Desktop Only) */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="hidden lg:flex absolute right-80 top-1/2 -translate-y-1/2 flex-col z-40"
+        >
+          {/* Main Container - Square & Technical */}
+          <div className="relative bg-black/60 backdrop-blur-2xl border border-white/20 flex flex-col">
+            
+            {/* CORNER SQUARES */}
+            <div className="absolute -top-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
+            <div className="absolute -top-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
+            <div className="absolute -bottom-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
+            <div className="absolute -bottom-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />
+
+            {/* ELEMENTOR */}
+            <div className="size-20 border-b border-white/10 flex items-center justify-center group hover:bg-white/5 transition-colors cursor-default">
+              <Image 
+                src="/elementor.svg" 
+                alt="Elementor" 
+                width={32} 
+                height={32} 
+                className="brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" 
+              />
+            </div>
+
+            {/* WORDPRESS */}
+            <div className="size-20 border-b border-white/10 flex items-center justify-center group hover:bg-white/5 transition-colors cursor-default">
+              <Image 
+                src="/wordpress.svg" 
+                alt="WordPress" 
+                width={32} 
+                height={32} 
+                className="brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" 
+              />
+            </div>
+
+            {/* ITEMS COUNT */}
+            <div className="size-20 flex flex-col items-center justify-center group hover:bg-white/5 transition-colors cursor-default">
+              <span className="text-white font-black text-lg tracking-tighter">+250</span>
+              <span className="text-white/40 font-black text-[7px] uppercase tracking-[0.2em] group-hover:text-purple-400 transition-colors">Itens</span>
+            </div>
+          </div>
+        </motion.div>
 
       </div>
     </section>

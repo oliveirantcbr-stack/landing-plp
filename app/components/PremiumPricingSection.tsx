@@ -158,8 +158,8 @@ export function PremiumPricingSection() {
           >
             {/* Top Badge */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30">
-              <TechBadge className="bg-purple-600 border-white/20 py-2.5 px-4 shadow-xl shadow-purple-600/20">
-                <span className="tracking-[0.15em] md:tracking-[0.3em]">MELHOR CUSTO-BENEFÍCIO</span>
+              <TechBadge className="bg-purple-600 border-purple-400 py-2.5 px-6 shadow-xl shadow-purple-600/30">
+                <span className="tracking-[0.15em] md:tracking-[0.3em] text-white font-black">MELHOR CUSTO-BENEFÍCIO</span>
               </TechBadge>
             </div>
 

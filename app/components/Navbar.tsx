@@ -33,11 +33,16 @@ export function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className={`relative flex items-center justify-between px-5 md:px-6 py-2 rounded-full border transition-all duration-500 ${
+        <div className={`relative flex items-center justify-between px-5 md:px-8 py-3 transition-all duration-500 border border-white/20 ${
           scrolled 
-            ? "bg-black/80 backdrop-blur-2xl border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
-            : "bg-transparent border-transparent"
+            ? "bg-black/80 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
+            : "bg-black/20 backdrop-blur-md"
         }`}>
+          {/* CORNER SQUARES */}
+          <div className="absolute -top-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
+          <div className="absolute -top-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
+          <div className="absolute -bottom-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
+          <div className="absolute -bottom-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
           
           {/* LOGO with INTENSE PURPLE GLOW */}
           <div className="relative group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
@@ -72,15 +77,18 @@ export function Navbar() {
           {/* CTA & MOBILE TOGGLE */}
           <div className="flex items-center gap-3">
             <div className="hidden sm:block">
-              <ShinyButton
+              <button
                 onClick={scrollToOferta}
-                highlightColor="#a855f7"
-                highlightSubtleColor="#c084fc"
-                style={{ "--padding": "0.7rem 1.4rem", "--font-size": "9px" } as React.CSSProperties}
-                className="font-black tracking-widest uppercase rounded-full bg-purple-600 border-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.3)]"
+                className="relative px-6 py-2 bg-white text-black text-[10px] font-black tracking-widest uppercase hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]"
               >
+                {/* BUTTON CORNER SQUARES */}
+                <div className="absolute -top-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -top-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -bottom-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                <div className="absolute -bottom-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
+                
                 COMEÇAR AGORA
-              </ShinyButton>
+              </button>
             </div>
             
             <button 

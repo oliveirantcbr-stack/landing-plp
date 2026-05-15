@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import { GlassButton } from "@/app/components/floating-cta-button";
+import { AiOrb } from "./AiOrb";
 import { scrollToOferta } from "@/lib/scrollToOferta";
 
 export default function FloatingCTA() {
@@ -50,20 +51,17 @@ export default function FloatingCTA() {
               shadow-xl
             "
           >
-            {/* LOGO */}
-            <Image
-              src="/logo-160.webp"
-              alt="Pack Landing Page"
-              width={48}
-              height={48}
-            />
+            {/* PREMIUM AI ORB */}
+            <div className="relative size-12 flex items-center justify-center">
+              <AiOrb />
+            </div>
 
             {/* CTA PRINCIPAL */}
 <GlassButton
   onClick={scrollToOferta}
-  aria-label="Iniciar teste gratuito de 7 dias"
+  aria-label="Acesso Imediato ao Pack Landing Page"
 >
-  INICIAR 7 DIAS DE TESTE
+  ACESSO IMEDIATO
 </GlassButton>
 
 

@@ -7,6 +7,7 @@ import Script from "next/script";
 import FloatingCTA from "@/app/components/FloatingCTA";
 import ScrollLockOnLoad from "@/app/components/ScrollLockOnLoad";
 import { Preloader } from "@/app/components/Preloader";
+import { DevToolsMessage } from "@/app/components/DevToolsMessage";
 
 /* ============================
    FONTE INTER (AUTO-HOSPEDADA)
@@ -24,6 +25,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Pack Landing Page",
   description: "Landing Pages Premium",
+  icons: {
+    icon: "/logoplpnew.svg",
+    apple: "/logoplpnew.svg",
+  }
 };
 
 export default function RootLayout({
@@ -68,6 +73,9 @@ export default function RootLayout({
 
         {/* 🔒 FIX DEFINITIVO DO AUTO-SCROLL MOBILE */}
         <ScrollLockOnLoad />
+
+        {/* 🕵️ MENSAGEM PARA CURIOSOS NO CONSOLE */}
+        <DevToolsMessage />
 
         {/* =================================================
             GRID GLOBAL FIXO (não afeta LCP)

@@ -13,11 +13,11 @@ export function TestimonialsCTA() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-6">
 
-        {/* SUBTLE LINE DECORATION */}
-        <div className="flex items-center justify-center gap-4 opacity-20">
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-white" />
-          <div className="size-1 rounded-full bg-white" />
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-white" />
+        {/* SUBTLE LINE DECORATION - NOW PURPLE */}
+        <div className="flex items-center justify-center gap-4 opacity-40">
+          <div className="h-px w-12 bg-gradient-to-r from-transparent to-purple-500" />
+          <div className="size-1 rounded-full bg-purple-500 shadow-[0_0_8px_#a855f7]" />
+          <div className="h-px w-12 bg-gradient-to-l from-transparent to-purple-500" />
         </div>
 
         <motion.div

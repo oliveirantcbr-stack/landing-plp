@@ -9,7 +9,7 @@ import { scrollToOferta } from "@/lib/scrollToOferta";
 
 export default function GuaranteeSection() {
   return (
-    <section className="relative py-20 md:py-32 overflow-visible bg-[#0a0a0a]">
+    <section id="garantia" className="relative py-20 md:py-32 overflow-visible bg-[#0a0a0a]">
       {/* 🔮 AI TRIANGLE DIVIDER (Transition from Offer) */}
       <div className="absolute top-0 left-0 right-0 z-40 flex flex-col items-center pointer-events-none translate-y-0">
         {/* VIBRANT PURPLE GRADIENT LINE */}
@@ -108,7 +108,7 @@ export default function GuaranteeSection() {
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
                 className="w-full md:w-auto max-w-[280px] md:max-w-none font-black tracking-widest uppercase rounded-full shadow-xl shadow-purple-500/10"
               >
-                QUERO TESTAR POR 7 DIAS
+                ACESSO IMEDIATO
               </ShinyButton>
             </div>
           </div>

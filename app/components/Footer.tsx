@@ -38,7 +38,7 @@ export default function Footer() {
 
             <ul className="mt-4 space-y-2 text-sm text-white/60">
               <li>
-                <a href="#planos" className="hover:text-white transition">
+                <a href="#oferta" className="hover:text-white transition">
                   Planos
                 </a>
               </li>
