@@ -147,7 +147,7 @@ export function PremiumPricingSection() {
 
             <div className="flex justify-center w-full">
               <button
-                onClick={() => window.open('https://pay.cakto.com.br/35azrwr', '_blank')}
+                onClick={() => window.open('https://pay.cakto.com.br/87m3bxz_692614', '_blank')}
                 className="w-full max-w-[280px] md:max-w-none py-3.5 rounded-xl border border-white/10 bg-white/5 text-white text-[10px] font-black tracking-widest uppercase hover:bg-white/10 transition-all"
               >
                 Começar agora
@@ -228,7 +228,7 @@ export function PremiumPricingSection() {
             {/* CTA */}
             <div className="mt-10 flex justify-center w-full">
               <ShinyButton
-                onClick={() => window.open('https://pay.cakto.com.br/yzbek9g', '_blank')}
+                onClick={() => window.open('https://pay.cakto.com.br/yzbek9g_692619', '_blank')}
                 highlightColor="#a855f7"
                 highlightSubtleColor="#c084fc"
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}

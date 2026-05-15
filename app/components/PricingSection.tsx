@@ -152,8 +152,8 @@ const PRICES: Record<
 
 const CHECKOUT_LINKS: Record<PlanType, string> = {
   mensal: "https://pay.cakto.com.br/35azrwr",
-  trimestral: "https://pay.cakto.com.br/87m3bxz",
-  anual: "https://pay.cakto.com.br/yzbek9g",
+  trimestral: "https://pay.cakto.com.br/87m3bxz_692614",
+  anual: "https://pay.cakto.com.br/yzbek9g_692619",
 };
 
 /* =========================================================
