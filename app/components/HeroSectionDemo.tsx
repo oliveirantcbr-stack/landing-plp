@@ -210,9 +210,9 @@ export function HeroSectionDemo() {
 
           {/* Desktop Content Only (Social Proof) */}
           <div className="hidden md:flex flex-col items-center lg:items-start mt-10 gap-8">
-            <p className="text-sm text-white/40 leading-relaxed max-w-sm font-medium text-balance">
-              Crie Landing Pages em Minutos, usando nossa biblioteca exclusiva de seções, codigos css e botões.
-              <span className="block mt-2 text-purple-500 font-black uppercase tracking-widest text-[10px]">
+            <p className="text-base text-zinc-200 leading-relaxed max-w-sm font-medium text-balance">
+              Crie Landing Pages em Minutos, usando nossa biblioteca exclusiva de seções, códigos css e botões.
+              <span className="block mt-3 text-purple-400 font-black uppercase tracking-widest text-xs">
                 + de 250 itens para você copiar e colar no seu Elementor
               </span>
             </p>
@@ -241,9 +241,9 @@ export function HeroSectionDemo() {
 
         {/* BOTTOM GROUP (Mobile Only) */}
         <div className="md:hidden flex flex-col items-center w-full px-8 gap-10 mt-20">
-          <p className="text-[11px] text-white/40 leading-relaxed text-center font-medium text-balance">
-            Crie Landing Pages em Minutos!, usando nossa biblioteca exclusiva de seções, codigos css e botões.
-            <span className="block mt-2 text-purple-500 font-black uppercase tracking-[0.2em] text-[9px]">
+          <p className="text-xs text-zinc-200 leading-relaxed text-center font-medium text-balance">
+            Crie Landing Pages em Minutos, usando nossa biblioteca exclusiva de seções, códigos css e botões.
+            <span className="block mt-3 text-purple-400 font-black uppercase tracking-[0.2em] text-[10px]">
               + de 250 itens para você copiar e colar no seu Elementor
             </span>
           </p>
