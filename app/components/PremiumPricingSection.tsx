@@ -229,7 +229,6 @@ export function PremiumPricingSection() {
             <div className="mt-10 flex justify-center w-full">
               <ShinyButton
                 onClick={() => window.open('https://pay.cakto.com.br/yzbek9g_692619', '_blank')}
-                highlightColor="#a855f7"
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
                 className="w-full max-w-[280px] md:max-w-none bg-purple-600 border-purple-400 hover:bg-purple-500 text-white font-black tracking-widest uppercase shadow-xl group"
               >

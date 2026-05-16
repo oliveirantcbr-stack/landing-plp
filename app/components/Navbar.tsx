@@ -131,7 +131,6 @@ export function Navbar() {
                   scrollToOferta();
                   setMobileMenuOpen(false);
                 }}
-                highlightColor="#a855f7"
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
                 className="w-full font-black tracking-widest uppercase bg-purple-600 border-purple-400 shadow-[0_15px_30px_rgba(147,51,234,0.3)]"
               >

@@ -220,7 +220,6 @@ export function HeroSectionDemo() {
             <div className="flex flex-col items-start gap-8">
               <ShinyButton
                 onClick={scrollToOferta}
-                highlightColor="#a855f7"
                 style={{ "--padding": "1.25rem 2.5rem", "--font-size": "11px" } as React.CSSProperties}
                 className="font-black tracking-[0.2em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300"
               >
