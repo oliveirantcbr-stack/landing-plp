@@ -132,9 +132,8 @@ export function Navbar() {
                   setMobileMenuOpen(false);
                 }}
                 highlightColor="#a855f7"
-                highlightSubtleColor="#c084fc"
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
-                className="w-full font-black tracking-widest uppercase rounded-full bg-purple-600 border-purple-400 shadow-[0_15px_30px_rgba(147,51,234,0.3)]"
+                className="w-full font-black tracking-widest uppercase bg-purple-600 border-purple-400 shadow-[0_15px_30px_rgba(147,51,234,0.3)]"
               >
                 COMEÇAR AGORA
               </ShinyButton>

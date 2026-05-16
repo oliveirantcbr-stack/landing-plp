@@ -230,9 +230,8 @@ export function PremiumPricingSection() {
               <ShinyButton
                 onClick={() => window.open('https://pay.cakto.com.br/yzbek9g_692619', '_blank')}
                 highlightColor="#a855f7"
-                highlightSubtleColor="#c084fc"
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
-                className="w-full max-w-[280px] md:max-w-none bg-purple-600 border-purple-400 hover:bg-purple-500 text-white font-black tracking-widest uppercase rounded-full shadow-xl group"
+                className="w-full max-w-[280px] md:max-w-none bg-purple-600 border-purple-400 hover:bg-purple-500 text-white font-black tracking-widest uppercase shadow-xl group"
               >
                 <div className="flex items-center justify-center gap-2">
                   ACESSO ELITE

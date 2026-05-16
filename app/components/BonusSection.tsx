@@ -162,9 +162,8 @@ export function BonusSection() {
         <ShinyButton
           onClick={scrollToOferta}
           highlightColor="#a855f7"
-          highlightSubtleColor="#c084fc"
           style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
-          className="w-full md:w-auto max-w-[280px] md:max-w-none font-black tracking-widest uppercase rounded-full shadow-2xl shadow-purple-500/10"
+          className="w-full md:w-auto max-w-[280px] md:max-w-none font-black tracking-widest uppercase shadow-2xl shadow-purple-500/10"
         >
           QUERO MEU ACESSO AGORA
         </ShinyButton>
