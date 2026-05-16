@@ -13,13 +13,13 @@ const UnicornBackground = dynamic(() => import("./UnicornBackground"), {
 });
 
 export function HeroSectionDemo() {
-  const words = ["Minutos.", "Segundos.", "Horas."];
   const [currentText, setCurrentText] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [speed, setSpeed] = useState(150);
 
   useEffect(() => {
+    const words = ["Minutos.", "Segundos.", "Horas."];
     const handleTyping = () => {
       const fullText = words[wordIndex];
       
@@ -45,7 +45,7 @@ export function HeroSectionDemo() {
 
     const timer = setTimeout(handleTyping, speed);
     return () => clearTimeout(timer);
-  }, [currentText, isDeleting, wordIndex, words, speed]);
+  }, [currentText, isDeleting, wordIndex, speed]);
 
   return (
     <section

@@ -17,6 +17,7 @@ declare global {
 }
 
 // Armazena a instância global para evitar múltiplas inicializações
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let globalPlayerInstance: any = null;
 
 export default function UnicornBackground({
@@ -62,6 +63,7 @@ export default function UnicornBackground({
           scale: scale,
           dpi: targetDpi,
           antialias: !isMobile 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }).then((scene: any) => {
           console.log("WebGL Scene Loaded");
           globalPlayerInstance = scene;
@@ -69,6 +71,7 @@ export default function UnicornBackground({
           
           // Ativa a visibilidade com um pequeno delay para evitar flashes
           setTimeout(() => setIsReady(true), 200);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }).catch((err: any) => {
           console.error('Erro no addScene:', err);
           // Fallback: mostra o container mesmo se houver erro (pode estar renderizando algo parcial)
