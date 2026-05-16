@@ -34,6 +34,7 @@ export default function UnicornBackground({
     let timeoutId: NodeJS.Timeout;
 
     const initScene = () => {
+      console.log("Iniciando Unicorn Studio...");
       // Verifica se o SDK e o container estão prontos
       if (!window.UnicornStudio || !containerRef.current) {
         timeoutId = setTimeout(initScene, 50);
@@ -49,29 +50,29 @@ export default function UnicornBackground({
       try {
         const absolutePath = scenePath.startsWith('/') ? scenePath : `/${scenePath}`;
         const isMobile = typeof window !== 'undefined' && window.matchMedia("(max-width: 768px)").matches;
-        
+
         // DPI 1 como padrão (original) para evitar problemas de compatibilidade
         // No mobile, limitamos a 2 se o device permitir, mas o padrão do pack era 1
         const targetDpi = isMobile ? Math.min(window.devicePixelRatio, 2) : 1;
 
         window.UnicornStudio.addScene({
-          elementId: UNICORN_ID, 
-          filePath: absolutePath, 
+          elementId: UNICORN_ID,
+          filePath: absolutePath,
           production: false,
           lazyLoad: false,
-          fps: isMobile ? 30 : 60, 
+          fps: isMobile ? 30 : 60,
           scale: scale,
           dpi: targetDpi,
-          antialias: !isMobile 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          antialias: !isMobile
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }).then((scene: any) => {
           console.log("WebGL Scene Loaded");
           globalPlayerInstance = scene;
           if (scene && scene.play) scene.play();
-          
+
           // Ativa a visibilidade com um pequeno delay para evitar flashes
           setTimeout(() => setIsReady(true), 200);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }).catch((err: any) => {
           console.error('Erro no addScene:', err);
           // Fallback: mostra o container mesmo se houver erro (pode estar renderizando algo parcial)
@@ -94,26 +95,27 @@ export default function UnicornBackground({
 
   return (
     <>
-      <Script
+      <Script 
         src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.1.12/dist/unicornStudio.umd.js"
-        strategy="afterInteractive"
+        strategy="afterInteractive" 
         onLoad={() => setScriptLoaded(true)}
       />
-      
+
       <div
         id={UNICORN_ID}
         ref={containerRef}
         className={className}
-        style={{ 
-          position: 'absolute', 
-          inset: 0, 
-          width: '100%', 
-          height: '100%', 
-          zIndex: 1, // Garantindo que fique acima do background estático
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 1, 
           pointerEvents: 'none',
           opacity: isReady ? 1 : 0,
-          transition: 'opacity 1.5s ease-in-out',
-          visibility: isReady ? 'visible' : 'hidden' // Garante que não interfira se não estiver pronto
+          transition: 'opacity 0.8s ease-in-out',
+          visibility: 'visible',
+          willChange: 'transform'
         }}
       />
     </>

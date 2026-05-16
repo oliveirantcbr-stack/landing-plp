@@ -93,6 +93,7 @@ export function SectionsShowcase() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-[400px] pointer-events-none z-10 opacity-60 hidden lg:block">
           <video
             autoPlay loop muted playsInline
+            preload="none"
             className="w-full h-full object-contain mix-blend-screen scale-110"
             style={{
               maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
@@ -152,6 +153,7 @@ export function SectionsShowcase() {
           <div className="block lg:hidden w-full max-w-[240px] h-[100px] relative pointer-events-none opacity-90 order-2 -my-10 md:-my-12">
             <video
               autoPlay loop muted playsInline
+              preload="none"
               className="w-full h-full object-contain mix-blend-screen scale-150"
               style={{
                 maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
@@ -187,7 +189,7 @@ export function SectionsShowcase() {
                     </div>
                     <div className="w-[30px]" /> {/* Spacer to balance the dots */}
                   </div>
-                  <video autoPlay loop muted playsInline poster="/thumbs/1.webp" className="w-full h-auto object-cover">
+                  <video autoPlay loop muted playsInline preload="none" poster="/thumbs/1.webp" className="w-full h-auto object-cover">
                     <source src="/plp.webm" type="video/webm" />
                   </video>
                 </div>
