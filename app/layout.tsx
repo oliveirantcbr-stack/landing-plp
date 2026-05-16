@@ -38,6 +38,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={`${inter.className} overflow-x-hidden`}>
+      <head>
+        <link rel="preconnect" href="https://api6.ipify.org" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.utmify.com.br" />
+      </head>
       <body className="bg-black text-white min-h-screen overflow-x-hidden w-full relative">
         {/* =================================================
             🔥 UTMIFY – CAPTURA DE UTMs

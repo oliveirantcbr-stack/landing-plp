@@ -154,12 +154,7 @@ export function HeroSectionDemo() {
           </div>
 
           {/* Headline */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-center lg:items-start w-full"
-          >
+          <div className="flex flex-col items-center lg:items-start w-full animate-in fade-in slide-in-from-bottom-5 duration-1000 fill-mode-both">
             <h1 className="flex flex-col text-center lg:text-left font-black tracking-tighter leading-[0.85] mb-2 w-full">
               <span className="text-3xl sm:text-5xl md:text-[42px] lg:text-[48px] text-white uppercase drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
                 Landing Pages
@@ -187,12 +182,7 @@ export function HeroSectionDemo() {
             </div>
 
             {/* 🛠️ TECH STACK HORIZONTAL (Mobile Only) */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="flex md:hidden mt-1 mb-2 justify-center w-full"
-            >
+            <div className="flex md:hidden mt-1 mb-2 justify-center w-full animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-500 fill-mode-both">
               <div className="relative bg-black/60 backdrop-blur-2xl border border-white/20 flex items-center">
                 {/* CORNER SQUARES */}
                 <div className="absolute -top-[3px] -left-[3px] size-1 bg-white shadow-[0_0_5px_#fff]" />
@@ -216,8 +206,8 @@ export function HeroSectionDemo() {
                   <span className="text-white/40 font-black text-[4px] uppercase tracking-[0.2em]">Itens</span>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Desktop Content Only (Social Proof) */}
           <div className="hidden md:flex flex-col items-center lg:items-start mt-10 gap-8">
@@ -231,7 +221,6 @@ export function HeroSectionDemo() {
               <ShinyButton
                 onClick={scrollToOferta}
                 highlightColor="#a855f7"
-                highlightSubtleColor="#c084fc"
                 style={{ "--padding": "1.25rem 2.5rem", "--font-size": "11px" } as React.CSSProperties}
                 className="font-black tracking-[0.2em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300"
               >
@@ -263,7 +252,6 @@ export function HeroSectionDemo() {
             <ShinyButton
               onClick={scrollToOferta}
               highlightColor="#a855f7"
-              highlightSubtleColor="#c084fc"
               style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
               className="w-full max-w-[280px] font-black tracking-[0.1em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 whitespace-nowrap"
             >
@@ -283,12 +271,7 @@ export function HeroSectionDemo() {
         </div>
 
         {/* 🛠️ TECH STACK VERTICAL CARD (Desktop Only) */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="hidden lg:flex absolute right-80 top-1/2 -translate-y-1/2 flex-col z-40"
-        >
+        <div className="hidden lg:flex absolute right-80 top-1/2 -translate-y-1/2 flex-col z-40 animate-in fade-in slide-in-from-right-5 duration-1000 delay-700 fill-mode-both">
           {/* Main Container - Square & Technical */}
           <div className="relative bg-black/60 backdrop-blur-2xl border border-white/20 flex flex-col">
 
@@ -326,7 +309,7 @@ export function HeroSectionDemo() {
               <span className="text-white/40 font-black text-[7px] uppercase tracking-[0.2em] group-hover:text-purple-400 transition-colors">Itens</span>
             </div>
           </div>
-        </motion.div>
+        </div>
 
       </div>
     </section>
