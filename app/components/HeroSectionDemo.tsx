@@ -2,11 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { ShinyButton } from "@/components/shiny-button";
 import { scrollToOferta } from "@/lib/scrollToOferta";
-import UnicornBackground from "./UnicornBackground";
+import dynamic from "next/dynamic";
+
+const UnicornBackground = dynamic(() => import("./UnicornBackground"), {
+  ssr: false,
+});
 
 export function HeroSectionDemo() {
   const words = ["Minutos.", "Segundos.", "Horas."];
@@ -49,16 +53,36 @@ export function HeroSectionDemo() {
       className="relative w-full min-h-screen text-white flex flex-col items-center overflow-hidden select-none"
       style={{ background: 'transparent !important', maxWidth: '100vw' }}
     >
-      {/* 1. Unicorn Studio Animation (Background Layer) */}
+      {/* 0. Static Immediate Layer (LCP Optimized) */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/bgpc.webp"
+          alt="Hero Background Desktop"
+          fill
+          priority
+          quality={100}
+          className="hidden md:block object-cover"
+        />
+        <Image
+          src="/bgcell.webp"
+          alt="Hero Background Mobile"
+          fill
+          priority
+          quality={100}
+          className="block md:hidden object-cover"
+        />
+      </div>
+
+      {/* 1. Unicorn Studio Animation (Background Layer) - Loaded Dynamically */}
       <UnicornBackground
         scenePath="/bguni.json"
-        className="absolute inset-0 pointer-events-none opacity-80"
+        className="absolute inset-0 pointer-events-none z-[1]"
         scale={0.8}
       />
 
       {/* 🌑 Premium Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/95 pointer-events-none z-[1]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] pointer-events-none z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/95 pointer-events-none z-[2]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] pointer-events-none z-[2]" />
 
       {/* 🏷️ LOGO (Desktop) - Restored with opacity-0 as requested */}
       <div className="absolute top-8 left-1/2 -translate-x-1/2 z-[50] hidden md:block opacity-0 pointer-events-none">
