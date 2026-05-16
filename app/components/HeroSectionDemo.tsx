@@ -240,8 +240,8 @@ export function HeroSectionDemo() {
         </div>
 
         {/* BOTTOM GROUP (Mobile Only) */}
-        <div className="md:hidden flex flex-col items-center w-full px-8 gap-10 mt-20">
-          <p className="text-xs text-zinc-200 leading-relaxed text-center font-medium text-balance">
+        <div className="md:hidden flex flex-col items-center w-full px-8 gap-10 mt-32">
+          <p className="text-[11px] text-zinc-200 leading-relaxed text-center font-medium text-balance">
             Crie Landing Pages em Minutos, usando nossa biblioteca exclusiva de seções, códigos css e botões.
             <span className="block mt-3 text-purple-400 font-black uppercase tracking-[0.2em] text-[10px]">
               + de 250 itens para você copiar e colar no seu Elementor
@@ -264,7 +264,7 @@ export function HeroSectionDemo() {
                 { src: "/thumbs/cliente2.webp" },
                 { src: "/thumbs/cliente3.webp" }
               ]} />
-              <span className="text-[9px] font-black text-white/20 tracking-[0.3em] uppercase">+1000 MEMBROS ATIVOS</span>
+              <span className="text-[9px] font-black text-white tracking-[0.3em] uppercase drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">+1000 MEMBROS ATIVOS</span>
             </div>
           </div>
         </div>
