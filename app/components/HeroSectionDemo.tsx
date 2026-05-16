@@ -60,7 +60,7 @@ export function HeroSectionDemo() {
           alt="Hero Background Desktop"
           fill
           priority
-          quality={100}
+          unoptimized
           className="hidden md:block object-cover"
         />
         <Image
@@ -68,7 +68,7 @@ export function HeroSectionDemo() {
           alt="Hero Background Mobile"
           fill
           priority
-          quality={100}
+          unoptimized
           className="block md:hidden object-cover"
         />
       </div>
