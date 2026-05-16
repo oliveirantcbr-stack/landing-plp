@@ -52,9 +52,9 @@ export function PremiumPricingSection() {
           priority
         />
 
-        {/* Seamless background glows to match TestimonialsSection */}
-        <div className="absolute inset-0 pointer-events-none opacity-20">
-          <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-purple-500/20 blur-[100px] rounded-full" />
+        {/* Seamless background glows to match TestimonialsSection - Below texture */}
+        <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
+          <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-purple-500/20 blur-[150px] rounded-full" />
         </div>
 
         {/* ⚡ FLASH EFFECT - Animated subtle flash every 5 seconds */}
@@ -120,7 +120,7 @@ export function PremiumPricingSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-[45%] bg-zinc-950 border border-white/5 p-6 md:p-10 rounded-[24px] md:rounded-[32px] md:-mr-8 relative z-10 group hover:border-white/10 transition-all shadow-2xl"
+            className="w-full md:w-[45%] bg-zinc-950 border border-white/5 p-6 md:p-10 rounded-[24px] md:rounded-[32px] md:-mr-8 relative z-10 group hover:border-white/10 transition-all shadow-2xl tech-pixel-texture"
           >
             <div className="mb-6 md:mb-8 flex flex-col items-start gap-3">
               <TechBadge>Entrada</TechBadge>
@@ -160,7 +160,7 @@ export function PremiumPricingSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="w-full md:w-[60%] bg-zinc-900 border-2 border-purple-500/40 p-8 md:p-12 rounded-[30px] md:rounded-[40px] relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(147,51,234,0.1)] flex flex-col"
+            className="w-full md:w-[60%] bg-zinc-900 border-2 border-purple-500/40 p-8 md:p-12 rounded-[30px] md:rounded-[40px] relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(147,51,234,0.1)] flex flex-col tech-pixel-texture"
           >
             {/* Top Badge - Solid White Technical Block */}
             <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30">

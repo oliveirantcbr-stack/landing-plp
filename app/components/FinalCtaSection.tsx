@@ -40,6 +40,7 @@ export default function FinalCtaSection() {
             md:px-20
             text-center
             shadow-2xl
+            tech-pixel-texture
           "
         >
           {/* INTERIOR DECORATION */}
@@ -69,7 +70,8 @@ export default function FinalCtaSection() {
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
                 className="w-full md:w-auto max-w-[280px] md:max-w-none font-black tracking-widest uppercase shadow-2xl shadow-purple-500/20"
               >
-                ULTIMA OPORTUNIDADE!
+                <span className="hidden md:inline">ULTIMA OPORTUNIDADE!</span>
+                <span className="inline md:hidden">Garantir Agora</span>
               </ShinyButton>
             </div>
 

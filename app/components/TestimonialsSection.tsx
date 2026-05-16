@@ -11,12 +11,9 @@ export function TestimonialsSection() {
   const row2 = testimonialsPLP.slice(3, 6);
 
   return (
-    <section id="depoimentos" className="relative w-full py-24 md:py-32 overflow-hidden bg-[#0a0a0a]">
-      {/* Background gradients with purple/blue theme */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/30 blur-[120px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-500/20 blur-[120px] rounded-full" />
-      </div>
+    <section id="depoimentos" className="relative w-full py-24 md:py-32 overflow-visible bg-[#0a0a0a]">
+
+      {/* Background is now clean #0a0a0a with continuous grid from parent */}
 
       {/* HEADER */}
       <div className="relative z-20 text-center mb-16 md:mb-24 px-4">
@@ -36,8 +33,14 @@ export function TestimonialsSection() {
         </p>
       </div>
 
-      {/* CAROUSELS */}
-      <div className="relative z-20 flex flex-col gap-6 md:gap-10">
+      {/* CAROUSELS - Using CSS Mask instead of opaque overlays to preserve background texture */}
+      <div 
+        className="relative z-20 flex flex-col gap-6 md:gap-10"
+        style={{
+          maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+        }}
+      >
         {/* Row 1: Forward */}
         <InfiniteSlider duration={40} gap={24} className="py-4">
           {row1.map((t) => (
@@ -52,17 +55,13 @@ export function TestimonialsSection() {
           ))}
         </InfiniteSlider>
       </div>
-
-      {/* Side gradients for smooth transition */}
-      <div className="absolute inset-y-0 left-0 w-20 md:w-60 bg-gradient-to-r from-[#0a0a0a] to-transparent z-30 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-20 md:w-60 bg-gradient-to-l from-[#0a0a0a] to-transparent z-30 pointer-events-none" />
     </section>
   );
 }
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div className="w-[300px] md:w-[400px] p-6 md:p-8 rounded-[32px] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex flex-col gap-6 hover:bg-white/[0.04] transition-all duration-300 group">
+    <div className="w-[300px] md:w-[400px] p-6 md:p-8 rounded-[32px] bg-white/[0.02] border border-white/5 backdrop-blur-sm flex flex-col gap-6 hover:bg-white/[0.04] transition-all duration-300 group tech-pixel-texture">
       {/* Stars & Quote Icon */}
       <div className="flex justify-between items-center">
         <div className="flex gap-1">

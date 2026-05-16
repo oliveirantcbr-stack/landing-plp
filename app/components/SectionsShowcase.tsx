@@ -28,7 +28,7 @@ const sliderRow2 = heroImages.slice(8, 16);
 
 export function SectionsShowcase() {
   const [isClientMobile, setIsClientMobile] = useState(false);
-
+  
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springConfig = { damping: 30, stiffness: 100 };
@@ -52,16 +52,33 @@ export function SectionsShowcase() {
   }, [mouseX, mouseY]);
 
   return (
-    <section id="beneficios" className="relative w-full py-16 md:py-48 text-white bg-black">
-
-      {/* 🔮 CINEMATIC BACKGROUND GLOWS */}
-      <div className="absolute inset-0 pointer-events-none overflow-visible">
-        <div className="absolute top-[15%] left-[-10%] w-[350px] md:w-[800px] h-[350px] md:h-[800px] bg-purple-600/[0.04] md:bg-purple-600/10 blur-[80px] md:blur-[150px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[10%] right-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-indigo-600/[0.04] md:bg-indigo-600/10 blur-[60px] md:blur-[120px] rounded-full" />
+    <section id="beneficios" className="relative w-full py-16 md:py-48 text-white bg-black overflow-hidden">
+      
+      {/* 🚀 RISING TECH LINES (Exclusive to this section) */}
+      <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`rising-line-${i}`}
+            initial={{ top: "110%", left: `${10 + i * 12}%`, opacity: 0 }}
+            animate={{ 
+              top: ["110%", "-20%"],
+              opacity: [0, 0.5, 0]
+            }}
+            transition={{ 
+              duration: 7 + Math.random() * 5, 
+              repeat: Infinity, 
+              ease: "linear",
+              delay: Math.random() * 10
+            }}
+            className="absolute w-px h-[200px] bg-gradient-to-t from-transparent via-purple-500/40 to-transparent"
+          />
+        ))}
       </div>
 
-      {/* 🌑 SECTION FADES */}
-      <div className="absolute top-0 left-0 right-0 h-48 md:h-72 bg-gradient-to-b from-black via-black/80 to-transparent z-20 pointer-events-none" />
+
+      {/* 🌑 GRADIENT OVERLAYS FOR DEPTH */}
+      <div className="absolute inset-x-0 top-0 h-48 md:h-72 bg-gradient-to-b from-black via-black/90 to-transparent z-20 pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-48 md:h-72 bg-gradient-to-t from-black via-black/90 to-transparent z-20 pointer-events-none" />
 
       {/* HEADER CTA */}
       <div className="relative z-30 max-w-4xl mx-auto mb-12 md:mb-20 px-4">
@@ -214,7 +231,7 @@ export function SectionsShowcase() {
 
         {/* BENTOBG.WEBP BACKGROUND FOR PIPELINE - INVERTED */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-80 z-0 scale-y-[-1]"
+          className="absolute inset-0 pointer-events-none opacity-80 z-0 scale-y-[-1] luzpulsante"
           style={{
             backgroundImage: 'url(/bentobg.webp)',
             backgroundSize: 'cover',
@@ -231,15 +248,6 @@ export function SectionsShowcase() {
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-[2]" />
 
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-12 lg:gap-20">
-
-          <div className="absolute top-[40px] left-0 w-full h-[2px] bg-white/5 hidden md:block pointer-events-none overflow-hidden z-10">
-            <motion.div
-              initial={{ left: "-20%" }}
-              animate={{ left: "120%" }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              className="absolute top-0 w-1/4 h-full bg-gradient-to-r from-transparent via-purple-500 to-transparent shadow-[0_0_20px_#a855f7]"
-            />
-          </div>
 
           {[
             {
@@ -287,6 +295,27 @@ export function SectionsShowcase() {
             </motion.div>
           ))}
         </div>
+      </div>
+      
+      {/* 🌪️ CINEMATIC SMOKE OVERLAY (Drifting above everything) */}
+      <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden mix-blend-screen">
+        <motion.div
+          animate={{ 
+            x: ['-2%', '2%', '-2%'],
+            scale: [1.1, 1.15, 1.1]
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="absolute inset-[-10%] opacity-[0.15]"
+          style={{
+            backgroundImage: 'url(/SMOKEFALLBACK.webp)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
       </div>
 
     </section>

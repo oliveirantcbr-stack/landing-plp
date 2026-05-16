@@ -128,6 +128,24 @@
   .CallToAction {
     border: 2px solid #6b7280;
   }
+
+  .tech-pixel-texture {
+    position: relative;
+  }
+  
+  .tech-pixel-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(at 20% 80%, #fff 1px, transparent 0px);
+    background-size: 3px 3px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.10;
+    mix-blend-mode: plus-lighter;
+    user-select: none;
+    border-radius: inherit;
+  }
 }
 
 @layer base {
@@ -300,5 +318,25 @@ body {
 html,
 body {
   scroll-behavior: auto;
+}
+
+/* ⚡ PULSING LIGHT EFFECT */
+.luzpulsante {
+  animation: 10s luzz ease infinite;
+}
+
+@keyframes luzz {
+  0%, 82%, 100% {
+    filter: brightness(1) saturate(1);
+  }
+  86% {
+    filter: brightness(1.5) saturate(1.2);
+  }
+  89% {
+    filter: brightness(1.2) saturate(1.1);
+  }
+  93% {
+    filter: brightness(1.6) saturate(1.3);
+  }
 }
 

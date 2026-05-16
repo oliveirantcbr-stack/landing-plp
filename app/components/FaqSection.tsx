@@ -68,7 +68,7 @@ export default function FaqSection() {
                 key={i}
                 layout="position"
                 className={`
-                  relative rounded-2xl overflow-hidden transition-all duration-500 h-fit
+                  relative rounded-2xl overflow-hidden transition-all duration-500 h-fit tech-pixel-texture
                   ${
                     isOpen
                       ? "border border-purple-500/40 bg-white/[0.08]"

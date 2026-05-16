@@ -112,7 +112,7 @@ export function BonusSection() {
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className="group"
             >
-              <div className="rounded-2xl bg-zinc-950/40 p-6 border border-white/10 hover:border-purple-500/30 hover:bg-zinc-900/60 transition-all duration-500 h-full flex flex-col gap-4 relative overflow-hidden backdrop-blur-xl shadow-2xl">
+              <div className="rounded-2xl bg-zinc-950/40 p-6 border border-white/10 hover:border-purple-500/30 hover:bg-zinc-900/60 transition-all duration-500 h-full flex flex-col gap-4 relative overflow-hidden backdrop-blur-xl shadow-2xl tech-pixel-texture">
                 {/* Subtle Inner Highlight */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none" />
                 

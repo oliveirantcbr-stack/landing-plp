@@ -66,15 +66,14 @@ export function HeroSectionDemo() {
     >
       {/* 🚀 Ultra-Clean Pre-loader (Minimalist & Performant) */}
       {showPreloader && (
-        <div 
-          className={`fixed inset-0 z-[999] flex items-center justify-center bg-black transition-opacity duration-300 ease-in-out ${
-            isPreloading ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
+        <div
+          className={`fixed inset-0 z-[999] flex items-center justify-center bg-black transition-opacity duration-300 ease-in-out ${isPreloading ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
         >
           <div className="relative flex flex-col items-center">
             {/* 💎 Pure CSS Ambient Glow */}
             <div className="absolute inset-0 bg-purple-600/20 blur-[60px] rounded-full animate-pulse scale-150" />
-            
+
             <div className="relative">
               <Image
                 src="/logoplpn.svg"
@@ -212,9 +211,10 @@ export function HeroSectionDemo() {
           {/* Desktop Content Only (Social Proof) */}
           <div className="hidden md:flex flex-col items-center lg:items-start mt-10 gap-8">
             <p className="text-sm text-white/40 leading-relaxed max-w-sm font-medium text-balance">
-              A união perfeita entre a velocidade do template <br />
-              e a exclusividade do design premium. <br />
-              Crie experiências que convertem visitas em vendas reais.
+              Crie Landing Pages em Minutos, usando nossa biblioteca exclusiva de seções, codigos css e botões.
+              <span className="block mt-2 text-purple-500 font-black uppercase tracking-widest text-[10px]">
+                + de 250 itens para você copiar e colar no seu Elementor
+              </span>
             </p>
 
             <div className="flex flex-col items-start gap-8">
@@ -243,9 +243,10 @@ export function HeroSectionDemo() {
         {/* BOTTOM GROUP (Mobile Only) */}
         <div className="md:hidden flex flex-col items-center w-full px-8 gap-10 mt-20">
           <p className="text-[11px] text-white/40 leading-relaxed text-center font-medium text-balance">
-            A união perfeita entre a velocidade do template <br />
-            e a exclusividade do design premium. <br />
-            Crie experiências que convertem visitas em vendas reais.
+            Crie Landing Pages em Minutos!, usando nossa biblioteca exclusiva de seções, codigos css e botões.
+            <span className="block mt-2 text-purple-500 font-black uppercase tracking-[0.2em] text-[9px]">
+              + de 250 itens para você copiar e colar no seu Elementor
+            </span>
           </p>
 
           <div className="flex flex-col items-center gap-6 w-full">

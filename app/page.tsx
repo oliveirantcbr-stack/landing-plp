@@ -37,6 +37,7 @@ export default function Page() {
       {/* Subsequent Sections - Standard relative z-10 */}
       <div className="relative z-10 bg-transparent">
         <SectionsShowcase />
+        
         <ParaVoceSection />
         <ParaQuemESection />
         <BonusSection />
@@ -46,6 +47,7 @@ export default function Page() {
         <GuaranteeSection />
         <FaqSection />
         <FinalCtaSection />
+
         <Footer />
       </div>
     </main>

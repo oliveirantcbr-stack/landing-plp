@@ -59,9 +59,9 @@ export function ParaVoceSection() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10 overflow-hidden rounded-2xl">
 
                {/* MAIN CARD (Spans 2 columns on desktop) */}
-               <div className="md:col-span-2 relative bg-zinc-950/40 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-between group overflow-hidden border border-white/5">
+               <div className="md:col-span-2 relative bg-zinc-950/40 backdrop-blur-xl p-8 md:p-12 flex flex-col justify-between group overflow-hidden border border-white/5 tech-pixel-texture">
                   {/* Background Image */}
-                  <div className="absolute inset-0 -z-10">
+                  <div className="absolute inset-0 -z-10 luzpulsante">
                      <Image
                         src="/bgcard.webp"
                         alt="Card Background"
@@ -92,7 +92,7 @@ export function ParaVoceSection() {
                </div>
 
                {/* CARD 1: AFILIADOS */}
-               <div className="bg-[#050505] p-8 flex flex-col justify-between group hover:bg-zinc-900/40 transition-colors">
+               <div className="bg-[#050505] p-8 flex flex-col justify-between group hover:bg-zinc-900/40 transition-colors tech-pixel-texture">
                   <div className="flex justify-between items-start">
                      <Users className="size-5 text-purple-500" />
                      <ArrowUpRight className="size-4 text-zinc-700 group-hover:text-white transition-colors" />
@@ -106,7 +106,7 @@ export function ParaVoceSection() {
                </div>
 
                {/* CARD 2: DESIGNERS */}
-               <div className="bg-[#050505] p-8 flex flex-col justify-between group hover:bg-zinc-900/40 transition-colors">
+               <div className="bg-[#050505] p-8 flex flex-col justify-between group hover:bg-zinc-900/40 transition-colors tech-pixel-texture">
                   <div className="flex justify-between items-start">
                      <Palette className="size-5 text-purple-500" />
                      <ArrowUpRight className="size-4 text-zinc-700 group-hover:text-white transition-colors" />
@@ -120,7 +120,7 @@ export function ParaVoceSection() {
                </div>
 
                {/* CARD 3: INICIANTES */}
-               <div className="bg-[#050505] p-8 flex flex-col justify-between group hover:bg-zinc-900/40 transition-colors">
+               <div className="bg-[#050505] p-8 flex flex-col justify-between group hover:bg-zinc-900/40 transition-colors tech-pixel-texture">
                   <div className="flex justify-between items-start">
                      <Laptop className="size-5 text-purple-500" />
                      <ArrowUpRight className="size-4 text-zinc-700 group-hover:text-white transition-colors" />

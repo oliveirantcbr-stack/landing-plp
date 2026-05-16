@@ -310,7 +310,7 @@ const GridItem = ({ area, icon: Icon, title, description, iconColor = "#ef4444" 
             relative flex h-full flex-col justify-center gap-4
             rounded-2xl bg-zinc-950/60 backdrop-blur-xl overflow-hidden
             p-6 md:p-8 transition-colors group-hover:bg-zinc-900/80
-            border border-red-500/20 shadow-2xl
+            border border-red-500/20 shadow-2xl tech-pixel-texture
           "
         >
           {/* Subtle Red Inner Highlight */}
@@ -402,7 +402,7 @@ const BenefitGridItem = ({ area, icon: Icon, title, description, iconColor = "#1
             relative flex h-full flex-col justify-center gap-4
             rounded-2xl bg-zinc-900/60 backdrop-blur-xl overflow-hidden
             p-6 md:p-8 transition-colors group-hover:bg-zinc-800/80
-            border border-emerald-500/20 shadow-[0_15px_30px_rgba(16,185,129,0.05)]
+            border border-emerald-500/20 shadow-[0_15px_30px_rgba(16,185,129,0.05)] tech-pixel-texture
           "
         >
           {/* Softer Emerald Inner Highlight */}

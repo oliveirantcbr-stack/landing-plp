@@ -30,8 +30,9 @@ export default function GuaranteeSection() {
         <div className="w-1/2 h-20 bg-gradient-to-b from-purple-500/20 to-transparent blur-[50px] -mt-2" />
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 relative z-10">
-        <div className="relative grid items-center gap-12 rounded-[40px] border border-white/5 bg-zinc-950/40 backdrop-blur-2xl p-10 md:grid-cols-2 md:p-20 overflow-hidden shadow-2xl">
+      <div className="mx-auto max-w-5xl px-6 relative z-10">
+        {/* CARD CONTAINER */}
+        <div className="relative overflow-hidden rounded-[40px] border border-white/5 bg-zinc-950/40 backdrop-blur-3xl px-8 py-12 md:px-20 md:py-24 text-center shadow-2xl tech-pixel-texture grid items-center gap-12 md:grid-cols-2 md:text-left">
           
           {/* DECORATIVE LIGHTS */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 blur-[100px] -mr-32 -mt-32" />
