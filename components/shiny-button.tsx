@@ -8,7 +8,6 @@ interface ShinyButtonProps {
   onClick?: () => void
   className?: string
   style?: React.CSSProperties
-  highlightColor?: string
 }
 
 export function ShinyButton({ 
@@ -16,7 +15,6 @@ export function ShinyButton({
   onClick, 
   className = "", 
   style = {},
-  highlightColor = "#a855f7", 
 }: ShinyButtonProps) {
   return (
     <button 

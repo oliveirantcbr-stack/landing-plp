@@ -51,24 +51,33 @@ export function SectionsShowcase() {
     };
   }, [mouseX, mouseY]);
 
+  // Stabilize random values for rising lines to fix "impure function" build error
+  const risingLines = React.useMemo(() => {
+    return [...Array(8)].map((_, i) => ({
+      left: `${10 + i * 12}%`,
+      duration: 7 + Math.random() * 5,
+      delay: Math.random() * 10
+    }));
+  }, []);
+
   return (
     <section id="beneficios" className="relative w-full py-16 md:py-48 text-white bg-black overflow-hidden">
       
       {/* 🚀 RISING TECH LINES (Exclusive to this section) */}
       <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
-        {[...Array(8)].map((_, i) => (
+        {risingLines.map((line, i) => (
           <motion.div
             key={`rising-line-${i}`}
-            initial={{ top: "110%", left: `${10 + i * 12}%`, opacity: 0 }}
+            initial={{ top: "110%", left: line.left, opacity: 0 }}
             animate={{ 
               top: ["110%", "-20%"],
               opacity: [0, 0.5, 0]
             }}
             transition={{ 
-              duration: 7 + Math.random() * 5, 
+              duration: line.duration, 
               repeat: Infinity, 
               ease: "linear",
-              delay: Math.random() * 10
+              delay: line.delay
             }}
             className="absolute w-px h-[200px] bg-gradient-to-t from-transparent via-purple-500/40 to-transparent"
           />
