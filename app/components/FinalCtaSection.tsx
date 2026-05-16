@@ -69,7 +69,7 @@ export default function FinalCtaSection() {
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
                 className="w-full md:w-auto max-w-[280px] md:max-w-none font-black tracking-widest uppercase shadow-2xl shadow-purple-500/20"
               >
-                COMEÇAR AGORA MESMO
+                ULTIMA OPORTUNIDADE!
               </ShinyButton>
             </div>
 
