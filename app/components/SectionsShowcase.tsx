@@ -51,13 +51,16 @@ export function SectionsShowcase() {
     };
   }, [mouseX, mouseY]);
 
-  // Stabilize random values for rising lines to fix "impure function" build error
-  const risingLines = React.useMemo(() => {
-    return [...Array(8)].map((_, i) => ({
+  // Generate random values for rising lines in useEffect to satisfy strict purity rules
+  const [risingLines, setRisingLines] = React.useState<{left: string, duration: number, delay: number}[]>([]);
+
+  React.useEffect(() => {
+    const lines = [...Array(8)].map((_, i) => ({
       left: `${10 + i * 12}%`,
       duration: 7 + Math.random() * 5,
       delay: Math.random() * 10
     }));
+    setRisingLines(lines);
   }, []);
 
   return (
