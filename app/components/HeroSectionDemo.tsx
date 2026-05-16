@@ -251,7 +251,6 @@ export function HeroSectionDemo() {
           <div className="flex flex-col items-center gap-6 w-full">
             <ShinyButton
               onClick={scrollToOferta}
-              highlightColor="#a855f7"
               style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
               className="w-full max-w-[280px] font-black tracking-[0.1em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 whitespace-nowrap"
             >
