@@ -291,8 +291,8 @@ export function ParaQuemESection() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
           <div className="relative w-full">
             {/* Máscara de Degradê nas Laterais (Mobile/Tablet) */}
-            <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#0a0a0a] to-transparent z-20 pointer-events-none md:hidden" />
-            <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#0a0a0a] to-transparent z-20 pointer-events-none md:hidden" />
+            <div className="absolute -left-4 top-0 bottom-0 w-16 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-20 pointer-events-none md:hidden" />
+            <div className="absolute -right-4 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-20 pointer-events-none md:hidden" />
 
             <div 
               onScroll={handleScroll}

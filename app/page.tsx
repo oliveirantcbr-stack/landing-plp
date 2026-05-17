@@ -1,19 +1,22 @@
 "use client";
 
 import { HeroSectionDemo } from "@/app/components/HeroSectionDemo";
-import { SectionsShowcase } from "@/app/components/SectionsShowcase";
-import { ParaQuemESection } from "@/app/components/ParaQuemESection";
-import { ParaVoceSection } from "./components/ParaVoceSection";
-import { BonusSection } from "@/app/components/BonusSection";
-import { TestimonialsSection } from "@/app/components/TestimonialsSection";
-import dynamic from "next/dynamic";
-import { PremiumPricingSection } from "@/app/components/PremiumPricingSection";
-import GuaranteeSection from "@/app/components/GuaranteeSection";
-import FaqSection from "@/app/components/FaqSection";
-import FinalCtaSection from "@/app/components/FinalCtaSection";
-import Footer from "@/app/components/Footer";
 import { Navbar } from "@/app/components/Navbar";
-import { TestimonialsCTA } from "./components/TestimonialsCTA";
+import dynamic from "next/dynamic";
+
+const SectionsShowcase = dynamic(() => import("@/app/components/SectionsShowcase").then(mod => mod.SectionsShowcase), { ssr: true });
+const ParaQuemESection = dynamic(() => import("@/app/components/ParaQuemESection").then(mod => mod.ParaQuemESection), { ssr: true });
+const ParaVoceSection = dynamic(() => import("./components/ParaVoceSection").then(mod => mod.ParaVoceSection), { ssr: true });
+const BonusSection = dynamic(() => import("@/app/components/BonusSection").then(mod => mod.BonusSection), { ssr: true });
+const TestimonialsSection = dynamic(() => import("@/app/components/TestimonialsSection").then(mod => mod.TestimonialsSection), { ssr: true });
+const PremiumPricingSection = dynamic(() => import("@/app/components/PremiumPricingSection").then(mod => mod.PremiumPricingSection), { ssr: true });
+const TestimonialsCTA = dynamic(() => import("./components/TestimonialsCTA").then(mod => mod.TestimonialsCTA), { ssr: true });
+
+const GuaranteeSection = dynamic(() => import("@/app/components/GuaranteeSection"), { ssr: true });
+const FaqSection = dynamic(() => import("@/app/components/FaqSection"), { ssr: true });
+const FinalCtaSection = dynamic(() => import("@/app/components/FinalCtaSection"), { ssr: true });
+const Footer = dynamic(() => import("@/app/components/Footer"), { ssr: true });
+
 const TextureOverlay = dynamic(
   () => import("@/app/components/TextureOverlay").then(mod => mod.TextureOverlay),
   { ssr: false }
