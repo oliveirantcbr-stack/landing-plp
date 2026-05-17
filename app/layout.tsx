@@ -60,7 +60,7 @@ export default function RootLayout({
         ================================================= */}
         <Script
           id="utmify-meta-pixel"
-          strategy="lazyOnload"
+          strategy="worker"
           dangerouslySetInnerHTML={{
             __html: `
               window.pixelId = "68d474d381056b37956c018d";

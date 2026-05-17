@@ -2,6 +2,13 @@
   "name": "landing-nova",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "Chrome >= 90",
+    "Safari >= 15",
+    "iOS >= 15",
+    "Edge >= 90",
+    "Firefox >= 90"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +16,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@builder.io/partytown": "^0.10.3",
     "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

@@ -311,9 +311,9 @@ export function ParaQuemESection() {
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   viewport={{ once: true }}
                   key={idx} 
-                  className="flex-none w-[75vw] sm:w-[45vw] md:w-[280px] lg:w-[300px] snap-center rounded-3xl border border-white/10 overflow-hidden relative group shadow-2xl bg-zinc-900/40 tech-pixel-texture"
+                  className="flex-none w-[75vw] sm:w-[45vw] md:w-[280px] lg:w-[300px] snap-center rounded-3xl border border-white/10 overflow-hidden relative group shadow-2xl bg-zinc-900/40 tech-pixel-texture aspect-[4/5]"
                 >
-                  <div className="relative w-full h-[180px] md:h-[200px]">
+                  <div className="relative w-full h-full">
                     <Image
                       src={img.src}
                       alt={img.alt}

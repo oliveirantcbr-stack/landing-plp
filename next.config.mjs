@@ -18,6 +18,9 @@ const nextConfig = {
     ],
   },
   swcMinify: true,
+  experimental: {
+    nextScriptWorkers: true,
+  },
 }
 
 export default nextConfig;
