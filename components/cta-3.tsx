@@ -1,9 +1,11 @@
-
 export function CallToAction() {
   return (
     <div className="relative mx-auto w-full max-w-3xl px-4">
       {/* Main Container - Technical Square Aesthetic */}
       <div className="relative flex flex-col justify-between gap-y-8 border border-white/20 px-8 py-14 md:py-20 bg-black/40 backdrop-blur-3xl overflow-hidden">
+        
+        {/* GLOW INFERIOR INTERNO CENTRADO */}
+        <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[80%] h-24 bg-purple-600/20 rounded-full blur-[60px] pointer-events-none z-0" />
 
         {/* CORNER ACCENTS - TECHNICAL SQUARES */}
         <div className="absolute -top-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />

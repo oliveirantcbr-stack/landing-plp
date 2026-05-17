@@ -76,6 +76,22 @@ export function Navbar() {
 
           {/* CTA & MOBILE TOGGLE */}
           <div className="flex items-center gap-3">
+            {/* Botão de Login Roxo (Desktop) */}
+            <div className="hidden sm:block">
+              <button
+                onClick={() => window.open("/login", "_blank")}
+                className="relative px-5 py-2 bg-purple-600 text-white hover:bg-purple-500 text-[10px] font-black tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] border border-purple-500/50"
+              >
+                {/* BUTTON CORNER SQUARES */}
+                <div className="absolute -top-[2px] -left-[2px] size-1 bg-purple-400 shadow-[0_0_5px_#c084fc]" />
+                <div className="absolute -top-[2px] -right-[2px] size-1 bg-purple-400 shadow-[0_0_5px_#c084fc]" />
+                <div className="absolute -bottom-[2px] -left-[2px] size-1 bg-purple-400 shadow-[0_0_5px_#c084fc]" />
+                <div className="absolute -bottom-[2px] -right-[2px] size-1 bg-purple-400 shadow-[0_0_5px_#c084fc]" />
+                
+                LOGIN
+              </button>
+            </div>
+
             <div className="hidden sm:block">
               <button
                 onClick={scrollToOferta}
@@ -126,16 +142,29 @@ export function Navbar() {
               
               <div className="h-px bg-white/5 w-full" />
               
-              <ShinyButton
-                onClick={() => {
-                  scrollToOferta();
-                  setMobileMenuOpen(false);
-                }}
-                style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
-                className="w-full font-black tracking-widest uppercase bg-purple-600 border-purple-400 shadow-[0_15px_30px_rgba(147,51,234,0.3)]"
-              >
-                COMEÇAR AGORA
-              </ShinyButton>
+              <div className="flex flex-col gap-2">
+                <ShinyButton
+                  onClick={() => {
+                    scrollToOferta();
+                    setMobileMenuOpen(false);
+                  }}
+                  style={{ "--padding": "0.6rem 1.2rem", "--font-size": "10px" } as React.CSSProperties}
+                  className="w-full font-black tracking-widest uppercase bg-white text-black border-white shadow-[0_10px_20px_rgba(255,255,255,0.05)]"
+                >
+                  COMEÇAR AGORA
+                </ShinyButton>
+
+                <ShinyButton
+                  onClick={() => {
+                    window.open("/login", "_blank");
+                    setMobileMenuOpen(false);
+                  }}
+                  style={{ "--padding": "0.6rem 1.2rem", "--font-size": "10px" } as React.CSSProperties}
+                  className="w-full font-black tracking-widest uppercase bg-purple-600 border-purple-400 shadow-[0_10px_20px_rgba(147,51,234,0.2)]"
+                >
+                  LOGIN
+                </ShinyButton>
+              </div>
             </div>
           </motion.div>
         )}

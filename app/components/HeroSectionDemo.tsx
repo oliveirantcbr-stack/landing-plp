@@ -240,7 +240,7 @@ export function HeroSectionDemo() {
         </div>
 
         {/* BOTTOM GROUP (Mobile Only) */}
-        <div className="md:hidden flex flex-col items-center w-full px-8 gap-10 mt-32">
+        <div className="md:hidden flex flex-col items-center w-full px-8 gap-4 mt-32">
           <p className="text-[11px] text-zinc-200 leading-relaxed text-center font-medium text-balance">
             Crie Landing Pages em Minutos, usando nossa biblioteca exclusiva de seções, códigos css e botões.
             <span className="block mt-3 text-purple-400 font-black uppercase tracking-[0.2em] text-[10px]">
