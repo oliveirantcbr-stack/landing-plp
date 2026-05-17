@@ -2,15 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function TestimonialsCTA() {
-  const containerRef = React.useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: "200px" });
-
   return (
     <section className="relative w-full py-12 md:py-24 bg-[#0a0a0a] overflow-hidden flex flex-col items-center">
-      <div className="mx-auto max-w-5xl px-6 relative z-10 w-full" ref={containerRef}>
+      <div className="mx-auto max-w-5xl px-6 relative z-10 w-full">
         
         {/* THE TECHNICAL CARD WITH FLASH ANIMATION (SAME AS BENTO/PIPELINE) */}
         <div className="relative overflow-hidden rounded-[40px] border border-white/10 bg-zinc-950/50 luzpulsante tech-pixel-texture shadow-2xl">

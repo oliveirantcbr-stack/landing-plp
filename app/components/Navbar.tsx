@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShinyButton } from "@/components/shiny-button";
 import { scrollToOferta } from "@/lib/scrollToOferta";
 import { Menu, X } from "lucide-react";
 

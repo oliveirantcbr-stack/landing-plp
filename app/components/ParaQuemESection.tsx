@@ -18,7 +18,7 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useMotionValue, useTransform } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 export function ParaQuemESection() {
   const [activeIdx, setActiveIdx] = useState(0);
