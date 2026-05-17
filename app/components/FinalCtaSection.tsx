@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ShieldCheck, Zap, RefreshCw } from "lucide-react";
 import { ShinyButton } from "@/components/shiny-button";
 import { scrollToOferta } from "@/lib/scrollToOferta";
@@ -45,10 +46,11 @@ export default function FinalCtaSection() {
         >
           {/* BACKGROUND IMAGE */}
           <div className="absolute inset-0 z-0 pointer-events-none">
-            <img
+            <Image
               src="/finalcard.webp"
               alt="Final Card Background"
-              className="w-full h-full object-cover opacity-45"
+              fill
+              className="object-cover opacity-45"
             />
           </div>
 

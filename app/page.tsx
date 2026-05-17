@@ -1,28 +1,29 @@
 "use client";
 
+import React, { lazy } from "react";
 import { HeroSectionDemo } from "@/app/components/HeroSectionDemo";
 import { Navbar } from "@/app/components/Navbar";
 import dynamic from "next/dynamic";
+import { LazySection } from "@/app/components/LazySection";
 
-const SectionsShowcase = dynamic(() => import("@/app/components/SectionsShowcase").then(mod => mod.SectionsShowcase), { ssr: true });
-const ParaQuemESection = dynamic(() => import("@/app/components/ParaQuemESection").then(mod => mod.ParaQuemESection), { ssr: true });
-const ParaVoceSection = dynamic(() => import("./components/ParaVoceSection").then(mod => mod.ParaVoceSection), { ssr: true });
-const BonusSection = dynamic(() => import("@/app/components/BonusSection").then(mod => mod.BonusSection), { ssr: true });
-const TestimonialsSection = dynamic(() => import("@/app/components/TestimonialsSection").then(mod => mod.TestimonialsSection), { ssr: true });
-const PremiumPricingSection = dynamic(() => import("@/app/components/PremiumPricingSection").then(mod => mod.PremiumPricingSection), { ssr: true });
-const TestimonialsCTA = dynamic(() => import("./components/TestimonialsCTA").then(mod => mod.TestimonialsCTA), { ssr: true });
+const SectionsShowcase = lazy(() => import("@/app/components/SectionsShowcase").then(mod => ({ default: mod.SectionsShowcase })));
+const ParaQuemESection = lazy(() => import("@/app/components/ParaQuemESection").then(mod => ({ default: mod.ParaQuemESection })));
+const ParaVoceSection = lazy(() => import("./components/ParaVoceSection").then(mod => ({ default: mod.ParaVoceSection })));
+const BonusSection = lazy(() => import("@/app/components/BonusSection").then(mod => ({ default: mod.BonusSection })));
+const TestimonialsSection = lazy(() => import("@/app/components/TestimonialsSection").then(mod => ({ default: mod.TestimonialsSection })));
+const PremiumPricingSection = lazy(() => import("@/app/components/PremiumPricingSection").then(mod => ({ default: mod.PremiumPricingSection })));
+const TestimonialsCTA = lazy(() => import("./components/TestimonialsCTA").then(mod => ({ default: mod.TestimonialsCTA })));
 
-const GuaranteeSection = dynamic(() => import("@/app/components/GuaranteeSection"), { ssr: true });
-const FaqSection = dynamic(() => import("@/app/components/FaqSection"), { ssr: true });
-const FinalCtaSection = dynamic(() => import("@/app/components/FinalCtaSection"), { ssr: true });
-const Footer = dynamic(() => import("@/app/components/Footer"), { ssr: true });
+const GuaranteeSection = lazy(() => import("@/app/components/GuaranteeSection"));
+const FaqSection = lazy(() => import("@/app/components/FaqSection"));
+const FinalCtaSection = lazy(() => import("@/app/components/FinalCtaSection"));
+const Footer = lazy(() => import("@/app/components/Footer"));
 
+// TextureOverlay pode continuar com next/dynamic pois é puramente visual e sem SSR
 const TextureOverlay = dynamic(
   () => import("@/app/components/TextureOverlay").then(mod => mod.TextureOverlay),
   { ssr: false }
 );
-
-
 
 export default function Page() {
   return (
@@ -39,19 +40,49 @@ export default function Page() {
 
       {/* Subsequent Sections - Standard relative z-10 */}
       <div className="relative z-10 bg-transparent">
-        <SectionsShowcase />
+        <LazySection rootMargin="1000px 0px">
+          <SectionsShowcase />
+        </LazySection>
         
-        <ParaVoceSection />
-        <ParaQuemESection />
-        <BonusSection />
-        <TestimonialsSection />
-        <TestimonialsCTA />
-        <PremiumPricingSection />
-        <GuaranteeSection />
-        <FaqSection />
-        <FinalCtaSection />
+        <LazySection rootMargin="800px 0px">
+          <ParaVoceSection />
+        </LazySection>
 
-        <Footer />
+        <LazySection rootMargin="800px 0px">
+          <ParaQuemESection />
+        </LazySection>
+
+        <LazySection rootMargin="800px 0px">
+          <BonusSection />
+        </LazySection>
+
+        <LazySection rootMargin="800px 0px">
+          <TestimonialsSection />
+        </LazySection>
+
+        <LazySection rootMargin="800px 0px">
+          <TestimonialsCTA />
+        </LazySection>
+
+        <LazySection rootMargin="800px 0px">
+          <PremiumPricingSection />
+        </LazySection>
+
+        <LazySection rootMargin="800px 0px">
+          <GuaranteeSection />
+        </LazySection>
+
+        <LazySection rootMargin="800px 0px">
+          <FaqSection />
+        </LazySection>
+
+        <LazySection rootMargin="800px 0px">
+          <FinalCtaSection />
+        </LazySection>
+
+        <LazySection rootMargin="400px 0px">
+          <Footer />
+        </LazySection>
       </div>
     </main>
   );

@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useMotionValue, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export function ParaQuemESection() {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -266,10 +267,11 @@ export function ParaQuemESection() {
       <section className="w-full pb-16 md:pb-24 relative overflow-hidden">
         {/* Background Image horizontal (deitada) com degradê */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img
+          <Image
             src="/bgcardcta.webp"
             alt="Carousel Background"
-            className="w-full h-full object-cover opacity-20"
+            fill
+            className="object-cover opacity-20"
           />
           {/* Fades to match section top/bottom borders */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
@@ -311,11 +313,12 @@ export function ParaQuemESection() {
                   key={idx} 
                   className="flex-none w-[75vw] sm:w-[45vw] md:w-[280px] lg:w-[300px] snap-center rounded-3xl border border-white/10 overflow-hidden relative group shadow-2xl bg-zinc-900/40 tech-pixel-texture"
                 >
-                  <div className="relative w-full h-full">
-                    <img
+                  <div className="relative w-full h-[180px] md:h-[200px]">
+                    <Image
                       src={img.src}
                       alt={img.alt}
-                      className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
                     {/* Subtle Gradient Overlay */}
