@@ -140,7 +140,7 @@
     background-image: radial-gradient(at 20% 80%, #fff 1px, transparent 0px);
     background-size: 3px 3px;
     pointer-events: none;
-    z-index: 10;
+    z-index: 2;
     opacity: 0.10;
     mix-blend-mode: plus-lighter;
     user-select: none;

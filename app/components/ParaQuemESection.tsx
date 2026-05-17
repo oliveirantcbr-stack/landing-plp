@@ -18,9 +18,21 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useMotionValue, useTransform } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function ParaQuemESection() {
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    if (maxScroll <= 0) return;
+    const pct = scrollLeft / maxScroll;
+    const index = Math.min(2, Math.max(0, Math.round(pct * 2)));
+    setActiveIdx(index);
+  };
+
   return (
     <div className="bg-[#0a0a0a]">
       {/* PRIMEIRA SEÇÃO - PROBLEMAS (ÍCONES VERMELHOS) */}
@@ -282,7 +294,10 @@ export function ParaQuemESection() {
             <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#0a0a0a] to-transparent z-20 pointer-events-none md:hidden" />
             <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#0a0a0a] to-transparent z-20 pointer-events-none md:hidden" />
 
-            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-8 pb-8 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] md:justify-center">
+            <div 
+              onScroll={handleScroll}
+              className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-8 pb-8 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] md:justify-center"
+            >
               {[
                 { src: "/domina.webp", alt: "Domina" },
                 { src: "/tempo.webp", alt: "Tempo" },
@@ -314,9 +329,9 @@ export function ParaQuemESection() {
           
           {/* Scroll Indicator */}
           <div className="flex justify-center items-center gap-2 mt-4 md:hidden">
-            <div className="w-8 h-1 rounded-full bg-purple-500"></div>
-            <div className="w-2 h-1 rounded-full bg-white/20"></div>
-            <div className="w-2 h-1 rounded-full bg-white/20"></div>
+            <div className={`h-1 rounded-full transition-all duration-300 ${activeIdx === 0 ? "w-8 bg-purple-500" : "w-2 bg-white/20"}`}></div>
+            <div className={`h-1 rounded-full transition-all duration-300 ${activeIdx === 1 ? "w-8 bg-purple-500" : "w-2 bg-white/20"}`}></div>
+            <div className={`h-1 rounded-full transition-all duration-300 ${activeIdx === 2 ? "w-8 bg-purple-500" : "w-2 bg-white/20"}`}></div>
           </div>
         </div>
       </section>
@@ -395,12 +410,12 @@ const GridItem = ({ area, icon: Icon, title, description, iconColor = "#ef4444" 
           />
           <motion.div
             style={isMobile ? undefined : { rotateX, rotateY }}
-            className="w-fit rounded-lg border border-white/5 bg-white/5 p-2"
+            className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 relative z-10"
           >
             <Icon className="h-5 w-5" style={{ color: iconColor }} />
           </motion.div>
 
-          <div className="space-y-1">
+          <div className="space-y-1 relative z-10">
             <h3 className="text-lg md:text-xl font-black text-white tracking-tight uppercase">
               {title}
             </h3>
@@ -487,12 +502,12 @@ const BenefitGridItem = ({ area, icon: Icon, title, description, iconColor = "#1
           />
           <motion.div
             style={isMobile ? undefined : { rotateX, rotateY }}
-            className="w-fit rounded-lg border border-white/5 bg-white/5 p-2"
+            className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 relative z-10"
           >
             <Icon className="h-5 w-5" style={{ color: iconColor }} />
           </motion.div>
 
-          <div className="space-y-1">
+          <div className="space-y-1 relative z-10">
             <h3 className="text-lg md:text-xl font-black text-white tracking-tight uppercase">
               {title}
             </h3>

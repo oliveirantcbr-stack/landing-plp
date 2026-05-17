@@ -18,7 +18,7 @@ export function ShinyButton({
 }: ShinyButtonProps) {
   return (
     <button 
-      className={`group relative flex items-stretch overflow-hidden border border-white/20 bg-slate-950 transition-all active:scale-[0.98] ${className}`}
+      className={`group relative flex items-stretch overflow-hidden border border-white/20 bg-slate-950 transition-all active:scale-[0.98] focus:outline-none outline-none ${className}`}
       onClick={onClick}
       style={style}
     >
