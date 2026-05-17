@@ -43,6 +43,15 @@ export default function FinalCtaSection() {
             tech-pixel-texture
           "
         >
+          {/* BACKGROUND IMAGE */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <img
+              src="/finalcard.webp"
+              alt="Final Card Background"
+              className="w-full h-full object-cover opacity-45"
+            />
+          </div>
+
           {/* INTERIOR DECORATION */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/5 blur-[100px] -mr-32 -mt-32" />
           

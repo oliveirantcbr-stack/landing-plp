@@ -249,6 +249,77 @@ export function ParaQuemESection() {
           />
         </ul>
       </section>
+
+      {/* TERCEIRA SEÇÃO - CARROSSEL */}
+      <section className="w-full pb-16 md:pb-24 relative overflow-hidden">
+        {/* Background Image horizontal (deitada) com degradê */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src="/bgcardcta.webp"
+            alt="Carousel Background"
+            className="w-full h-full object-cover opacity-20"
+          />
+          {/* Fades to match section top/bottom borders */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
+        </div>
+
+        <div className="text-center px-4 mb-12 relative z-10">
+          <div className="max-w-4xl mx-auto">
+            {/* Título */}
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white 
+              mb-4 leading-[1.1] tracking-tighter uppercase">
+              <span className="text-white/30 italic">Com o</span>{" "}
+              <span className="text-purple-500">Pack Landing Page</span>
+              <br />
+              <span className="text-white">Você</span>
+            </h2>
+          </div>
+        </div>
+
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
+          <div className="relative w-full">
+            {/* Máscara de Degradê nas Laterais (Mobile/Tablet) */}
+            <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-[#0a0a0a] to-transparent z-20 pointer-events-none md:hidden" />
+            <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-[#0a0a0a] to-transparent z-20 pointer-events-none md:hidden" />
+
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-8 pb-8 pt-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] md:justify-center">
+              {[
+                { src: "/domina.webp", alt: "Domina" },
+                { src: "/tempo.webp", alt: "Tempo" },
+                { src: "/vendas.webp", alt: "Vendas" },
+              ].map((img, idx) => (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  key={idx} 
+                  className="flex-none w-[75vw] sm:w-[45vw] md:w-[280px] lg:w-[300px] snap-center rounded-3xl border border-white/10 overflow-hidden relative group shadow-2xl bg-zinc-900/40 tech-pixel-texture"
+                >
+                  <div className="relative w-full h-full">
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    {/* Subtle Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 border border-white/5 rounded-3xl pointer-events-none" />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Scroll Indicator */}
+          <div className="flex justify-center items-center gap-2 mt-4 md:hidden">
+            <div className="w-8 h-1 rounded-full bg-purple-500"></div>
+            <div className="w-2 h-1 rounded-full bg-white/20"></div>
+            <div className="w-2 h-1 rounded-full bg-white/20"></div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

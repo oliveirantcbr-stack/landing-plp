@@ -31,13 +31,13 @@ export default function GuaranteeSection() {
       </div>
 
       <div className="mx-auto max-w-5xl px-6 relative z-10">
-        {/* CARD CONTAINER */}
-        <div className="relative overflow-hidden rounded-[40px] border border-white/5 bg-zinc-950/40 backdrop-blur-3xl px-8 py-12 md:px-20 md:py-24 text-center shadow-2xl tech-pixel-texture grid items-center gap-12 md:grid-cols-2 md:text-left">
-          
-          {/* DECORATIVE LIGHTS */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 blur-[100px] -mr-32 -mt-32" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/10 blur-[100px] -ml-32 -mb-32" />
+        {/* DECORATIVE LIGHTS */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 blur-[120px] pointer-events-none -mr-32 -mt-32" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/10 blur-[120px] pointer-events-none -ml-32 -mb-32" />
 
+        {/* UNBOXED GRID LAYOUT */}
+        <div className="grid items-center gap-12 md:grid-cols-2 md:text-left text-center">
+          
           {/* COLUNA DA IMAGEM */}
           <div className="relative flex items-center justify-center order-2 md:order-1">
             {/* CENTRAL PURPLE GLOW */}
@@ -53,7 +53,7 @@ export default function GuaranteeSection() {
                 animate-pulse
               "
             />
-
+ 
             {/* IMAGEM COM MÁSCARA / SHADOW */}
             <div className="relative w-full max-w-[340px] aspect-square drop-shadow-[0_0_50px_rgba(168,85,247,0.2)]">
               <Image
@@ -65,24 +65,24 @@ export default function GuaranteeSection() {
               />
             </div>
           </div>
-
+ 
           {/* COLUNA DO TEXTO */}
           <div className="relative z-10 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2">
             <div className="flex items-center gap-3 mb-6">
                <div className="size-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/50">Segurança & Confiança</span>
             </div>
-
+ 
             <h3 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tighter uppercase">
               RISCO ZERO <br />
               <span className="text-purple-500 italic">GARANTIDO.</span>
             </h3>
-
+ 
             <p className="mt-6 text-zinc-400 text-sm md:text-base leading-relaxed max-w-md">
               Teste a biblioteca sem compromisso. Se você não ficar satisfeito nos primeiros 7 dias, devolvemos seu dinheiro integralmente.
               <span className="block mt-4 font-bold text-white uppercase tracking-widest text-xs">Sem burocracia. Sem perguntas.</span>
             </p>
-
+ 
             {/* LISTA PREMIUM */}
             <div className="mt-10 space-y-4 w-full">
               {[
@@ -98,7 +98,7 @@ export default function GuaranteeSection() {
                 </div>
               ))}
             </div>
-
+ 
             {/* CTA FINAL */}
             <div className="mt-12 w-full flex justify-center md:justify-start">
               <ShinyButton
@@ -110,7 +110,7 @@ export default function GuaranteeSection() {
               </ShinyButton>
             </div>
           </div>
-
+ 
         </div>
       </div>
     </section>
