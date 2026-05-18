@@ -6,6 +6,7 @@ import { Navbar } from "@/app/components/Navbar";
 import dynamic from "next/dynamic";
 import { LazySection } from "@/app/components/LazySection";
 
+const VideoSection = lazy(() => import("@/app/components/VideoSection").then(mod => ({ default: mod.VideoSection })));
 const SectionsShowcase = lazy(() => import("@/app/components/SectionsShowcase").then(mod => ({ default: mod.SectionsShowcase })));
 const ParaQuemESection = lazy(() => import("@/app/components/ParaQuemESection").then(mod => ({ default: mod.ParaQuemESection })));
 const ParaVoceSection = lazy(() => import("./components/ParaVoceSection").then(mod => ({ default: mod.ParaVoceSection })));
@@ -40,6 +41,10 @@ export default function Page() {
 
       {/* Subsequent Sections - Standard relative z-10 */}
       <div className="relative z-10 bg-transparent">
+        <LazySection rootMargin="1000px 0px">
+          <VideoSection />
+        </LazySection>
+
         <LazySection rootMargin="1000px 0px">
           <SectionsShowcase />
         </LazySection>
