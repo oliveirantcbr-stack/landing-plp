@@ -69,9 +69,11 @@ export default function Page() {
           <TestimonialsCTA />
         </LazySection>
 
-        <LazySection rootMargin="800px 0px">
-          <PremiumPricingSection />
-        </LazySection>
+        <div id="oferta">
+          <LazySection rootMargin="800px 0px">
+            <PremiumPricingSection />
+          </LazySection>
+        </div>
 
         <LazySection rootMargin="800px 0px">
           <GuaranteeSection />

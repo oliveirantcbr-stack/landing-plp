@@ -40,7 +40,7 @@ function TechBadge({ children, className = "" }: { children: React.ReactNode; cl
 
 export function PremiumPricingSection() {
   return (
-    <section id="oferta" className="relative w-full py-12 md:py-20 bg-[#0a0a0a] overflow-hidden flex flex-col items-center">
+    <section className="relative w-full py-12 md:py-20 bg-[#0a0a0a] overflow-hidden flex flex-col items-center">
 
       {/* 🔮 ULTRA PREMIUM BACKGROUND */}
       <div className="absolute inset-0 z-0">
