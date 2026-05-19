@@ -10,6 +10,7 @@ import { CallToAction } from "@/components/cta-3";
 import { MacbookPro } from "@/components/ui/macbook-pro";
 import { ShinyButton } from "@/components/shiny-button";
 import { Search, Copy, Zap, Layout } from "lucide-react";
+import { ToolsSection } from "@/app/components/ToolsSection";
 
 // ======================================================
 // IMAGENS
@@ -308,6 +309,8 @@ export function SectionsShowcase() {
           ))}
         </div>
       </div>
+
+      <ToolsSection />
       
       {/* 🌪️ CINEMATIC SMOKE OVERLAY (Drifting above everything) */}
       <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden mix-blend-screen">

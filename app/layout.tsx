@@ -49,7 +49,7 @@ export default function RootLayout({
         ================================================= */}
         <Script
           src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           data-utmify-prevent-xcod-sck
           data-utmify-prevent-subids
         />
@@ -60,7 +60,7 @@ export default function RootLayout({
         ================================================= */}
         <Script
           id="utmify-meta-pixel"
-          strategy="worker"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.pixelId = "68d474d381056b37956c018d";
