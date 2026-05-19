@@ -19,14 +19,23 @@ export function HeroSectionDemo() {
   const [speed, setSpeed] = useState(150);
   const [isPreloading, setIsPreloading] = useState(true);
   const [showPreloader, setShowPreloader] = useState(true);
+  const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
 
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); // Check immediately on mount
+    window.addEventListener('resize', handleResize);
+
     const timer = setTimeout(() => {
       setIsPreloading(false);
       // Remove do DOM após a transição de 300ms
       setTimeout(() => setShowPreloader(false), 310);
     }, 600);
-    return () => clearTimeout(timer);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -100,7 +109,7 @@ export function HeroSectionDemo() {
           className="hidden md:block object-cover"
         />
         <Image
-          src="/bgcell.webp"
+          src="/bgfallmobile.webp"
           alt="Hero Background Mobile"
           fill
           priority
@@ -110,12 +119,14 @@ export function HeroSectionDemo() {
         />
       </div>
 
-      {/* 1. Unicorn Studio Animation (Background Layer) - Loaded Dynamically */}
-      <UnicornBackground
-        scenePath="/bguni.json"
-        className="absolute inset-0 pointer-events-none z-[1]"
-        scale={0.8}
-      />
+      {/* 1. Unicorn Studio Animation (Background Layer) - Loaded Dynamically (Only Desktop) */}
+      {!isMobile && (
+        <UnicornBackground
+          scenePath="/bguni.json"
+          className="absolute inset-0 pointer-events-none z-[1]"
+          scale={0.8}
+        />
+      )}
 
       {/* 🌑 Premium Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/95 pointer-events-none z-[2]" />
