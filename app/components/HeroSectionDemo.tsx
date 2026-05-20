@@ -17,23 +17,14 @@ export function HeroSectionDemo() {
   const [wordIndex, setWordIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [speed, setSpeed] = useState(150);
-  const [isPreloading, setIsPreloading] = useState(true);
-  const [showPreloader, setShowPreloader] = useState(true);
   const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize(); // Check immediately on mount
     window.addEventListener('resize', handleResize);
-
-    const timer = setTimeout(() => {
-      setIsPreloading(false);
-      // Remove do DOM após a transição de 300ms
-      setTimeout(() => setShowPreloader(false), 310);
-    }, 600);
     
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -73,30 +64,6 @@ export function HeroSectionDemo() {
       className="relative w-full min-h-screen text-white flex flex-col items-center overflow-hidden select-none"
       style={{ background: 'transparent !important', maxWidth: '100vw' }}
     >
-      {/* 🚀 Ultra-Clean Pre-loader (Minimalist & Performant) */}
-      {showPreloader && (
-        <div
-          className={`fixed inset-0 z-[999] flex items-center justify-center bg-black transition-opacity duration-300 ease-in-out ${isPreloading ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-        >
-          <div className="relative flex flex-col items-center">
-            {/* 💎 Pure CSS Ambient Glow */}
-            <div className="absolute inset-0 bg-purple-600/20 blur-[60px] rounded-full animate-pulse scale-150" />
-
-            <div className="relative">
-              <Image
-                src="/logoplpn.svg"
-                alt="Loading Logo"
-                width={240}
-                height={60}
-                className="h-12 md:h-20 w-auto opacity-90 relative z-10"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* 0. Static Immediate Layer (LCP Optimized) */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -145,7 +112,12 @@ export function HeroSectionDemo() {
       </div>
 
       {/* Main Layout Container - pt-32 on mobile to lower the headline */}
-      <div className="relative z-30 w-full min-h-screen flex flex-col items-center justify-between md:justify-end lg:justify-center lg:items-start lg:px-24 pt-32 pb-12 lg:pt-0 lg:pb-0">
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-30 w-full min-h-screen flex flex-col items-center justify-between md:justify-end lg:justify-center lg:items-start lg:px-24 pt-32 pb-12 lg:pt-0 lg:pb-0"
+      >
 
         {/* TOP GROUP: Headline & Typing Effect */}
         <div className="flex flex-col items-center lg:items-start w-full md:max-w-2xl lg:max-w-lg md:bg-black/30 md:backdrop-blur-2xl md:border md:border-white/10 md:p-10 md:rounded-[40px] md:shadow-2xl">
@@ -321,7 +293,7 @@ export function HeroSectionDemo() {
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }
