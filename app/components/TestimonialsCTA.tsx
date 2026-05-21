@@ -50,7 +50,7 @@ export function TestimonialsCTA() {
                   </h2>
 
                   <p className="text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] max-w-lg mx-auto">
-                    Abaixo, escolha seu plano e <br />
+                    Abaixo, garanta seu acesso e <br />
                     <span className="text-white">destrave o seu potencial.</span>
                   </p>
                 </motion.div>

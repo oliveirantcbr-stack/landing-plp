@@ -8,12 +8,17 @@ import { Menu, X } from "lucide-react";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      const heroHeight = window.innerHeight || 800;
+      setVisible(window.scrollY > heroHeight - 120);
       setScrolled(window.scrollY > 20);
     };
+    // Initialize on mount
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -27,7 +32,11 @@ export function Navbar() {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
+      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ease-in-out ${
+        visible 
+          ? "opacity-100 translate-y-0 pointer-events-auto" 
+          : "opacity-0 -translate-y-12 pointer-events-none"
+      } ${
         scrolled ? "py-2" : "py-6"
       }`}
     >

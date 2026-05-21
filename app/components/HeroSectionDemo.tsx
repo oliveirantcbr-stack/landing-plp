@@ -6,11 +6,73 @@ import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { ShinyButton } from "@/components/shiny-button";
 import { scrollToOferta } from "@/lib/scrollToOferta";
+import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const UnicornBackground = dynamic(() => import("./UnicornBackground"), {
   ssr: false,
 });
+
+function HeroCtaButton({ onClick, isMobile = false }: { onClick: () => void; isMobile?: boolean }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        group relative flex items-stretch overflow-hidden
+        border border-purple-400/30 bg-zinc-950/80 transition-all duration-300
+        active:scale-[0.98] focus:outline-none outline-none rounded-none cursor-pointer
+        shadow-[0_0_20px_rgba(168,85,247,0.25)]
+        hover:shadow-[0_0_40px_rgba(192,132,252,0.6)]
+        hover:border-purple-350/50
+        ${isMobile ? "w-full max-w-[280px]" : "w-auto"}
+      `}
+    >
+      {/* 🔮 Dynamic Light Purple Liquid/Mesh Layer */}
+      <div className="absolute inset-0 z-0 opacity-90 group-hover:opacity-100 transition-opacity duration-500">
+        {/* Soft Light Purple Base Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-700/80 via-purple-500/80 to-fuchsia-600/80" />
+        
+        {/* Animated Moving Soft Blobs */}
+        <div className="absolute top-[-30%] left-[-20%] size-[150%] bg-purple-300/35 blur-[30px] rounded-full animate-[hero-liquid_8s_ease-in-out_infinite]" />
+        <div className="absolute bottom-[-30%] right-[-20%] size-[150%] bg-fuchsia-300/35 blur-[30px] rounded-full animate-[hero-liquid_12s_ease-in-out_infinite_reverse]" />
+      </div>
+
+      {/* ⚡ High-tech Glass Overlay */}
+      <div className="absolute inset-0 z-10 bg-white/[0.04] backdrop-blur-[2px] opacity-100 group-hover:bg-white/[0.08] transition-colors duration-500" />
+
+      {/* 🌟 Shimmer Sweep Effect */}
+      <div className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-hero-shine pointer-events-none" />
+
+      {/* Main Content Area */}
+      <div className="relative z-30 flex-1 px-8 py-4 flex items-center justify-center border-r border-white/10 overflow-hidden bg-white/[0.02]">
+        <span className="text-[11px] md:text-[13px] font-black tracking-[0.2em] text-white uppercase whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+          ACESSO IMEDIATO
+        </span>
+      </div>
+
+      {/* Squared Orb with Arrow Icon (Premium Dark Glassmorphism - Glass Escuro) */}
+      <div className="relative z-30 px-5 flex items-center justify-center bg-black/75 backdrop-blur-xl border-l border-white/20 group-hover:bg-black/85 transition-all duration-300">
+        <ArrowRight className="size-4 text-white/90 group-hover:text-white transition-all group-hover:translate-x-1 duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
+      </div>
+
+      {/* Keyframe Styling */}
+      <style jsx global>{`
+        @keyframes hero-liquid {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(8%, 12%) scale(1.15); }
+          66% { transform: translate(-8%, 8%) scale(0.9); }
+        }
+        @keyframes hero-shine {
+          0% { transform: translateX(-100%) skewX(-15deg); }
+          100% { transform: translateX(200%) skewX(-15deg); }
+        }
+        .group:hover .group-hover\\:animate-hero-shine {
+          animation: hero-shine 1.8s ease-in-out infinite;
+        }
+      `}</style>
+    </button>
+  );
+}
 
 export function HeroSectionDemo() {
   const [currentText, setCurrentText] = useState("");
@@ -124,7 +186,7 @@ export function HeroSectionDemo() {
 
           {/* Version Badge - Technical Square */}
           <div className="relative mb-6 hidden md:inline-flex group">
-            <div className="relative px-3 py-1 bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center">
+            <div className="relative px-3 py-1 bg-black/75 backdrop-blur-xl border border-white/20 flex items-center justify-center">
               {/* CORNER SQUARES */}
               <div className="absolute -top-[2px] -left-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
               <div className="absolute -top-[2px] -right-[2px] size-1 bg-white shadow-[0_0_5px_#fff]" />
@@ -165,7 +227,7 @@ export function HeroSectionDemo() {
 
             {/* 🛠️ TECH STACK HORIZONTAL (Mobile Only) */}
             <div className="flex md:hidden mt-1 mb-2 justify-center w-full animate-in fade-in slide-in-from-bottom-2 duration-1000 delay-500 fill-mode-both">
-              <div className="relative bg-black/60 backdrop-blur-2xl border border-white/20 flex items-center">
+              <div className="relative bg-black/75 backdrop-blur-xl border border-white/20 flex items-center">
                 {/* CORNER SQUARES */}
                 <div className="absolute -top-[3px] -left-[3px] size-1 bg-white shadow-[0_0_5px_#fff]" />
                 <div className="absolute -top-[3px] -right-[3px] size-1 bg-white shadow-[0_0_5px_#fff]" />
@@ -201,13 +263,7 @@ export function HeroSectionDemo() {
             </p>
 
             <div className="flex flex-col items-start gap-8">
-              <ShinyButton
-                onClick={scrollToOferta}
-                style={{ "--padding": "1.25rem 2.5rem", "--font-size": "11px" } as React.CSSProperties}
-                className="font-black tracking-[0.2em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300"
-              >
-                ACESSO IMEDIATO
-              </ShinyButton>
+              <HeroCtaButton onClick={scrollToOferta} />
 
               <div className="flex items-center gap-4 px-6 py-3 bg-white/[0.02] border border-white/5 rounded-2xl">
                 <AvatarGroup avatars={[
@@ -232,13 +288,7 @@ export function HeroSectionDemo() {
           </p>
 
           <div className="flex flex-col items-center gap-6 w-full">
-            <ShinyButton
-              onClick={scrollToOferta}
-              style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
-              className="w-full max-w-[280px] font-black tracking-[0.1em] uppercase rounded-full border border-purple-500/20 bg-purple-500/5 whitespace-nowrap"
-            >
-              ACESSO IMEDIATO
-            </ShinyButton>
+            <HeroCtaButton onClick={scrollToOferta} isMobile={true} />
 
             <div className="flex items-center gap-3 px-5 py-2.5 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md">
               <AvatarGroup avatars={[
@@ -255,7 +305,7 @@ export function HeroSectionDemo() {
         {/* 🛠️ TECH STACK VERTICAL CARD (Desktop Only) */}
         <div className="hidden lg:flex absolute right-80 top-1/2 -translate-y-1/2 flex-col z-40 animate-in fade-in slide-in-from-right-5 duration-1000 delay-700 fill-mode-both">
           {/* Main Container - Square & Technical */}
-          <div className="relative bg-black/60 backdrop-blur-2xl border border-white/20 flex flex-col">
+          <div className="relative bg-black/75 backdrop-blur-xl border border-white/20 flex flex-col">
 
             {/* CORNER SQUARES */}
             <div className="absolute -top-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_10px_#fff]" />

@@ -35,7 +35,7 @@ const FAQS = [
   },
   {
     q: "O suporte é realmente via WhatsApp?",
-    a: "Sim. Nos planos Trimestral e Anual você tem suporte direto via WhatsApp.",
+    a: "Sim. Você tem suporte direto via WhatsApp para tirar qualquer dúvida.",
   },
 ];
 

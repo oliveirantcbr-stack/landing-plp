@@ -8,18 +8,19 @@ import { ShinyButton } from "@/components/shiny-button";
 import { Spotlight } from "@/components/spotlight-new";
 import { cn } from "@/lib/utils";
 
-const SHARED_FEATURES = [
-  "Gerador Landing Page ( exclusivo )",
-  "PRO Incluso",
-  "Biblioteca de Seções 2.0",
+const FEATURES = [
+  "PRO",
+  "Pacote de Landing Pages",
+  "Acesso a Biblioteca de Seções",
+  "Codigos CSS",
+  "Botões",
+  "Gerador de Landing Page",
+  "Gerador de Contrato",
   "Aulas de Personalização",
   "Aulas de Otimização",
-  "Suporte Via WhatsApp",
-  "Pack Do Designer ( NOVO )",
-  "Plugin Clonador ( NOVO )",
-  "Kit do Digital ( NOVO )",
-  "Assistente IA ( NOVO )",
-  "Extensão Google Chrome"
+  "Suporte via Whats App",
+  "Atualizações Semanais",
+  "e +++"
 ];
 
 /* 🛠️ REFINED TECHNICAL BADGE */
@@ -108,59 +109,19 @@ export function PremiumPricingSection() {
           </h2>
 
           <p className="text-white/40 max-w-xl mx-auto font-medium text-sm md:text-base leading-relaxed">
-            Tenha as ferramentas da elite na palma da sua mão. Escolha o plano ideal para o seu momento.
+            Tenha as ferramentas da elite na palma da sua mão. Garanta seu acesso completo agora mesmo.
           </p>
         </div>
 
         {/* ⚡ THE "VAULT" LAYOUT */}
-        <div className="relative w-full max-w-4xl flex flex-col md:flex-row items-center justify-center gap-6 md:gap-0">
+        <div className="relative w-full max-w-2xl flex flex-col items-center justify-center">
 
-          {/* TRIMESTRAL */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="w-full md:w-[45%] bg-zinc-950 border border-white/5 p-6 md:p-10 rounded-[24px] md:rounded-[32px] md:-mr-8 relative z-10 group hover:border-white/10 transition-all shadow-2xl tech-pixel-texture"
-          >
-            <div className="mb-6 md:mb-8 flex flex-col items-start gap-3">
-              <TechBadge>Entrada</TechBadge>
-              <h3 className="text-2xl md:text-3xl font-black text-white tracking-tighter">TRIMESTRAL</h3>
-            </div>
-
-            <div className="mb-8">
-              <div className="flex items-baseline gap-1">
-                <span className="text-white text-3xl md:text-4xl font-black tracking-tighter">R$29</span>
-                <span className="text-white/40 text-sm">/ mês</span>
-              </div>
-              <p className="text-white/60 text-[10px] font-bold uppercase tracking-widest mt-1">Ou R$ 87 à vista</p>
-            </div>
-
-            {/* FEATURES LIST */}
-            <div className="grid grid-cols-1 gap-y-3 mb-8 md:mb-10">
-              {SHARED_FEATURES.slice(0, 7).map((f, i) => (
-                <div key={i} className="flex items-center gap-3 text-white/50 text-[12px] font-medium">
-                  <Check className="size-3 text-purple-500 shrink-0" /> <span className="truncate">{f}</span>
-                </div>
-              ))}
-              <div className="text-purple-500/50 text-[10px] font-bold uppercase tracking-widest pl-6">+ E muito mais</div>
-            </div>
-
-            <div className="flex justify-center w-full">
-              <button
-                onClick={() => window.open('https://pay.cakto.com.br/87m3bxz_692614', '_blank')}
-                className="w-full max-w-[280px] md:max-w-none py-3.5 rounded-xl border border-white/10 bg-white/5 text-white text-[10px] font-black tracking-widest uppercase hover:bg-white/10 transition-all"
-              >
-                Começar agora
-              </button>
-            </div>
-          </motion.div>
-
-          {/* ANUAL - THE CENTERPIECE */}
+          {/* PLAN CARD - THE CENTERPIECE */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="w-full md:w-[60%] bg-zinc-900 border-2 border-purple-500/40 p-8 md:p-12 rounded-[30px] md:rounded-[40px] relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(147,51,234,0.1)] flex flex-col tech-pixel-texture"
+            className="w-full bg-zinc-900 border-2 border-purple-500/40 p-8 md:p-12 rounded-[30px] md:rounded-[40px] relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(147,51,234,0.1)] flex flex-col tech-pixel-texture"
           >
             {/* Top Badge - Solid White Technical Block */}
             <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30">
@@ -171,56 +132,54 @@ export function PremiumPricingSection() {
                 <div className="absolute -bottom-[2px] -left-[2px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
                 <div className="absolute -bottom-[2px] -right-[2px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
                 
-                <span className="tracking-[0.2em] md:tracking-[0.3em] text-black font-black text-[10px] md:text-[11px] whitespace-nowrap">MELHOR CUSTO-BENEFÍCIO</span>
+                <span className="tracking-[0.2em] md:tracking-[0.3em] text-black font-black text-[10px] md:text-[11px] whitespace-nowrap">OFERTA ESPECIAL</span>
               </div>
             </div>
 
             {/* TOP HEADER AREA */}
             <div className="flex flex-col items-start gap-4 mb-8 mt-4 md:mt-0">
               <div className="flex items-center justify-between w-full">
-                {/* Subtle Plan Badge - Different from TechBadge */}
+                {/* Subtle Plan Badge */}
                 <div className="px-2.5 py-0.5 rounded-md bg-purple-500/10 border border-purple-500/30 text-[9px] font-black text-purple-400 uppercase tracking-widest">
-                  Plano Elite
+                  Acesso Completo
                 </div>
                 <Trophy className="size-8 text-purple-500/60" />
               </div>
-              <h3 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
-                ANUAL
+              <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none">
+                PLANO PRO
               </h3>
             </div>
 
             {/* PRICING AREA */}
             <div className="mb-10">
               <div className="flex items-center gap-4 mb-4">
-                {/* Minimal Savings Label - No technical corners */}
                 <div className="flex items-center gap-1.5 text-emerald-400">
                   <div className="size-1 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Economia de 50%</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest">Acesso Imediato</span>
                 </div>
-                <span className="text-white/20 text-xl font-bold line-through tracking-tighter">R$ 468</span>
               </div>
 
-              <div className="flex items-baseline gap-2">
-                <span className="text-white text-7xl md:text-9xl font-black tracking-tighter leading-none drop-shadow-2xl">R$19</span>
-                <div className="flex flex-col">
-                  <span className="text-white/40 text-xl font-black uppercase tracking-widest leading-none">/ MÊS</span>
+              <div className="flex flex-col">
+                <span className="text-white/40 text-xs font-black uppercase tracking-widest leading-none mb-2">Apenas 3x de</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-white text-6xl md:text-8xl font-black tracking-tighter leading-none drop-shadow-2xl">R$ 24,52</span>
                 </div>
               </div>
 
               <div className="mt-6 flex items-center gap-3 py-2 px-4 bg-white/[0.03] border border-white/5 rounded-full w-fit">
                 <Zap className="size-4 text-purple-400 fill-purple-400" />
-                <span className="text-white/60 font-black text-[10px] md:text-xs tracking-widest uppercase">Pagamento único de R$ 228</span>
+                <span className="text-white/60 font-black text-[10px] md:text-xs tracking-widest uppercase">Ou R$ 67,00 à vista</span>
               </div>
             </div>
 
             {/* ELITE FEATURES GRID */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3.5 md:gap-y-4 gap-x-6 mb-10">
-              {SHARED_FEATURES.map((f, i) => (
+              {FEATURES.map((f, i) => (
                 <div key={i} className="flex items-center gap-3 text-white/90 text-[12px] md:text-sm font-bold group/item">
                   <div className="size-5 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/30 shrink-0">
                     <Rocket className="size-2.5 text-purple-400" />
                   </div>
-                  <span className={`truncate ${f.includes("exclusivo") || f.includes("NOVO") || f === "PRO Incluso" ? "text-purple-300" : ""}`}>{f}</span>
+                  <span className={`truncate ${f === "PRO" || f.includes("Biblioteca") || f === "e +++" ? "text-purple-300" : ""}`}>{f}</span>
                 </div>
               ))}
             </div>
@@ -228,12 +187,12 @@ export function PremiumPricingSection() {
             {/* CTA */}
             <div className="mt-10 flex justify-center w-full">
               <ShinyButton
-                onClick={() => window.open('https://pay.cakto.com.br/yzbek9g_692619', '_blank')}
+                onClick={() => window.open('https://pay.cakto.com.br/87m3bxz_692614', '_blank')}
                 style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
-                className="w-full max-w-[280px] md:max-w-none bg-purple-600 border-purple-400 hover:bg-purple-500 text-white font-black tracking-widest uppercase shadow-xl group"
+                className="w-full bg-purple-600 border-purple-400 hover:bg-purple-500 text-white font-black tracking-widest uppercase shadow-xl group"
               >
                 <div className="flex items-center justify-center gap-2">
-                  ACESSO ELITE
+                  GARANTIR MINHA VAGA
                   <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </ShinyButton>
