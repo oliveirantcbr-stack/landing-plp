@@ -9,7 +9,7 @@ import { Spotlight } from "@/components/spotlight-new";
 import { cn } from "@/lib/utils";
 
 const FEATURES = [
-  "PRO",
+  "Elementor - PRO",
   "Pacote de Landing Pages",
   "Acesso a Biblioteca de Seções",
   "Codigos CSS",
@@ -179,23 +179,58 @@ export function PremiumPricingSection() {
                   <div className="size-5 rounded-full bg-purple-500/20 flex items-center justify-center border border-purple-500/30 shrink-0">
                     <Rocket className="size-2.5 text-purple-400" />
                   </div>
-                  <span className={`truncate ${f === "PRO" || f.includes("Biblioteca") || f === "e +++" ? "text-purple-300" : ""}`}>{f}</span>
+                  <span className={`truncate ${f === "Elementor - PRO" || f.includes("Biblioteca") || f === "e +++" ? "text-purple-300" : ""}`}>{f}</span>
                 </div>
               ))}
             </div>
 
             {/* CTA */}
             <div className="mt-10 flex justify-center w-full">
-              <ShinyButton
+              <button
                 onClick={() => window.open('https://pay.cakto.com.br/87m3bxz_692614', '_blank')}
-                style={{ "--padding": "1.1rem 2.5rem", "--font-size": "12px" } as React.CSSProperties}
-                className="w-full bg-purple-600 border-purple-400 hover:bg-purple-500 text-white font-black tracking-widest uppercase shadow-xl group"
+                className="w-full group relative flex items-stretch overflow-hidden border border-purple-500/40 bg-zinc-950/80 transition-all duration-300 active:scale-[0.98] focus:outline-none outline-none rounded-2xl cursor-pointer shadow-[0_0_20px_rgba(168,85,247,0.15)] hover:shadow-[0_0_45px_rgba(168,85,247,0.45)] hover:border-purple-400"
               >
-                <div className="flex items-center justify-center gap-2">
-                  GARANTIR MINHA VAGA
-                  <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
+                {/* 🔮 Dynamic Liquid Gradient Background */}
+                <div className="absolute inset-0 z-0 opacity-90 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-700" />
+                  <div className="absolute top-[-30%] left-[-20%] size-[150%] bg-purple-400/20 blur-[30px] rounded-full animate-[pricing-liquid_8s_ease-in-out_infinite]" />
+                  <div className="absolute bottom-[-30%] right-[-20%] size-[150%] bg-indigo-400/20 blur-[30px] rounded-full animate-[pricing-liquid_12s_ease-in-out_infinite_reverse]" />
                 </div>
-              </ShinyButton>
+
+                {/* ⚡ High-tech Glass Overlay */}
+                <div className="absolute inset-0 z-10 bg-white/[0.02] backdrop-blur-[1px] opacity-100 group-hover:bg-white/[0.06] transition-colors duration-500" />
+
+                {/* 🌟 Shimmer Sweep Effect */}
+                <div className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:animate-pricing-shine pointer-events-none" />
+
+                {/* Main Content Area */}
+                <div className="relative z-30 flex-1 px-3 sm:px-6 py-4.5 flex items-center justify-center border-r border-white/10 overflow-hidden bg-white/[0.01]">
+                  <span className="text-[10px] xs:text-[11px] sm:text-xs md:text-sm font-black tracking-[0.15em] sm:tracking-[0.25em] text-white uppercase whitespace-nowrap drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                    GARANTIR MINHA VAGA
+                  </span>
+                </div>
+
+                {/* Right Side with Arrow Seta */}
+                <div className="relative z-30 px-4 sm:px-5 flex items-center justify-center bg-black/25 group-hover:bg-black/40 transition-all duration-300">
+                  <ArrowRight className="size-4 text-white/90 group-hover:text-white transition-all group-hover:translate-x-1 duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
+                </div>
+
+                {/* Local Styles for Animate Blobs and Shimmer */}
+                <style jsx global>{`
+                  @keyframes pricing-liquid {
+                    0%, 100% { transform: translate(0, 0) scale(1); }
+                    33% { transform: translate(6%, 10%) scale(1.1); }
+                    66% { transform: translate(-6%, 6%) scale(0.95); }
+                  }
+                  @keyframes pricing-shine {
+                    0% { transform: translateX(-100%) skewX(-15deg); }
+                    100% { transform: translateX(200%) skewX(-15deg); }
+                  }
+                  .group:hover .group-hover\\:animate-pricing-shine {
+                    animation: pricing-shine 1.8s ease-in-out infinite;
+                  }
+                `}</style>
+              </button>
             </div>
           </motion.div>
 
