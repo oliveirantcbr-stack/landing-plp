@@ -384,3 +384,34 @@ body {
   0% { transform: scale(1); }
   100% { transform: scale(1.03); }
 }
+
+/* 120 FPS infinite marquee animations */
+@keyframes marquee-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-horizontal {
+  animation: marquee-horizontal var(--marquee-duration, 40s) linear infinite;
+}
+
+.animate-marquee-horizontal-reverse {
+  animation: marquee-horizontal var(--marquee-duration, 40s) linear infinite reverse;
+}
+
+/* Responsive carousel gradient mask (eliminates WebKit rendering issues) */
+.carousel-mask {
+  mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+}
+
+@media (min-width: 768px) {
+  .carousel-mask {
+    mask-image: linear-gradient(to right, transparent, black 160px, black calc(100% - 160px), transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 160px, black calc(100% - 160px), transparent);
+  }
+}

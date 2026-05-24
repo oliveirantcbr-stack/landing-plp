@@ -293,8 +293,8 @@ export function ParaQuemESection() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
           <div className="relative w-full">
             {/* Máscara de Degradê nas Laterais (Mobile/Tablet) */}
-            <div className="absolute -left-4 top-0 bottom-0 w-16 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-20 pointer-events-none md:hidden" />
-            <div className="absolute -right-4 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent z-20 pointer-events-none md:hidden" />
+             <div className="absolute -left-4 top-0 bottom-0 w-10 z-20 pointer-events-none md:hidden" style={{ background: 'linear-gradient(to right, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%)' }} />
+             <div className="absolute -right-4 top-0 bottom-0 w-10 z-20 pointer-events-none md:hidden" style={{ background: 'linear-gradient(to left, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0) 100%)' }} />
 
             <div 
               onScroll={handleScroll}
@@ -311,7 +311,7 @@ export function ParaQuemESection() {
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   viewport={{ once: true }}
                   key={idx} 
-                  className="flex-none w-[75vw] sm:w-[45vw] md:w-[280px] lg:w-[300px] snap-center rounded-3xl border border-white/10 overflow-hidden relative group shadow-2xl bg-zinc-900/40 tech-pixel-texture aspect-[4/5]"
+                  className="flex-none w-[75vw] sm:w-[45vw] md:w-[280px] lg:w-[300px] snap-center rounded-3xl border border-white/10 overflow-hidden relative group shadow-none md:shadow-2xl bg-zinc-900/40 tech-pixel-texture aspect-[4/5]"
                 >
                   <div className="relative w-full h-full">
                     <Image
@@ -384,22 +384,24 @@ const GridItem = ({ area, icon: Icon, title, description, iconColor = "#ef4444" 
   return (
     <li className={cn("min-h-[10rem] md:min-h-[12rem] list-none", area)}>
       <div className="relative h-full rounded-2xl border border-white/5 p-px group">
-        <GlowingEffect
-          spread={30}
-          glow={true}
-          disabled={false}
-          proximity={64}
-          inactiveZone={0.01}
-          borderWidth={2}
-        />
+        {!isMobile && (
+          <GlowingEffect
+            spread={30}
+            glow={true}
+            disabled={false}
+            proximity={64}
+            inactiveZone={0.01}
+            borderWidth={2}
+          />
+        )}
         <div
           onMouseMove={handleMove}
           onMouseLeave={handleLeave}
           className="
             relative flex h-full flex-col justify-center gap-4
-            rounded-2xl bg-zinc-950/60 backdrop-blur-xl overflow-hidden
+            rounded-2xl bg-zinc-950/90 md:bg-zinc-950/60 backdrop-blur-none md:backdrop-blur-xl overflow-hidden
             p-6 md:p-8 transition-colors group-hover:bg-zinc-900/80
-            border border-red-500/20 shadow-2xl tech-pixel-texture
+            border border-red-500/20 shadow-none md:shadow-2xl tech-pixel-texture
           "
         >
           {/* Subtle Red Inner Highlight */}
@@ -476,22 +478,24 @@ const BenefitGridItem = ({ area, icon: Icon, title, description, iconColor = "#1
   return (
     <li className={cn("min-h-[10rem] md:min-h-[12rem] list-none", area)}>
       <div className="relative h-full rounded-2xl border border-white/5 p-px group">
-        <GlowingEffect
-          spread={30}
-          glow={true}
-          disabled={false}
-          proximity={64}
-          inactiveZone={0.01}
-          borderWidth={2}
-        />
+        {!isMobile && (
+          <GlowingEffect
+            spread={30}
+            glow={true}
+            disabled={false}
+            proximity={64}
+            inactiveZone={0.01}
+            borderWidth={2}
+          />
+        )}
         <div
           onMouseMove={handleMove}
           onMouseLeave={handleLeave}
           className="
             relative flex h-full flex-col justify-center gap-4
-            rounded-2xl bg-zinc-900/60 backdrop-blur-xl overflow-hidden
+            rounded-2xl bg-zinc-900/90 md:bg-zinc-900/60 backdrop-blur-none md:backdrop-blur-xl overflow-hidden
             p-6 md:p-8 transition-colors group-hover:bg-zinc-800/80
-            border border-emerald-500/20 shadow-[0_15px_30px_rgba(16,185,129,0.05)] tech-pixel-texture
+            border border-emerald-500/20 shadow-none md:shadow-[0_15px_30px_rgba(16,185,129,0.05)] tech-pixel-texture
           "
         >
           {/* Softer Emerald Inner Highlight */}

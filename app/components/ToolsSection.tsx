@@ -36,21 +36,21 @@ export function ToolsSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <div className="relative pt-24 pb-12 w-full overflow-hidden flex flex-col items-center justify-center bg-transparent z-20">
+    <div className="relative pt-12 pb-6 md:pt-24 md:pb-12 w-full overflow-hidden flex flex-col items-center justify-center bg-transparent z-20">
       {/* Background glow lines */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[500px] bg-white/[0.02] blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 w-full" ref={ref}>
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="flex flex-col items-center text-center mb-8 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-6 backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-4 md:mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-            <span className="text-sm text-neutral-300 font-medium tracking-wide uppercase">
+            <span className="text-[10px] md:text-sm text-neutral-300 font-medium tracking-wide uppercase">
               Ferramentas Exclusivas
             </span>
           </motion.div>
@@ -59,61 +59,63 @@ export function ToolsSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-semibold tracking-tight text-white mb-4"
+            className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-white mb-3 md:mb-4 uppercase"
           >
-            Acelere sua <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">produção</span>
+            Acelere sua <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-400">produção</span>
           </motion.h2>
 
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-neutral-400 max-w-2xl text-lg"
+            className="text-neutral-400 max-w-xl text-xs sm:text-sm md:text-lg leading-relaxed"
           >
             Além dos templates, você recebe acesso a um ecossistema de geradores para otimizar o seu tempo e profissionalizar suas entregas.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {tools.map((tool, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 0.3 + idx * 0.1 }}
-              className="group relative h-full"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-b ${tool.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`} />
-              
-              <div className={`relative h-full flex flex-col p-8 rounded-3xl bg-[#111] border border-white/[0.05] ${tool.border} transition-colors duration-500 overflow-hidden`}>
-                
-                {/* Ícone com glow sutil no hover */}
-                <div className="relative mb-6">
-                  <div className={`absolute inset-0 blur-xl opacity-0 transition-opacity duration-500 rounded-full ${tool.glow}`} />
-                  <div className="relative z-10 w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center">
-                    {tool.icon}
+        {/* 🛠️ SINGLE UNIFIED HIGH-TECH GRID BLOCK (Colados, sem "Acessar Ferramenta") */}
+        <div className="relative bg-black/75 backdrop-blur-xl border border-white/20 rounded-none shadow-2xl w-full">
+          
+          {/* 🌟 FOUR OUTERMOST GLOWING CORNER SQUARES */}
+          <div className="absolute -top-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff] z-30" />
+          <div className="absolute -top-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff] z-30" />
+          <div className="absolute -bottom-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff] z-30" />
+          <div className="absolute -bottom-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff] z-30" />
+
+          {/* Grid Layout with automatic responsive dividers (Colados) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-white/20">
+            {tools.map((tool, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
+                className="group relative flex flex-col overflow-hidden"
+              >
+                {/* 🔮 Top Icon Block (Segmented with border-b) */}
+                <div className="p-6 border-b border-white/10 flex items-center justify-center bg-white/[0.01] relative overflow-hidden group-hover:bg-white/[0.03] transition-colors duration-500">
+                  <div className={`absolute inset-0 bg-gradient-to-b ${tool.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div className="relative z-10 w-14 h-14 rounded-none bg-black border border-white/15 flex items-center justify-center shadow-[inset_0_1px_4px_rgba(255,255,255,0.05)] group-hover:border-purple-500/50 transition-all duration-500">
+                    <div className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-purple-500/10 rounded-full" />
+                    <div className="relative z-10 text-white brightness-0 invert group-hover:scale-110 transition-transform duration-500">
+                      {tool.icon}
+                    </div>
                   </div>
                 </div>
 
-                <h3 className="text-xl font-medium text-white mb-3">
-                  {tool.title}
-                </h3>
-                
-                <p className="text-neutral-400 leading-relaxed text-sm">
-                  {tool.description}
-                </p>
-
-                <div className="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-2 group-hover:translate-y-0">
-                  <div className="flex items-center gap-2 text-sm font-medium text-neutral-300">
-                    Saber mais
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </div>
+                {/* 📝 Content Area */}
+                <div className="p-6 flex-1 flex flex-col justify-start space-y-3 bg-transparent">
+                  <h3 className="text-base md:text-lg font-black text-white tracking-tight uppercase group-hover:text-purple-400 transition-colors duration-500">
+                    {tool.title}
+                  </h3>
+                  <p className="text-white/40 leading-relaxed text-xs md:text-sm font-medium">
+                    {tool.description}
+                  </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

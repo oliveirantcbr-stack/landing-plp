@@ -67,26 +67,28 @@ export function SectionsShowcase() {
   return (
     <section id="beneficios" className="relative w-full py-16 md:py-48 text-white bg-black overflow-hidden">
       
-      {/* 🚀 RISING TECH LINES (Exclusive to this section) */}
-      <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
-        {risingLines.map((line, i) => (
-          <motion.div
-            key={`rising-line-${i}`}
-            initial={{ top: "110%", left: line.left, opacity: 0 }}
-            animate={{ 
-              top: ["110%", "-20%"],
-              opacity: [0, 0.5, 0]
-            }}
-            transition={{ 
-              duration: line.duration, 
-              repeat: Infinity, 
-              ease: "linear",
-              delay: line.delay
-            }}
-            className="absolute w-px h-[200px] bg-gradient-to-t from-transparent via-purple-500/40 to-transparent"
-          />
-        ))}
-      </div>
+      {/* 🚀 RISING TECH LINES (Exclusive to this section, disabled on mobile for performance) */}
+      {!isClientMobile && (
+        <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
+          {risingLines.map((line, i) => (
+            <motion.div
+              key={`rising-line-${i}`}
+              initial={{ top: "110%", left: line.left, opacity: 0 }}
+              animate={{ 
+                top: ["110%", "-20%"],
+                opacity: [0, 0.5, 0]
+              }}
+              transition={{ 
+                duration: line.duration, 
+                repeat: Infinity, 
+                ease: "linear",
+                delay: line.delay
+              }}
+              className="absolute w-px h-[200px] bg-gradient-to-t from-transparent via-purple-500/40 to-transparent"
+            />
+          ))}
+        </div>
+      )}
 
 
       {/* 🌑 GRADIENT OVERLAYS FOR DEPTH */}
@@ -98,10 +100,7 @@ export function SectionsShowcase() {
         <CallToAction />
       </div>
 
-      {/* INFINITY CAROUSELS */}
-      <div className="relative w-full overflow-hidden z-20 space-y-4 md:space-y-8">
-        <div className="absolute inset-y-0 left-0 w-20 md:w-32 bg-gradient-to-r from-black to-transparent z-20" />
-        <div className="absolute inset-y-0 right-0 w-20 md:w-32 bg-gradient-to-l from-black to-transparent z-20" />
+      <div className="relative w-full overflow-hidden z-20 space-y-4 md:space-y-8 carousel-mask">
 
         <InfiniteSlider duration={40} gap={20} className="py-2">
           {sliderRow1.map((src, i) => (
@@ -339,8 +338,8 @@ export function SectionsShowcase() {
 
 function CarouselCard({ src }: { src: string }) {
   return (
-    <div className="relative w-[220px] h-[130px] md:w-[400px] md:h-[220px] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl group border border-white/5">
-      <Image src={src} alt="Section Preview" fill sizes="(max-width: 768px) 220px, 400px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
+    <div className="relative w-[160px] h-[95px] md:w-[400px] md:h-[220px] rounded-xl md:rounded-3xl overflow-hidden shadow-none md:shadow-2xl group border border-white/5">
+      <Image src={src} alt="Section Preview" fill sizes="(max-width: 768px) 160px, 400px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all duration-500" />
     </div>
   );
