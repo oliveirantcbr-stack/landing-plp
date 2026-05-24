@@ -21,11 +21,11 @@ const heroImages = [
   "/thumbs/9.webp", "/thumbs/10.webp", "/thumbs/11.webp", "/thumbs/12.webp",
   "/thumbs/13.webp", "/thumbs/14.webp", "/thumbs/15.webp", "/thumbs/16.webp",
   "/thumbs/17.webp", "/thumbs/18.webp", "/thumbs/19.webp", "/thumbs/20.webp",
-  "/thumbs/21.webp", "/thumbs/22.webp", "/thumbs/23.webp",
+  "/thumbs/21.webp", "/thumbs/22.webp", "/thumbs/23.webp", "/thumbs/24.webp",
 ];
 
-const sliderRow1 = heroImages.slice(0, 8);
-const sliderRow2 = heroImages.slice(8, 16);
+const sliderRow1 = heroImages.slice(0, 12);
+const sliderRow2 = heroImages.slice(12, 24);
 
 export function SectionsShowcase() {
   const [isClientMobile, setIsClientMobile] = useState(false);
@@ -63,10 +63,24 @@ export function SectionsShowcase() {
     }));
     setRisingLines(lines);
   }, []);
-
   return (
     <section id="beneficios" className="relative w-full py-16 md:py-48 text-white bg-black overflow-hidden">
       
+      {/* 🌌 HIGH-TECH DOTTED GRID BACKGROUND */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0 opacity-45"
+        style={{
+          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+        }}
+      />
+
+      {/* 🔮 CINEMATIC NEON BACKGROUND GLOWS (Slow breathing) */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-30 luzpulsante">
+        <div className="absolute top-[10%] left-0 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-purple-600/15 blur-[100px] md:blur-[150px] rounded-full -translate-x-1/2" />
+        <div className="absolute top-[40%] right-0 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-fuchsia-600/15 blur-[100px] md:blur-[150px] rounded-full translate-x-1/2" />
+      </div>
+
       {/* 🚀 RISING TECH LINES (Exclusive to this section, disabled on mobile for performance) */}
       {!isClientMobile && (
         <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
@@ -311,27 +325,6 @@ export function SectionsShowcase() {
 
       <ToolsSection />
       
-      {/* 🌪️ CINEMATIC SMOKE OVERLAY (Drifting above everything) */}
-      <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden mix-blend-screen">
-        <motion.div
-          animate={{ 
-            x: ['-2%', '2%', '-2%'],
-            scale: [1.1, 1.15, 1.1]
-          }}
-          transition={{ 
-            duration: 20, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-          className="absolute inset-[-10%] opacity-[0.15]"
-          style={{
-            backgroundImage: 'url(/SMOKEFALLBACK.webp)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-      </div>
-
     </section>
   );
 }

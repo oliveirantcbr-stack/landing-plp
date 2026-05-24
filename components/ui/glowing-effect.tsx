@@ -100,10 +100,16 @@ const GlowingEffect = memo(
     useEffect(() => {
       if (disabled) return;
 
-      const handleScroll = () => handleMove();
-      const handlePointerMove = (e: PointerEvent) => handleMove(e);
+      // Completely disable pointer move listeners on touch devices (pointer: coarse)
+      // to avoid layout thrashing and CPU overhead on mobile/tablet.
+      const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+      if (isTouchDevice) return;
 
-      window.addEventListener("scroll", handleScroll, { passive: true });
+      const handlePointerMove = (e: PointerEvent) => {
+        if (e.pointerType === 'touch') return;
+        handleMove(e);
+      };
+
       document.body.addEventListener("pointermove", handlePointerMove, {
         passive: true,
       });
@@ -112,7 +118,6 @@ const GlowingEffect = memo(
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
         }
-        window.removeEventListener("scroll", handleScroll);
         document.body.removeEventListener("pointermove", handlePointerMove);
       };
     }, [handleMove, disabled]);

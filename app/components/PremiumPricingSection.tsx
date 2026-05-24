@@ -89,8 +89,8 @@ export function PremiumPricingSection() {
   return (
     <section className="relative w-full py-12 md:py-20 bg-[#0a0a0a] overflow-hidden flex flex-col items-center">
 
-      {/* 🔮 ULTRA PREMIUM BACKGROUND */}
-      <div className="absolute inset-0 z-0">
+      {/* 🔮 ULTRA PREMIUM BACKGROUND WITH GPU-ACCELERATED FLASH EFFECT */}
+      <div className="absolute inset-0 z-0 luzpulsante">
         <Image
           src="/bglogin.webp"
           alt="Luxury Texture"
@@ -103,21 +103,6 @@ export function PremiumPricingSection() {
         <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
           <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-purple-500/20 blur-[150px] rounded-full" />
         </div>
-
-        {/* ⚡ FLASH EFFECT - Animated subtle flash every 5 seconds */}
-        <motion.div
-          animate={{
-            opacity: [0, 0.15, 0],
-            scale: [1, 1.05, 1]
-          }}
-          transition={{
-            duration: 0.8,
-            repeat: Infinity,
-            repeatDelay: 4,
-            ease: "easeInOut"
-          }}
-          className="absolute inset-0 bg-purple-500/10 pointer-events-none"
-        />
 
         {/* Subtle center overlay */}
         <div className="absolute inset-0 bg-[#0a0a0a]/40" />

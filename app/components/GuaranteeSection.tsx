@@ -33,7 +33,6 @@ export default function GuaranteeSection() {
       <div className="mx-auto max-w-5xl px-6 relative z-10">
         {/* DECORATIVE LIGHTS */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 blur-[120px] pointer-events-none -mr-32 -mt-32" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-600/10 blur-[120px] pointer-events-none -ml-32 -mb-32" />
 
         {/* UNBOXED GRID LAYOUT */}
         <div className="grid items-center gap-12 md:grid-cols-2 md:text-left text-center">

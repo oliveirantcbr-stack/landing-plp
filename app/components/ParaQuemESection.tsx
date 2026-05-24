@@ -60,10 +60,7 @@ export function ParaQuemESection() {
         <div className="text-center px-4 mb-12 md:mb-16 relative z-10">
           <div className="max-w-4xl mx-auto">
             {/* Badge - More refined */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+            <div
               className="
                 inline-flex items-center gap-2
                 px-3 py-1
@@ -80,7 +77,7 @@ export function ParaQuemESection() {
               <span className="text-[10px] text-white/60 font-black uppercase tracking-[0.2em]">
                 O Cenário Atual
               </span>
-            </motion.div>
+            </div>
 
             {/* Título mais elegante */}
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white 
@@ -175,10 +172,7 @@ export function ParaQuemESection() {
         <div className="text-center px-4 mb-12 md:mb-16 relative z-10">
           <div className="max-w-4xl mx-auto">
             {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+            <div
               className="
                 inline-flex items-center gap-2
                 px-3 py-1
@@ -195,7 +189,7 @@ export function ParaQuemESection() {
               <span className="text-[10px] text-white/60 font-black uppercase tracking-[0.2em]">
                 A Solução Definitiva
               </span>
-            </motion.div>
+            </div>
 
             {/* Título mais elegante */}
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white 
@@ -305,11 +299,7 @@ export function ParaQuemESection() {
                 { src: "/tempo.webp", alt: "Tempo" },
                 { src: "/vendas.webp", alt: "Vendas" },
               ].map((img, idx) => (
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  viewport={{ once: true }}
+                <div 
                   key={idx} 
                   className="flex-none w-[75vw] sm:w-[45vw] md:w-[280px] lg:w-[300px] snap-center rounded-3xl border border-white/10 overflow-hidden relative group shadow-none md:shadow-2xl bg-zinc-900/40 tech-pixel-texture aspect-[4/5]"
                 >
@@ -325,7 +315,7 @@ export function ParaQuemESection() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute inset-0 border border-white/5 rounded-3xl pointer-events-none" />
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -413,12 +403,18 @@ const GridItem = ({ area, icon: Icon, title, description, iconColor = "#ef4444" 
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
             }}
           />
-          <motion.div
-            style={isMobile ? undefined : { rotateX, rotateY }}
-            className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 relative z-10"
-          >
-            <Icon className="h-5 w-5" style={{ color: iconColor }} />
-          </motion.div>
+          {isMobile ? (
+            <div className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 relative z-10">
+              <Icon className="h-5 w-5" style={{ color: iconColor }} />
+            </div>
+          ) : (
+            <motion.div
+              style={{ rotateX, rotateY }}
+              className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 relative z-10"
+            >
+              <Icon className="h-5 w-5" style={{ color: iconColor }} />
+            </motion.div>
+          )}
 
           <div className="space-y-1 relative z-10">
             <h3 className="text-lg md:text-xl font-black text-white tracking-tight uppercase">
@@ -507,12 +503,18 @@ const BenefitGridItem = ({ area, icon: Icon, title, description, iconColor = "#1
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
             }}
           />
-          <motion.div
-            style={isMobile ? undefined : { rotateX, rotateY }}
-            className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 relative z-10"
-          >
-            <Icon className="h-5 w-5" style={{ color: iconColor }} />
-          </motion.div>
+          {isMobile ? (
+            <div className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 relative z-10">
+              <Icon className="h-5 w-5" style={{ color: iconColor }} />
+            </div>
+          ) : (
+            <motion.div
+              style={{ rotateX, rotateY }}
+              className="w-fit rounded-lg border border-white/5 bg-white/5 p-2 relative z-10"
+            >
+              <Icon className="h-5 w-5" style={{ color: iconColor }} />
+            </motion.div>
+          )}
 
           <div className="space-y-1 relative z-10">
             <h3 className="text-lg md:text-xl font-black text-white tracking-tight uppercase">

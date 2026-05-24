@@ -2,7 +2,8 @@
 
 import React, { useRef } from "react";
 import { LayoutTemplate, MousePointerClick, FileSignature } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const tools = [
   {
@@ -43,35 +44,35 @@ export function ToolsSection() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 w-full" ref={ref}>
         <div className="flex flex-col items-center text-center mb-8 md:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-4 md:mb-6"
+          <div
+            className={cn(
+              "inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] mb-4 md:mb-6 transition-all duration-700 transform ease-out",
+              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            )}
           >
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
             <span className="text-[10px] md:text-sm text-neutral-300 font-medium tracking-wide uppercase">
               Ferramentas Exclusivas
             </span>
-          </motion.div>
+          </div>
           
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-white mb-3 md:mb-4 uppercase"
+          <h2 
+            className={cn(
+              "text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-white mb-3 md:mb-4 uppercase transition-all duration-700 transform ease-out delay-75",
+              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            )}
           >
             Acelere sua <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-400">produção</span>
-          </motion.h2>
+          </h2>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-neutral-400 max-w-xl text-xs sm:text-sm md:text-lg leading-relaxed"
+          <p 
+            className={cn(
+              "text-neutral-400 max-w-xl text-xs sm:text-sm md:text-lg leading-relaxed transition-all duration-700 transform ease-out delay-150",
+              isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            )}
           >
             Além dos templates, você recebe acesso a um ecossistema de geradores para otimizar o seu tempo e profissionalizar suas entregas.
-          </motion.p>
+          </p>
         </div>
 
         {/* 🛠️ SINGLE UNIFIED HIGH-TECH GRID BLOCK (Colados, sem "Acessar Ferramenta") */}
@@ -86,12 +87,13 @@ export function ToolsSection() {
           {/* Grid Layout with automatic responsive dividers (Colados) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-white/20">
             {tools.map((tool, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-                className="group relative flex flex-col overflow-hidden"
+                className={cn(
+                  "group relative flex flex-col overflow-hidden transition-all duration-700 transform ease-out",
+                  isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                )}
+                style={{ transitionDelay: `${200 + idx * 100}ms` }}
               >
                 {/* 🔮 Top Icon Block (Segmented with border-b) */}
                 <div className="p-6 border-b border-white/10 flex items-center justify-center bg-white/[0.01] relative overflow-hidden group-hover:bg-white/[0.03] transition-colors duration-500">
@@ -113,7 +115,7 @@ export function ToolsSection() {
                     {tool.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

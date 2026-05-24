@@ -52,19 +52,14 @@ export function Navbar() {
           <div className="absolute -bottom-[3px] -left-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
           <div className="absolute -bottom-[3px] -right-[3px] size-1.5 bg-white shadow-[0_0_8px_#fff]" />
           
-          {/* LOGO with INTENSE PURPLE GLOW */}
+          {/* LOGO without glow, white color and larger size */}
           <div className="relative group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            {/* Base constant glow */}
-            <div className="absolute inset-0 bg-purple-600/30 blur-xl rounded-full scale-125 opacity-100" />
-            {/* Interactive inner glow */}
-            <div className="absolute inset-0 bg-purple-500/20 blur-md rounded-full scale-110 opacity-100 group-hover:bg-purple-400/40 transition-all duration-500" />
-            
             <Image
               src="/logoplpnew.svg"
               alt="Pack PLP Logo"
-              width={110}
-              height={28}
-              className="relative z-10 h-5 md:h-7 w-auto drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]"
+              width={140}
+              height={36}
+              className="relative z-10 h-7 md:h-9 w-auto brightness-0 invert"
               priority
             />
           </div>
