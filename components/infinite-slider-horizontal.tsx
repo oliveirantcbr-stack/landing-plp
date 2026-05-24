@@ -25,8 +25,8 @@ export function InfiniteSlider({
     <div 
       className={cn('overflow-hidden w-full flex select-none pointer-events-auto', className)}
       style={{
-        ['--marquee-duration' as any]: `${duration}s`,
-      }}
+        '--marquee-duration': `${duration}s`,
+      } as React.CSSProperties}
     >
       <div
         className={cn(
