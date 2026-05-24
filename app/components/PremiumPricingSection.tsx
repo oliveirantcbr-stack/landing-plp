@@ -162,13 +162,13 @@ export function PremiumPricingSection() {
               <div className="flex flex-col">
                 <span className="text-white/40 text-xs font-black uppercase tracking-widest leading-none mb-2">Apenas 3x de</span>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-white text-6xl md:text-8xl font-black tracking-tighter leading-none drop-shadow-2xl">R$ 24,52</span>
+                  <span className="text-white text-6xl md:text-8xl font-black tracking-tighter leading-none drop-shadow-2xl">R$ 18,26</span>
                 </div>
               </div>
 
               <div className="mt-6 flex items-center gap-3 py-2 px-4 bg-white/[0.03] border border-white/5 rounded-full w-fit">
                 <Zap className="size-4 text-purple-400 fill-purple-400" />
-                <span className="text-white/60 font-black text-[10px] md:text-xs tracking-widest uppercase">Ou R$ 67,00 à vista</span>
+                <span className="text-white/60 font-black text-[10px] md:text-xs tracking-widest uppercase">Ou R$ 49,90 à vista</span>
               </div>
             </div>
 
