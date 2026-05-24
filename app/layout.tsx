@@ -39,6 +39,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.className} overflow-x-hidden`}>
       <head>
+        <link rel="preconnect" href="https://lp.packlp.com" />
+        <link rel="preconnect" href="https://packlp.com" />
+        <link rel="dns-prefetch" href="https://lp.packlp.com" />
+        <link rel="dns-prefetch" href="https://packlp.com" />
         <link rel="preconnect" href="https://api6.ipify.org" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://cdn.utmify.com.br" />
