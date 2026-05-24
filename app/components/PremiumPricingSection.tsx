@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Check, Sparkles, ShieldCheck, ArrowRight, Zap, Trophy, Rocket } from "lucide-react";
-import { ShinyButton } from "@/components/shiny-button";
+import { Sparkles, ShieldCheck, ArrowRight, Zap, Trophy, Rocket } from "lucide-react";
 import { Spotlight } from "@/components/spotlight-new";
 import { cn } from "@/lib/utils";
 
@@ -73,13 +72,18 @@ export function PremiumPricingSection() {
       };
     };
 
-    setTimeLeft(calculateTimeLeft());
+    const initialTimer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 0);
 
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(timer);
+    };
   }, []);
 
   return (

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
-import { ShinyButton } from "@/components/shiny-button";
 import { scrollToOferta } from "@/lib/scrollToOferta";
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
