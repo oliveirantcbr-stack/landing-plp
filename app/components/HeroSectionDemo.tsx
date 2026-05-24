@@ -132,7 +132,6 @@ export function HeroSectionDemo() {
           alt="Hero Background Desktop"
           fill
           priority
-          unoptimized
           fetchPriority="high"
           className="hidden md:block object-cover"
         />
@@ -141,7 +140,6 @@ export function HeroSectionDemo() {
           alt="Hero Background Mobile"
           fill
           priority
-          unoptimized
           fetchPriority="high"
           className="block md:hidden object-cover"
         />

@@ -113,6 +113,7 @@ export function Navbar() {
             <button 
               className={`md:hidden p-2 rounded-xl transition-all ${mobileMenuOpen ? 'bg-purple-600/20 text-purple-400' : 'text-white'}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Menu principal"
             >
               {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>

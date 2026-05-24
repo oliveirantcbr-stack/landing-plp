@@ -232,7 +232,7 @@ export function SectionsShowcase() {
                     </div>
                     <div className="w-[30px]" /> {/* Spacer to balance the dots */}
                   </div>
-                  <video autoPlay loop muted playsInline preload="none" poster="/thumbs/1.webp" className="w-full h-auto object-cover">
+                  <video autoPlay loop muted playsInline preload="none" poster="/_next/image?url=%2Fthumbs%2F1.webp&w=384&q=75" className="w-full h-auto object-cover">
                     <source src="/plp.webm" type="video/webm" />
                   </video>
                 </div>
@@ -307,9 +307,9 @@ export function SectionsShowcase() {
               </div>
 
               <div className="space-y-3 md:space-y-4 px-4">
-                <h4 className="text-lg md:text-2xl font-black text-white uppercase tracking-tighter group-hover:text-purple-500 transition-colors">
+                <h3 className="text-lg md:text-2xl font-black text-white uppercase tracking-tighter group-hover:text-purple-500 transition-colors">
                   {item.title}
-                </h4>
+                </h3>
                 <p className="text-white/30 text-xs md:text-sm font-medium leading-relaxed mx-auto max-w-[240px]">
                   {item.desc}
                 </p>
