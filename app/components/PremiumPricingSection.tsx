@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Check, Sparkles, ShieldCheck, ArrowRight, Zap, Trophy, Rocket } from "lucide-react";
@@ -40,6 +40,48 @@ function TechBadge({ children, className = "" }: { children: React.ReactNode; cl
 }
 
 export function PremiumPricingSection() {
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 15, seconds: 0 });
+
+  useEffect(() => {
+    const savedTime = localStorage.getItem("pricing_countdown_target");
+    let targetTime: number;
+
+    if (savedTime) {
+      targetTime = parseInt(savedTime, 10);
+      if (Date.now() > targetTime) {
+        targetTime = Date.now() + 15 * 60 * 1000;
+        localStorage.setItem("pricing_countdown_target", targetTime.toString());
+      }
+    } else {
+      targetTime = Date.now() + 15 * 60 * 1000;
+      localStorage.setItem("pricing_countdown_target", targetTime.toString());
+    }
+
+    const calculateTimeLeft = () => {
+      const difference = targetTime - Date.now();
+      
+      if (difference <= 0) {
+        const newTarget = Date.now() + 15 * 60 * 1000;
+        localStorage.setItem("pricing_countdown_target", newTarget.toString());
+        return { hours: 0, minutes: 15, seconds: 0 };
+      }
+
+      return {
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    };
+
+    setTimeLeft(calculateTimeLeft());
+
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative w-full py-12 md:py-20 bg-[#0a0a0a] overflow-hidden flex flex-col items-center">
 
@@ -160,15 +202,22 @@ export function PremiumPricingSection() {
               </div>
 
               <div className="flex flex-col">
-                <span className="text-white/40 text-xs font-black uppercase tracking-widest leading-none mb-2">Apenas 3x de</span>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-white text-6xl md:text-8xl font-black tracking-tighter leading-none drop-shadow-2xl">R$ 18,26</span>
+                <span className="text-purple-400 text-[10px] sm:text-xs font-black uppercase tracking-widest leading-none mb-2 flex items-center gap-1.5">
+                  <span className="size-1.5 rounded-full bg-purple-500 animate-pulse" />
+                  Assinatura Recorrente Trimestral
+                </span>
+                <div className="flex items-baseline flex-wrap gap-x-1.5 gap-y-1">
+                  <span className="text-white text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter leading-none drop-shadow-2xl">3x de</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-300 to-fuchsia-400 font-black tracking-tighter leading-none drop-shadow-[0_4px_20px_rgba(168,85,247,0.3)] text-4xl xs:text-5xl sm:text-6xl md:text-7xl">R$ 18,26</span>
+                </div>
+                <div className="mt-2.5 text-white/50 text-xs font-bold tracking-wide">
+                  Ou apenas R$ 49,90 à vista por trimestre
                 </div>
               </div>
 
-              <div className="mt-6 flex items-center gap-3 py-2 px-4 bg-white/[0.03] border border-white/5 rounded-full w-fit">
-                <Zap className="size-4 text-purple-400 fill-purple-400" />
-                <span className="text-white/60 font-black text-[10px] md:text-xs tracking-widest uppercase">Ou R$ 49,90 à vista</span>
+              <div className="mt-6 flex items-center gap-3 py-2.5 px-4 bg-purple-500/10 border border-purple-500/20 rounded-xl w-fit">
+                <Zap className="size-4 text-purple-400 fill-purple-400 animate-pulse" />
+                <span className="text-purple-300 font-black text-[10px] md:text-xs tracking-wider uppercase">Cancele a qualquer momento • Sem multas</span>
               </div>
             </div>
 
@@ -184,8 +233,42 @@ export function PremiumPricingSection() {
               ))}
             </div>
 
+            {/* ⏳ URGENCY COUNTDOWN TIMER */}
+            <div className="mt-8 mb-2 w-full bg-purple-500/5 border border-purple-500/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 tech-pixel-texture relative overflow-hidden">
+              <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-purple-500 rounded-full shadow-[0_0_8px_#a855f7]" />
+              <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-purple-500 rounded-full shadow-[0_0_8px_#a855f7]" />
+              <div className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 w-1 h-1 bg-purple-500 rounded-full shadow-[0_0_8px_#a855f7]" />
+              <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-1 h-1 bg-purple-500 rounded-full shadow-[0_0_8px_#a855f7]" />
+
+              <div className="flex items-center gap-3">
+                <div className="size-8 rounded-lg bg-purple-500/10 flex items-center justify-center border border-purple-500/20 shrink-0">
+                  <span className="relative flex size-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                  </span>
+                </div>
+                <div className="flex flex-col items-start text-left">
+                  <span className="text-[10px] md:text-xs font-black text-purple-300 uppercase tracking-widest leading-tight">Oferta por tempo limitado</span>
+                  <span className="text-[9px] md:text-[10px] text-white/50 font-bold uppercase tracking-wider mt-0.5">Garanta seu desconto antes que expire</span>
+                </div>
+              </div>
+
+              {/* Ticking Numbers */}
+              <div className="flex items-center gap-2 font-mono shrink-0">
+                <div className="flex flex-col items-center bg-black/40 border border-white/10 rounded-lg px-2.5 py-1 min-w-[36px]">
+                  <span className="text-sm font-black text-white">{timeLeft.minutes.toString().padStart(2, "0")}</span>
+                  <span className="text-[7px] text-white/40 font-black uppercase tracking-wider">MIN</span>
+                </div>
+                <span className="text-purple-400 font-bold animate-pulse">:</span>
+                <div className="flex flex-col items-center bg-black/40 border border-white/10 rounded-lg px-2.5 py-1 min-w-[36px]">
+                  <span className="text-sm font-black text-purple-400">{timeLeft.seconds.toString().padStart(2, "0")}</span>
+                  <span className="text-[7px] text-white/40 font-black uppercase tracking-wider">SEG</span>
+                </div>
+              </div>
+            </div>
+
             {/* CTA */}
-            <div className="mt-10 flex justify-center w-full">
+            <div className="mt-4 flex justify-center w-full">
               <button
                 onClick={() => window.open('https://pay.cakto.com.br/87m3bxz_692614', '_blank')}
                 className="w-full group relative flex items-stretch overflow-hidden border border-purple-500/40 bg-zinc-950/80 transition-all duration-300 active:scale-[0.98] focus:outline-none outline-none rounded-2xl cursor-pointer shadow-[0_0_20px_rgba(168,85,247,0.15)] hover:shadow-[0_0_45px_rgba(168,85,247,0.45)] hover:border-purple-400"
@@ -231,6 +314,35 @@ export function PremiumPricingSection() {
                   }
                 `}</style>
               </button>
+            </div>
+
+            {/* Trust Badges under CTA */}
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-y-3.5 gap-x-5 text-[9px] md:text-[10px] font-black uppercase tracking-widest text-white/60">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="size-4 text-emerald-400 shrink-0" />
+                <span>7 dias de garantia incondicional</span>
+              </div>
+              <div className="hidden sm:block text-white/10">•</div>
+              <div className="flex items-center gap-2">
+                <Trophy className="size-4 text-purple-400 shrink-0" />
+                <span>+1.000 membros ativos</span>
+              </div>
+              <div className="hidden sm:block text-white/10">•</div>
+              <div className="flex items-center gap-2">
+                <Zap className="size-4 text-amber-400 shrink-0" />
+                <span>Cancele quando quiser</span>
+              </div>
+            </div>
+
+            {/* Formas de Pagamento */}
+            <div className="mt-6 flex justify-center w-full">
+              <Image
+                src="/formaspagemento.webp"
+                alt="Formas de Pagamento"
+                width={320}
+                height={40}
+                className="h-auto w-auto max-w-[280px] md:max-w-[320px] opacity-80 hover:opacity-100 transition-opacity duration-300"
+              />
             </div>
           </motion.div>
 
