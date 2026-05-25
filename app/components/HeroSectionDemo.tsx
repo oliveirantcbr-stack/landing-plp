@@ -99,24 +99,18 @@ export function HeroSectionDemo() {
       className="relative w-full min-h-screen text-white flex flex-col items-center overflow-hidden select-none"
       style={{ background: 'transparent !important', maxWidth: '100vw' }}
     >
-      {/* 0. Static Immediate Layer (LCP Optimized) */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/bgpc.webp"
-          alt="Hero Background Desktop"
-          fill
-          priority
-          fetchPriority="high"
-          className="hidden md:block object-cover"
-        />
-        <Image
-          src="/bgfallmobile.webp"
-          alt="Hero Background Mobile"
-          fill
-          priority
-          fetchPriority="high"
-          className="block md:hidden object-cover"
-        />
+      {/* 0. Static Immediate Layer (LCP Optimized via HTML Picture Art-Direction) */}
+      <div className="absolute inset-0 z-0 w-full h-full">
+        <picture>
+          <source srcSet="/bgpc.webp" media="(min-width: 768px)" />
+          <img
+            src="/bgfallmobile.webp"
+            alt="Hero Background"
+            className="w-full h-full object-cover absolute inset-0"
+            style={{ pointerEvents: 'none' }}
+            fetchPriority="high"
+          />
+        </picture>
       </div>
 
       {/* 1. Unicorn Studio Animation (Background Layer) - Loaded Dynamically (Only Desktop) */}
