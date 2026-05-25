@@ -40,6 +40,14 @@ function TechBadge({ children, className = "" }: { children: React.ReactNode; cl
 
 export function PremiumPricingSection() {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 15, seconds: 0 });
+  const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for safety
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const savedTime = localStorage.getItem("pricing_countdown_target");
@@ -101,7 +109,7 @@ export function PremiumPricingSection() {
 
         {/* Seamless background glows to match TestimonialsSection - Below texture */}
         <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
-          <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] bg-purple-500/20 blur-[150px] rounded-full" />
+          <div className="absolute bottom-0 left-1/2 md:left-1/4 w-[300px] md:w-[600px] h-[200px] md:h-[400px] bg-purple-500/20 blur-[100px] md:blur-[150px] rounded-full" />
         </div>
 
         {/* Subtle center overlay */}
@@ -110,30 +118,27 @@ export function PremiumPricingSection() {
         {/* 🏔️ TOP GRADIENT TRANSITION - SEAMLESS MATCH WITH CTA */}
         <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a] to-transparent z-10" />
 
-        <Spotlight
-          gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(270, 100%, 60%, .12) 0, hsla(270, 100%, 50%, .04) 50%, transparent 80%)"
-          gradientSecond="radial-gradient(50% 50% at 50% 50%, hsla(270, 100%, 60%, .08) 0, transparent 100%)"
-          gradientThird="radial-gradient(50% 50% at 50% 50%, hsla(270, 100%, 60%, .06) 0, transparent 100%)"
-        />
+        {!isMobile && (
+          <Spotlight
+            gradientFirst="radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(270, 100%, 60%, .12) 0, hsla(270, 100%, 50%, .04) 50%, transparent 80%)"
+            gradientSecond="radial-gradient(50% 50% at 50% 50%, hsla(270, 100%, 60%, .08) 0, transparent 100%)"
+            gradientThird="radial-gradient(50% 50% at 50% 50%, hsla(270, 100%, 60%, .06) 0, transparent 100%)"
+          />
+        )}
       </div>
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-6 flex flex-col items-center">
 
         {/* EDITORIAL HEADER */}
         <div className="text-center mb-12 md:mb-20 max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="mb-6"
-          >
+          <div className="mb-6 animate-in fade-in duration-700">
             <TechBadge className="bg-purple-500/10 border-purple-500/20 px-6 py-2 w-fit mx-auto">
               <div className="flex items-center gap-2">
                 <Sparkles className="size-3 text-purple-400" />
                 <span className="text-[10px] font-black uppercase tracking-[0.2em]">Acesso Exclusivo</span>
               </div>
             </TechBadge>
-          </motion.div>
+          </div>
 
           <h2 className="text-3xl md:text-6xl font-black text-white leading-tight tracking-tighter uppercase mb-4 md:mb-6">
             INVISTA NO SEU <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500 italic">DOMÍNIO.</span>
@@ -149,8 +154,8 @@ export function PremiumPricingSection() {
 
           {/* PLAN CARD - THE CENTERPIECE */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            whileInView={isMobile ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="w-full bg-zinc-900 border-2 border-purple-500/40 p-8 md:p-12 rounded-[30px] md:rounded-[40px] relative z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8),0_0_40px_rgba(147,51,234,0.1)] flex flex-col tech-pixel-texture"
           >
@@ -265,15 +270,19 @@ export function PremiumPricingSection() {
                 {/* 🔮 Dynamic Liquid Gradient Background */}
                 <div className="absolute inset-0 z-0 opacity-90 group-hover:opacity-100 transition-opacity duration-500">
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-700" />
-                  <div className="absolute top-[-30%] left-[-20%] size-[150%] bg-purple-400/20 blur-[30px] rounded-full animate-[pricing-liquid_8s_ease-in-out_infinite]" />
-                  <div className="absolute bottom-[-30%] right-[-20%] size-[150%] bg-indigo-400/20 blur-[30px] rounded-full animate-[pricing-liquid_12s_ease-in-out_infinite_reverse]" />
+                  {!isMobile && (
+                    <>
+                      <div className="absolute top-[-30%] left-[-20%] size-[150%] bg-purple-400/20 blur-[30px] rounded-full animate-[pricing-liquid_8s_ease-in-out_infinite]" />
+                      <div className="absolute bottom-[-30%] right-[-20%] size-[150%] bg-indigo-400/20 blur-[30px] rounded-full animate-[pricing-liquid_12s_ease-in-out_infinite_reverse]" />
+                    </>
+                  )}
                 </div>
 
                 {/* ⚡ High-tech Glass Overlay */}
                 <div className="absolute inset-0 z-10 bg-white/[0.02] backdrop-blur-[1px] opacity-100 group-hover:bg-white/[0.06] transition-colors duration-500" />
 
                 {/* 🌟 Shimmer Sweep Effect */}
-                <div className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:animate-pricing-shine pointer-events-none" />
+                <div className="absolute inset-0 z-20 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-pricing-shine-periodic pointer-events-none" />
 
                 {/* Main Content Area */}
                 <div className="relative z-30 flex-1 px-3 sm:px-6 py-4.5 flex items-center justify-center border-r border-white/10 overflow-hidden bg-white/[0.01]">
@@ -294,12 +303,19 @@ export function PremiumPricingSection() {
                     33% { transform: translate(6%, 10%) scale(1.1); }
                     66% { transform: translate(-6%, 6%) scale(0.95); }
                   }
-                  @keyframes pricing-shine {
-                    0% { transform: translateX(-100%) skewX(-15deg); }
-                    100% { transform: translateX(200%) skewX(-15deg); }
+                  @keyframes pricing-shine-periodic {
+                    0% { transform: translateX(-150%) skewX(-15deg); }
+                    20%, 100% { transform: translateX(250%) skewX(-15deg); }
                   }
-                  .group:hover .group-hover\\:animate-pricing-shine {
-                    animation: pricing-shine 1.8s ease-in-out infinite;
+                  @keyframes pricing-shine-hover {
+                    0% { transform: translateX(-150%) skewX(-15deg); }
+                    100% { transform: translateX(250%) skewX(-15deg); }
+                  }
+                  .animate-pricing-shine-periodic {
+                    animation: pricing-shine-periodic 4s ease-in-out infinite;
+                  }
+                  .group:hover .animate-pricing-shine-periodic {
+                    animation: pricing-shine-hover 1.2s linear infinite;
                   }
                 `}</style>
               </button>

@@ -320,17 +320,18 @@ body {
   scroll-behavior: auto;
 }
 
-/* ⚡ PULSING LIGHT EFFECT */
+/* ⚡ PULSING LIGHT EFFECT - GPU ACCELERATED (NO FILTER LAG ON ANDROID) */
 .luzpulsante {
   animation: 5s luzz ease-in-out infinite;
+  will-change: opacity;
 }
 
 @keyframes luzz {
   0%, 70%, 100% {
-    filter: brightness(1) saturate(1);
+    opacity: 0.55;
   }
   85% {
-    filter: brightness(1.8) saturate(1.4);
+    opacity: 0.95;
   }
 }
 
