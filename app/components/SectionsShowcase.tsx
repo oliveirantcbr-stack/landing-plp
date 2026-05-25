@@ -133,19 +133,21 @@ export function SectionsShowcase() {
       <div className="relative z-20 mt-16 md:mt-48 px-6">
 
         {/* DESKTOP KEY VIDEO */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-[400px] pointer-events-none z-10 opacity-60 hidden lg:block">
-          <video
-            autoPlay loop muted playsInline
-            preload="none"
-            className="w-full h-full object-contain mix-blend-screen scale-110"
-            style={{
-              maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
-              WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)'
-            }}
-          >
-            <source src="/key.webm" type="video/webm" />
-          </video>
-        </div>
+        {!isClientMobile && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-[400px] pointer-events-none z-10 opacity-60 hidden lg:block">
+            <video
+              autoPlay loop muted playsInline
+              preload="none"
+              className="w-full h-full object-contain mix-blend-screen scale-110"
+              style={{
+                maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
+                WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)'
+              }}
+            >
+              <source src="/key.webm" type="video/webm" />
+            </video>
+          </div>
+        )}
 
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10 md:gap-16 lg:gap-24 relative z-20">
 
@@ -193,19 +195,21 @@ export function SectionsShowcase() {
           </motion.div>
 
           {/* MOBILE KEY VIDEO - Ultra-compact on Mobile */}
-          <div className="block lg:hidden w-full max-w-[240px] h-[100px] relative pointer-events-none opacity-90 order-2 -my-10 md:-my-12">
-            <video
-              autoPlay loop muted playsInline
-              preload="none"
-              className="w-full h-full object-contain mix-blend-screen scale-150"
-              style={{
-                maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
-                WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)'
-              }}
-            >
-              <source src="/key.webm" type="video/webm" />
-            </video>
-          </div>
+          {isClientMobile && (
+            <div className="block lg:hidden w-full max-w-[240px] h-[100px] relative pointer-events-none opacity-90 order-2 -my-10 md:-my-12">
+              <video
+                autoPlay loop muted playsInline
+                preload="none"
+                className="w-full h-full object-contain mix-blend-screen scale-150"
+                style={{
+                  maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
+                  WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)'
+                }}
+              >
+                <source src="/key.webm" type="video/webm" />
+              </video>
+            </div>
+          )}
 
           {/* VIDEO DISPLAY (MOCKUP) */}
           <motion.div
@@ -214,31 +218,35 @@ export function SectionsShowcase() {
           >
             <div className="absolute inset-0 bg-purple-600/[0.05] md:bg-purple-600/20 blur-[60px] md:blur-[100px] rounded-full scale-75 animate-pulse" />
 
-            <div className="hidden md:block relative z-20 w-full max-w-[700px]">
-              <MacbookPro videoSrc="/plp.webm" posterSrc="/thumbs/1.webp" autoPlay loop muted className="w-full drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]" />
-            </div>
-
-            <div className="block md:hidden w-full max-w-[320px] mx-auto relative z-20">
-              <div className="relative bg-[#1a1a1a] rounded-[24px] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden">
-                <div className="rounded-[18px] overflow-hidden bg-black">
-                  <div className="h-6 bg-[#262626] flex items-center justify-between px-4">
-                    <div className="flex gap-1.5">
-                      <div className="size-2 rounded-full bg-[#ff5f56]" />
-                      <div className="size-2 rounded-full bg-[#ffbd2e]" />
-                      <div className="size-2 rounded-full bg-[#27c93f]" />
-                    </div>
-                    <div className="flex-1 flex justify-center">
-                      <span className="text-[7px] text-white/30 font-medium tracking-tight">app.packlp.com</span>
-                    </div>
-                    <div className="w-[30px]" /> {/* Spacer to balance the dots */}
-                  </div>
-                  <video autoPlay loop muted playsInline preload="none" poster="/_next/image?url=%2Fthumbs%2F1.webp&w=384&q=75" className="w-full h-auto object-cover">
-                    <source src="/plp.webm" type="video/webm" />
-                  </video>
-                </div>
+            {!isClientMobile && (
+              <div className="hidden md:block relative z-20 w-full max-w-[700px]">
+                <MacbookPro videoSrc="/plp.webm" posterSrc="/thumbs/1.webp" autoPlay loop muted className="w-full drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)]" />
               </div>
-              <div className="absolute inset-0 pointer-events-none rounded-[24px] bg-gradient-to-tr from-white/[0.02] to-transparent" />
-            </div>
+            )}
+
+            {isClientMobile && (
+              <div className="block md:hidden w-full max-w-[320px] mx-auto relative z-20">
+                <div className="relative bg-[#1a1a1a] rounded-[24px] p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden">
+                  <div className="rounded-[18px] overflow-hidden bg-black">
+                    <div className="h-6 bg-[#262626] flex items-center justify-between px-4">
+                      <div className="flex gap-1.5">
+                        <div className="size-2 rounded-full bg-[#ff5f56]" />
+                        <div className="size-2 rounded-full bg-[#ffbd2e]" />
+                        <div className="size-2 rounded-full bg-[#27c93f]" />
+                      </div>
+                      <div className="flex-1 flex justify-center">
+                        <span className="text-[7px] text-white/30 font-medium tracking-tight">app.packlp.com</span>
+                      </div>
+                      <div className="w-[30px]" /> {/* Spacer to balance the dots */}
+                    </div>
+                    <video autoPlay loop muted playsInline preload="none" poster="/_next/image?url=%2Fthumbs%2F1.webp&w=384&q=75" className="w-full h-auto object-cover">
+                      <source src="/plp.webm" type="video/webm" />
+                    </video>
+                  </div>
+                </div>
+                <div className="absolute inset-0 pointer-events-none rounded-[24px] bg-gradient-to-tr from-white/[0.02] to-transparent" />
+              </div>
+            )}
           </motion.div>
 
           {/* MOBILE CTA - Now after the video mockup */}
