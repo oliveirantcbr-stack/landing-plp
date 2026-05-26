@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { scrollToOferta } from "@/lib/scrollToOferta";
-import { ArrowRight, VolumeX } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const UnicornBackground = dynamic(() => import("./UnicornBackground"), {
@@ -87,7 +87,7 @@ function HeroCtaButton({ onClick, isMobile = false }: { onClick: () => void; isM
 
 export function HeroSectionDemo() {
   const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
-  const [isMuted, setIsMuted] = useState(true);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -105,20 +105,18 @@ export function HeroSectionDemo() {
       className="relative w-full min-h-screen text-white flex flex-col items-center overflow-hidden select-none"
       style={{ background: 'transparent !important', maxWidth: '100vw' }}
     >
-      {/* 0. Static Immediate Layer (LCP Optimized via HTML Picture Art-Direction and Dynamic Next.js Compression) */}
+      {/* 0. Static Immediate Layer (LCP Optimized via Next.js Image Optimization) */}
       <div className="absolute inset-0 z-0 w-full h-full">
         {/* Desktop Background - Always active on desktop */}
         <div className="hidden md:block absolute inset-0 w-full h-full">
-          <picture>
-            <source srcSet="/_next/image?url=%2Fbgpc.webp&w=1920&q=75" media="(min-width: 768px)" />
-            <img
-              src="/_next/image?url=%2Fbgpc.webp&w=1920&q=75"
-              alt="Hero Background"
-              className="w-full h-full object-cover absolute inset-0"
-              style={{ pointerEvents: 'none' }}
-              fetchPriority="high"
-            />
-          </picture>
+          <Image
+            src="/bgpc.webp"
+            alt="Hero Background Desktop"
+            fill
+            className="object-cover"
+            style={{ pointerEvents: 'none' }}
+            priority
+          />
         </div>
 
         {/* Mobile Background */}
@@ -131,34 +129,15 @@ export function HeroSectionDemo() {
               <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[240px] h-[240px] bg-fuchsia-600/5 blur-[80px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '8s' }} />
             </div>
           ) : (
-            <img
-              src="/_next/image?url=%2Fbgfallmobile.webp&w=640&q=75"
-              alt="Hero Background"
-              className="w-full h-full object-cover absolute inset-0"
+            <Image
+              src="/bgfallmobile.webp"
+              alt="Hero Background Mobile"
+              fill
+              className="object-cover"
               style={{ pointerEvents: 'none' }}
-              fetchPriority="high"
+              priority
             />
           )}
-
-          {/* 🌌 High-Fidelity Mobile-Only Background Textures */}
-          {/* Subtle Tech Grid overlay (exclusively mobile) */}
-          <div
-            className="absolute inset-0 opacity-[0.06] pointer-events-none z-[1]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.15)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`,
-            }}
-          />
-          
-          {/* Cinematic Film Grain Noise Texture (exclusively mobile) */}
-          <div
-            className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none z-[1]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            }}
-          />
-
-          {/* 🌑 Deep Smooth Gradient to Black at the Bottom (degrade pro preto na parte inferior) */}
-          <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none z-[2]" />
         </div>
       </div>
 
@@ -174,6 +153,28 @@ export function HeroSectionDemo() {
       {/* 🌑 Premium Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/95 pointer-events-none z-[2]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] pointer-events-none z-[2]" />
+
+      {/* 🌌 Mobile-Only High-Fidelity Background Textures & Bottom Gradient */}
+      <div className="block md:hidden absolute inset-0 pointer-events-none z-[3]">
+        {/* Subtle Tech Grid overlay (exclusively mobile) */}
+        <div
+          className="absolute inset-0 opacity-[0.16]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.3)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`,
+          }}
+        />
+        
+        {/* Cinematic Film Grain Noise Texture (exclusively mobile) */}
+        <div
+          className="absolute inset-0 opacity-[0.06] mix-blend-overlay"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          }}
+        />
+
+        {/* 🌑 Deep Smooth Gradient to Black at the Bottom (degrade pro preto na parte inferior) */}
+        <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black via-black/85 to-transparent" />
+      </div>
 
       {/* 🏷️ LOGO (Desktop) - Restored with opacity-0 as requested */}
       <div className="absolute top-8 left-1/2 -translate-x-1/2 z-[50] hidden md:block opacity-0 pointer-events-none">
@@ -313,26 +314,37 @@ export function HeroSectionDemo() {
             <div className="relative rounded-3xl p-[1px] bg-gradient-to-b from-purple-500/40 via-white/10 to-transparent shadow-[0_0_50px_rgba(168,85,247,0.2)] overflow-hidden">
               <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl" />
               
-              <div className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full">
-                <iframe 
-                  src={`https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&loop=true&muted=${isMuted}&preload=true&responsive=true`} 
-                  className="border-0 w-full h-full absolute top-0 left-0 z-10" 
-                  allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
-                  allowFullScreen={true}
-                ></iframe>
-
-                {/* Pulsing Speaker Unmute Button */}
-                {isMuted && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsMuted(false);
-                    }}
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-purple-600/90 border border-purple-400/40 rounded-full text-[10px] font-black text-white tracking-widest uppercase backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.5)] cursor-pointer hover:bg-purple-500 active:scale-[0.98] transition-all animate-pulse"
-                  >
-                    <VolumeX className="size-3.5" />
-                    <span>ATIVAR SOM</span>
-                  </button>
+              <div 
+                className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full cursor-pointer group/video"
+                onClick={() => !isVideoPlaying && setIsVideoPlaying(true)}
+              >
+                {!isVideoPlaying ? (
+                  <div className="absolute inset-0 w-full h-full z-20">
+                    <Image 
+                      src="/APERTE O PLAY.webp" 
+                      alt="Aperte o Play" 
+                      fill 
+                      className="object-cover transition-transform duration-700 group-hover/video:scale-105"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-black/20 group-hover/video:bg-black/10 transition-colors duration-500" />
+                    
+                    {/* Glass Pulsing Play Icon */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="size-14 rounded-full bg-purple-600/90 border border-purple-400/40 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse">
+                        <svg className="size-6 text-white fill-current translate-x-[2px]" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <iframe 
+                    src="https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&loop=false&muted=false&preload=true&responsive=true" 
+                    className="border-0 w-full h-full absolute top-0 left-0 z-10" 
+                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
+                    allowFullScreen={true}
+                  ></iframe>
                 )}
               </div>
             </div>
