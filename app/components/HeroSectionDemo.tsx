@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import type Hls from "hls.js";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
@@ -99,8 +98,9 @@ export function HeroSectionDemo() {
 
   // Ref to the native <video> element — all audio/playback control is done directly here
   const videoRef = useRef<HTMLVideoElement>(null);
-  // Ref to the hls.js instance for cleanup on unmount
-  const hlsRef = useRef<Hls | null>(null);
+  // Minimal interface — only the method we call on unmount
+  // (avoids top-level import of hls.js which Next.js tries to resolve at build time)
+  const hlsRef = useRef<{ destroy: () => void } | null>(null);
 
   // Resize listener
   useEffect(() => {
