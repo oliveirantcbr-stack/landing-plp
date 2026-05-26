@@ -88,6 +88,7 @@ function HeroCtaButton({ onClick, isMobile = false }: { onClick: () => void; isM
 export function HeroSectionDemo() {
   const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -320,7 +321,20 @@ export function HeroSectionDemo() {
               <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl" />
               
               <div className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full">
-                {!isVideoPlaying ? (
+                {/* Iframe sits underneath (z-10) and starts loading when isVideoPlaying is true */}
+                {isVideoPlaying && (
+                  <iframe 
+                    src="https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&loop=false&muted=false&preload=true&responsive=true" 
+                    className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]" 
+                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
+                    allowFullScreen={true}
+                    loading="lazy"
+                    onLoad={() => setIsIframeLoaded(true)}
+                  ></iframe>
+                )}
+
+                {/* Cover image sits on top (z-20) and is visible until the iframe has fully loaded */}
+                {!isIframeLoaded && (
                   <div 
                     className="absolute inset-0 w-full h-full z-20 cursor-pointer group/video bg-[#0a0a0a]"
                     onClick={() => setIsVideoPlaying(true)}
@@ -334,23 +348,19 @@ export function HeroSectionDemo() {
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover/video:bg-black/10 transition-colors duration-500" />
                     
-                    {/* Glass Pulsing Play Icon */}
+                    {/* Glass Pulsing Play Icon or Subtle Loading Spinner */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div className="size-14 rounded-full bg-purple-600/90 border border-purple-400/40 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse">
-                        <svg className="size-6 text-white fill-current translate-x-[2px]" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
+                      {!isVideoPlaying ? (
+                        <div className="size-14 rounded-full bg-purple-600/90 border border-purple-400/40 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse">
+                          <svg className="size-6 text-white fill-current translate-x-[2px]" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      ) : (
+                        <div className="size-10 rounded-full border-2 border-purple-500/20 border-t-purple-500 animate-spin" />
+                      )}
                     </div>
                   </div>
-                ) : (
-                  <iframe 
-                    src="https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&loop=false&muted=false&preload=true&responsive=true" 
-                    className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]" 
-                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
-                    allowFullScreen={true}
-                    loading="lazy"
-                  ></iframe>
                 )}
               </div>
             </div>
