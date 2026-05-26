@@ -7,6 +7,7 @@ import { AvatarGroup } from "@/components/ui/avatar-group";
 import { scrollToOferta } from "@/lib/scrollToOferta";
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
+import Script from "next/script";
 
 const UnicornBackground = dynamic(() => import("./UnicornBackground"), {
   ssr: false,
@@ -85,6 +86,15 @@ function HeroCtaButton({ onClick, isMobile = false }: { onClick: () => void; isM
   );
 }
 
+interface PlayerInstance {
+  play: () => void;
+  unmute: () => void;
+}
+
+interface PlayerJS {
+  Player: new (id: string) => PlayerInstance;
+}
+
 export function HeroSectionDemo() {
   const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -99,6 +109,35 @@ export function HeroSectionDemo() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  const handlePlayClick = () => {
+    setIsVideoPlaying(true);
+    
+    // 1. Direct postMessage triggers (runs synchronously in the same callstack of the click gesture)
+    const iframe = document.getElementById("bunny-vsl-player") as HTMLIFrameElement;
+    if (iframe && iframe.contentWindow) {
+      try {
+        iframe.contentWindow.postMessage(JSON.stringify({ method: "play" }), "*");
+        iframe.contentWindow.postMessage(JSON.stringify({ method: "unmute" }), "*");
+        iframe.contentWindow.postMessage(JSON.stringify({ context: "player.js", method: "play" }), "*");
+        iframe.contentWindow.postMessage(JSON.stringify({ context: "player.js", method: "unmute" }), "*");
+      } catch (err) {
+        console.warn("Direct postMessage calls failed:", err);
+      }
+    }
+
+    // 2. Official PlayerJS API call as robust second layer
+    try {
+      const playerjs = (window as unknown as { playerjs?: PlayerJS }).playerjs;
+      if (playerjs) {
+        const player = new playerjs.Player("bunny-vsl-player");
+        player.unmute();
+        player.play();
+      }
+    } catch (err) {
+      console.log("PlayerJS play/unmute failed:", err);
+    }
+  };
 
   const ContainerTag = (isMobile ? "div" : motion.div) as React.ElementType;
   const containerProps = isMobile ? {} : {
@@ -321,23 +360,37 @@ export function HeroSectionDemo() {
               <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl" />
               
               <div className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full">
-                {/* Iframe sits underneath (z-10) and starts loading when isVideoPlaying is true */}
-                {isVideoPlaying && (
-                  <iframe 
-                    src="https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&loop=false&muted=false&preload=true&responsive=true" 
-                    className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]" 
-                    allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
-                    allowFullScreen={true}
-                    loading="lazy"
-                    onLoad={() => setIsIframeLoaded(true)}
-                  ></iframe>
-                )}
+                {/* Iframe sits underneath (z-10) and is rendered from the start to preload in background */}
+                <iframe 
+                  id="bunny-vsl-player"
+                  src="https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=false&loop=false&muted=true&preload=true&responsive=true" 
+                  className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]" 
+                  allow="autoplay; encrypted-media; picture-in-picture" 
+                  allowFullScreen={true}
+                  loading="lazy"
+                  onLoad={() => {
+                    setIsIframeLoaded(true);
+                    // Tentativa imediata de reproduzir/desmutar assim que o iframe concluir a carga caso o usuário já tenha clicado
+                    if (isVideoPlaying) {
+                      try {
+                        const playerjs = (window as unknown as { playerjs?: PlayerJS }).playerjs;
+                        if (playerjs) {
+                          const player = new playerjs.Player("bunny-vsl-player");
+                          player.unmute();
+                          player.play();
+                        }
+                      } catch (err) {
+                        console.log("PlayerJS onLoad unmute failed:", err);
+                      }
+                    }
+                  }}
+                ></iframe>
 
-                {/* Cover image sits on top (z-20) and is visible until the iframe has fully loaded */}
-                {!isIframeLoaded && (
+                {/* Cover image sits on top (z-20) and is visible until the user clicks and the iframe has fully loaded */}
+                {(!isVideoPlaying || !isIframeLoaded) && (
                   <div 
                     className="absolute inset-0 w-full h-full z-20 cursor-pointer group/video bg-[#0a0a0a]"
-                    onClick={() => setIsVideoPlaying(true)}
+                    onClick={() => handlePlayClick()}
                   >
                     <Image 
                       src="/APERTE O PLAY.webp" 
@@ -437,6 +490,12 @@ export function HeroSectionDemo() {
         </div>
 
       </ContainerTag>
+
+      {/* Bunnynet Stream PlayerJS API SDK for unified cross-origin player control */}
+      <Script 
+        src="https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js" 
+        strategy="afterInteractive" 
+      />
     </section>
   );
 }
