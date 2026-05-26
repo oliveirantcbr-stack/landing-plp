@@ -3,11 +3,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
+import { USE_VIDEO_BACKGROUND_MOBILE } from "./HeroSectionDemo";
+
 export function VideoSection() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section className="relative w-full py-16 md:py-24 bg-black overflow-hidden">
+    <section className={`relative w-full py-16 md:py-24 bg-black overflow-hidden ${USE_VIDEO_BACKGROUND_MOBILE ? "hidden md:block" : ""}`}>
       {/* Background Image matching the 'Com o Pack Landing Page Você' section */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image

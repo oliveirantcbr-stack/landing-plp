@@ -5,12 +5,17 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { scrollToOferta } from "@/lib/scrollToOferta";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, VolumeX } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const UnicornBackground = dynamic(() => import("./UnicornBackground"), {
   ssr: false,
 });
+
+// 🧪 EXPERIMENTAL MOBILE BACKGROUND VIDEO TOGGLE
+// Set to true to test the embedded Bunnynet presentation video card ("Como funciona o Pack") in the mobile Hero.
+// Set to false to immediately revert/rollback to the LCP-optimized empty mockup center layout.
+export const USE_VIDEO_BACKGROUND_MOBILE = true;
 
 function HeroCtaButton({ onClick, isMobile = false }: { onClick: () => void; isMobile?: boolean }) {
   return (
@@ -82,6 +87,7 @@ function HeroCtaButton({ onClick, isMobile = false }: { onClick: () => void; isM
 
 export function HeroSectionDemo() {
   const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -101,16 +107,59 @@ export function HeroSectionDemo() {
     >
       {/* 0. Static Immediate Layer (LCP Optimized via HTML Picture Art-Direction and Dynamic Next.js Compression) */}
       <div className="absolute inset-0 z-0 w-full h-full">
-        <picture>
-          <source srcSet="/_next/image?url=%2Fbgpc.webp&w=1920&q=75" media="(min-width: 768px)" />
-          <img
-            src="/_next/image?url=%2Fbgfallmobile.webp&w=640&q=75"
-            alt="Hero Background"
-            className="w-full h-full object-cover absolute inset-0"
-            style={{ pointerEvents: 'none' }}
-            fetchPriority="high"
+        {/* Desktop Background - Always active on desktop */}
+        <div className="hidden md:block absolute inset-0 w-full h-full">
+          <picture>
+            <source srcSet="/_next/image?url=%2Fbgpc.webp&w=1920&q=75" media="(min-width: 768px)" />
+            <img
+              src="/_next/image?url=%2Fbgpc.webp&w=1920&q=75"
+              alt="Hero Background"
+              className="w-full h-full object-cover absolute inset-0"
+              style={{ pointerEvents: 'none' }}
+              fetchPriority="high"
+            />
+          </picture>
+        </div>
+
+        {/* Mobile Background */}
+        <div className="block md:hidden absolute inset-0 w-full h-full bg-[#030303]">
+          {USE_VIDEO_BACKGROUND_MOBILE ? (
+            /* Premium Textured VSL Layout Background */
+            <div className="absolute inset-0 w-full h-full">
+              {/* Subtle ambient blur light behind the VSL video player */}
+              <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-purple-600/15 blur-[90px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '6s' }} />
+              <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[240px] h-[240px] bg-fuchsia-600/5 blur-[80px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '8s' }} />
+            </div>
+          ) : (
+            <img
+              src="/_next/image?url=%2Fbgfallmobile.webp&w=640&q=75"
+              alt="Hero Background"
+              className="w-full h-full object-cover absolute inset-0"
+              style={{ pointerEvents: 'none' }}
+              fetchPriority="high"
+            />
+          )}
+
+          {/* 🌌 High-Fidelity Mobile-Only Background Textures */}
+          {/* Subtle Tech Grid overlay (exclusively mobile) */}
+          <div
+            className="absolute inset-0 opacity-[0.06] pointer-events-none z-[1]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.15)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`,
+            }}
           />
-        </picture>
+          
+          {/* Cinematic Film Grain Noise Texture (exclusively mobile) */}
+          <div
+            className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none z-[1]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            }}
+          />
+
+          {/* 🌑 Deep Smooth Gradient to Black at the Bottom (degrade pro preto na parte inferior) */}
+          <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none z-[2]" />
+        </div>
       </div>
 
       {/* 1. Unicorn Studio Animation (Background Layer) - Loaded Dynamically (Only Desktop) */}
@@ -257,6 +306,38 @@ export function HeroSectionDemo() {
             </div>
           </div>
         </div>
+
+        {/* MOBILE MIDDLE GROUP: Bunnynet Video Presentation (Vibe VSL) */}
+        {USE_VIDEO_BACKGROUND_MOBILE && (
+          <div className="md:hidden w-full max-w-[320px] xs:max-w-[340px] px-4 z-40 my-6 animate-in fade-in slide-in-from-bottom-3 duration-1000 delay-300 fill-mode-both">
+            <div className="relative rounded-3xl p-[1px] bg-gradient-to-b from-purple-500/40 via-white/10 to-transparent shadow-[0_0_50px_rgba(168,85,247,0.2)] overflow-hidden">
+              <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl" />
+              
+              <div className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full">
+                <iframe 
+                  src={`https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&loop=true&muted=${isMuted}&preload=true&responsive=true`} 
+                  className="border-0 w-full h-full absolute top-0 left-0 z-10" 
+                  allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
+                  allowFullScreen={true}
+                ></iframe>
+
+                {/* Pulsing Speaker Unmute Button */}
+                {isMuted && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsMuted(false);
+                    }}
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 bg-purple-600/90 border border-purple-400/40 rounded-full text-[10px] font-black text-white tracking-widest uppercase backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.5)] cursor-pointer hover:bg-purple-500 active:scale-[0.98] transition-all animate-pulse"
+                  >
+                    <VolumeX className="size-3.5" />
+                    <span>ATIVAR SOM</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* MOBILE BOTTOM GROUP: Description, CTA, Members */}
         <div className="md:hidden flex flex-col items-center w-full gap-5 z-40 mt-auto">
