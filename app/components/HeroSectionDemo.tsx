@@ -127,13 +127,13 @@ export function HeroSectionDemo() {
         </div>
 
         {/* Mobile Background */}
-        <div className="block md:hidden absolute inset-0 w-full h-full bg-[#030303]">
+        <div className="block md:hidden absolute inset-0 w-full h-full bg-[#0a0a0a]">
           {USE_VIDEO_BACKGROUND_MOBILE ? (
             /* Premium Textured VSL Layout Background */
             <div className="absolute inset-0 w-full h-full">
-              {/* Subtle ambient blur light behind the VSL video player */}
+              {/* Subtle ambient blur light behind the VSL video player (Roxo e Cinza) */}
               <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-purple-600/15 blur-[90px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '6s' }} />
-              <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[240px] h-[240px] bg-fuchsia-600/5 blur-[80px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '8s' }} />
+              <div className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[240px] h-[240px] bg-zinc-700/10 blur-[80px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: '8s' }} />
             </div>
           ) : (
             <Image
@@ -322,7 +322,7 @@ export function HeroSectionDemo() {
               <div className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full">
                 {!isVideoPlaying ? (
                   <div 
-                    className="absolute inset-0 w-full h-full z-20 cursor-pointer group/video"
+                    className="absolute inset-0 w-full h-full z-20 cursor-pointer group/video bg-[#0a0a0a]"
                     onClick={() => setIsVideoPlaying(true)}
                   >
                     <Image 
@@ -346,9 +346,10 @@ export function HeroSectionDemo() {
                 ) : (
                   <iframe 
                     src="https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&loop=false&muted=false&preload=true&responsive=true" 
-                    className="border-0 w-full h-full absolute top-0 left-0 z-10" 
+                    className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]" 
                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" 
                     allowFullScreen={true}
+                    loading="lazy"
                   ></iframe>
                 )}
               </div>
