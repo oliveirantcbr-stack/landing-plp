@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef, memo } from "react";
+import { useState, useEffect, useRef } from "react";
+import type Hls from "hls.js";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
@@ -85,126 +86,80 @@ function HeroCtaButton({ onClick, isMobile = false }: { onClick: () => void; isM
   );
 }
 
-// 🎥 Bunny Stream VSL Configuration (Placeholders / Environment Variables)
-// You can define these in your .env.local file or replace them directly here:
-// NEXT_PUBLIC_BUNNY_VIDEO_ID="your_video_id"
-// NEXT_PUBLIC_BUNNY_LIBRARY_ID="your_library_id"
-const BUNNY_VIDEO_ID = process.env.NEXT_PUBLIC_BUNNY_VIDEO_ID || "68d812a7-c226-4f41-8bd0-4bb2e2af6a1b";
-const BUNNY_LIBRARY_ID = process.env.NEXT_PUBLIC_BUNNY_LIBRARY_ID || "652088";
-
-interface PlayerJSInstance {
-  play?: () => void;
-  unmute?: () => void;
-  setMuted?: (muted: boolean) => void;
-  muted?: boolean;
-  on: (event: string, callback: () => void) => void;
-}
-
-interface PlayerJSConstructor {
-  new (element: HTMLIFrameElement | string): PlayerJSInstance;
-}
-
-// Subcomponente isolado para evitar qualquer re-render ou remontagem do iframe no DOM
-const BunnyPlayer = memo(({ iframeRef }: { iframeRef: React.RefObject<HTMLIFrameElement | null> }) => {
-  return (
-    <iframe
-      ref={iframeRef}
-      key="bunny-hero-iframe"
-      id="bunny-player"
-      src="https://player.mediadelivery.net/embed/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&muted=true&preload=true"
-      className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]"
-      allow="autoplay; encrypted-media"
-      {...{ allowtransparency: "true" }}
-    ></iframe>
-  );
-});
-
-BunnyPlayer.displayName = "BunnyPlayer";
+// 🎥 VSL — Bunny Stream HLS URL
+// Safari plays HLS natively. Chrome/Firefox use hls.js (loaded dynamically, no bundle overhead).
+const BUNNY_HLS_URL =
+  process.env.NEXT_PUBLIC_BUNNY_HLS_URL ||
+  "https://vz-288542d6-ff1.b-cdn.net/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b/playlist.m3u8";
 
 export function HeroSectionDemo() {
-  const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [isPlayerReadyToReveal, setIsPlayerReadyToReveal] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
+  // isRevealed: when true, cover is removed from DOM and audio is unlocked
+  const [isRevealed, setIsRevealed] = useState(false);
 
-  const playerRef = useRef<PlayerJSInstance | null>(null);
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  // Ref to the native <video> element — all audio/playback control is done directly here
+  const videoRef = useRef<HTMLVideoElement>(null);
+  // Ref to the hls.js instance for cleanup on unmount
+  const hlsRef = useRef<Hls | null>(null);
 
+  // Resize listener
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize(); // Check immediately on mount
+    handleResize();
     window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-    // Dynamic loading of the official Player.js library
-    const scriptId = "bunny-player-js-script";
-    let sdkScript = document.getElementById(scriptId) as HTMLScriptElement;
+  // HLS initialization — runs once on mount.
+  // Loads and pre-buffers the HLS stream silently (muted) in the background
+  // so the video is ready the instant the user clicks Play.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
 
-    if (!sdkScript) {
-      sdkScript = document.createElement("script");
-      sdkScript.id = scriptId;
-      sdkScript.src = "https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js";
-      sdkScript.async = true;
-      document.body.appendChild(sdkScript);
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // ✅ Safari — native HLS support, no library needed
+      video.src = BUNNY_HLS_URL;
+      video.load();
+      video.play().catch(() => {}); // muted autoplay is allowed by all browsers
+    } else {
+      // ✅ Chrome / Firefox / Edge — use hls.js (dynamic import = zero bundle cost until needed)
+      import('hls.js').then(({ default: Hls }) => {
+        if (!Hls.isSupported() || !videoRef.current) return;
+        const hls = new Hls({
+          enableWorker: true,   // decode on a worker thread, keeps main thread free
+          startLevel: -1,       // auto quality selection
+          lowLatencyMode: false,
+        });
+        hlsRef.current = hls;
+        hls.loadSource(BUNNY_HLS_URL);
+        hls.attachMedia(videoRef.current);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          // Manifest loaded — begin muted background playback immediately
+          videoRef.current?.play().catch(() => {});
+        });
+      });
     }
 
-    // Polling interval to wait for both the script and DOM element to be ready
-    const checkInterval = setInterval(() => {
-      try {
-        const PlayerConstructor = (window as unknown as { playerjs?: { Player: PlayerJSConstructor } }).playerjs?.Player;
-        const iframeElement = iframeRef.current;
-        
-        if (PlayerConstructor && iframeElement && !playerRef.current) {
-          const player = new PlayerConstructor(iframeElement);
-          playerRef.current = player;
-
-          let hasTriggeredReveal = false;
-          const triggerRevealWithBuffer = () => {
-            if (hasTriggeredReveal) return;
-            hasTriggeredReveal = true;
-            // Atraso sutil de 250ms para acomodar o "Hardware Decoding Lag" e pintar o frame na tela
-            setTimeout(() => {
-              setIsPlayerReadyToReveal(true);
-            }, 250);
-          };
-
-          // Registra o listener correto de play para comandar o fade-out
-          player.on("play", triggerRevealWithBuffer);
-        }
-      } catch (err) {
-        console.log("Player.js polling initialization failed:", err);
-      }
-    }, 100);
-    
     return () => {
-      clearInterval(checkInterval);
-      window.removeEventListener('resize', handleResize);
+      // Destroy hls.js instance on component unmount to free memory and stop network requests
+      hlsRef.current?.destroy();
+      hlsRef.current = null;
     };
   }, []);
 
+  // Click handler: 100% synchronous within the user gesture.
+  // Browsers grant audio permission when muted=false is set directly inside a click event.
+  // No postMessage, no cross-origin trust chain, no iframe drama.
   const handlePlayClick = () => {
-    setIsVideoPlaying(true);
-
-    // Unmute player natively via Player.js API
-    try {
-      if (playerRef.current) {
-        if (typeof playerRef.current.unmute === "function") {
-          playerRef.current.unmute();
-        } else if (typeof playerRef.current.setMuted === "function") {
-          playerRef.current.setMuted(false);
-        } else {
-          playerRef.current.muted = false;
-        }
-      }
-    } catch (err) {
-      console.log("Player.js unmute failed:", err);
+    if (isRevealed) return; // guard against double-clicks
+    setIsRevealed(true);
+    if (videoRef.current) {
+      videoRef.current.muted = false;
+      videoRef.current.currentTime = 0; // restart from beginning after background preload
     }
-
-    // Safety Fallback: Reveal after 2.5s anyway to prevent getting stuck
-    setTimeout(() => {
-      setIsPlayerReadyToReveal(true);
-    }, 2500);
   };
 
-  const ContainerTag = (isMobile ? "div" : motion.div) as React.ElementType;
   const containerProps = isMobile ? {} : {
     initial: { opacity: 0, y: 15 },
     animate: { opacity: 1, y: 0 },
@@ -301,7 +256,7 @@ export function HeroSectionDemo() {
       </div>
 
       {/* Main Layout Container */}
-      <ContainerTag
+      <motion.div
         {...containerProps}
         className="relative z-30 w-full min-h-screen flex flex-col items-center justify-between px-6 pt-24 pb-8 md:justify-end lg:justify-center lg:items-start lg:px-24 lg:py-0"
       >
@@ -447,43 +402,45 @@ export function HeroSectionDemo() {
 
                 {/* Video / Player Area Container */}
                 <div className="relative w-full aspect-video bg-[#0a0a0a] overflow-hidden">
-                  {/* Highly isolated memoized iframe player component */}
-                  <BunnyPlayer iframeRef={iframeRef} />
 
-                  {/* Cover image sits on top (z-20) and is visible until the user clicks and the iframe has fully loaded */}
-                  <div 
-                    className={`absolute inset-0 w-full h-full z-20 cursor-pointer group/video bg-[#0a0a0a] transition-opacity duration-500 ease-in-out ${
-                      (isVideoPlaying && isPlayerReadyToReveal) ? "opacity-0 pointer-events-none" : "opacity-100"
-                    }`}
-                    onClick={() => handlePlayClick()}
-                  >
-                    <Image 
-                      src="/APERTE O PLAY.webp" 
-                      alt="Aperte o Play" 
-                      fill 
-                      className="object-cover transition-transform duration-700 group-hover/video:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-black/20 group-hover/video:bg-black/10 transition-colors duration-500" />
-                    
-                    {/* Glass Pulsing Play Icon or Subtle Loading Spinner (Strict DOM Isolation - Zero Layout Shift) */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      {/* Play Button Icon */}
-                      <div className={`size-14 rounded-full bg-purple-600/90 border border-purple-400/40 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse transition-opacity duration-300 ${
-                        isVideoPlaying ? "opacity-0" : "opacity-100"
-                      }`}>
-                        <svg className="size-6 text-white fill-current translate-x-[2px]" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
+                  {/* Native <video> (z-10) — pre-buffers the HLS stream silently in background.
+                      No iframe, no Cast SDK, no postMessage. Pure browser-native decoding. */}
+                  <video
+                    ref={videoRef}
+                    muted
+                    playsInline
+                    loop
+                    preload="auto"
+                    className="absolute inset-0 w-full h-full z-10 object-cover bg-[#0a0a0a]"
+                  />
+
+                  {/* Protective cover (z-20) — React conditional: removed from DOM on reveal.
+                      No CSS transition = no GPU compositor conflict = zero flicker. */}
+                  {!isRevealed && (
+                    <div
+                      className="absolute inset-0 w-full h-full z-20 bg-[#0a0a0a] cursor-pointer"
+                      onClick={handlePlayClick}
+                    >
+                      <Image
+                        src="/APERTE O PLAY.webp"
+                        alt="Aperte o Play"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority
+                      />
+                      <div className="absolute inset-0 bg-black/20" />
+                      {/* Glass Play Icon */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="size-14 rounded-full bg-purple-600/90 border border-purple-400/40 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse">
+                          <svg className="size-6 text-white fill-current translate-x-[2px]" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
                       </div>
-                      
-                      {/* Loading Spinner */}
-                      <div className={`absolute size-10 rounded-full border-2 border-purple-500/20 border-t-purple-500 animate-spin transition-opacity duration-300 ${
-                        isVideoPlaying ? "opacity-100" : "opacity-0"
-                      }`} />
                     </div>
-                  </div>
+                  )}
+
                 </div>
 
               </div>
@@ -559,11 +516,7 @@ export function HeroSectionDemo() {
             </div>
           </div>
         </div>
-
-      </ContainerTag>
-
-
-
+      </motion.div>
     </section>
   );
 }
