@@ -99,6 +99,14 @@ export function HeroSectionDemo() {
     };
   }, []);
 
+  // @ts-ignore
+  const ContainerTag = isMobile ? "div" : motion.div;
+  const containerProps = isMobile ? {} : {
+    initial: { opacity: 0, y: 15 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
+
   return (
     <section
       id="hero"
@@ -189,10 +197,9 @@ export function HeroSectionDemo() {
       </div>
 
       {/* Main Layout Container */}
-      <motion.div 
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+      {/* @ts-ignore */}
+      <ContainerTag
+        {...containerProps}
         className="relative z-30 w-full min-h-screen flex flex-col items-center justify-between px-6 pt-24 pb-8 md:justify-end lg:justify-center lg:items-start lg:px-24 lg:py-0"
       >
         
@@ -310,16 +317,16 @@ export function HeroSectionDemo() {
 
         {/* MOBILE MIDDLE GROUP: Bunnynet Video Presentation (Vibe VSL) */}
         {USE_VIDEO_BACKGROUND_MOBILE && (
-          <div className="md:hidden w-full max-w-[320px] xs:max-w-[340px] px-4 z-40 my-6 animate-in fade-in slide-in-from-bottom-3 duration-1000 delay-300 fill-mode-both">
+          <div className="md:hidden w-full max-w-[320px] xs:max-w-[340px] px-4 z-40 my-6">
             <div className="relative rounded-3xl p-[1px] bg-gradient-to-b from-purple-500/40 via-white/10 to-transparent shadow-[0_0_50px_rgba(168,85,247,0.2)] overflow-hidden">
               <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl" />
               
-              <div 
-                className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full cursor-pointer group/video"
-                onClick={() => !isVideoPlaying && setIsVideoPlaying(true)}
-              >
+              <div className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full">
                 {!isVideoPlaying ? (
-                  <div className="absolute inset-0 w-full h-full z-20">
+                  <div 
+                    className="absolute inset-0 w-full h-full z-20 cursor-pointer group/video"
+                    onClick={() => setIsVideoPlaying(true)}
+                  >
                     <Image 
                       src="/APERTE O PLAY.webp" 
                       alt="Aperte o Play" 
@@ -420,7 +427,8 @@ export function HeroSectionDemo() {
           </div>
         </div>
 
-      </motion.div>
+      {/* @ts-ignore */}
+      </ContainerTag>
     </section>
   );
 }
