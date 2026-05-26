@@ -99,7 +99,7 @@ export function HeroSectionDemo() {
     };
   }, []);
 
-  const ContainerTag = (isMobile ? "div" : motion.div) as any;
+  const ContainerTag = (isMobile ? "div" : motion.div) as React.ElementType;
   const containerProps = isMobile ? {} : {
     initial: { opacity: 0, y: 15 },
     animate: { opacity: 1, y: 0 },
