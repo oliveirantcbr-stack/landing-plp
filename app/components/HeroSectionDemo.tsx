@@ -99,8 +99,7 @@ export function HeroSectionDemo() {
     };
   }, []);
 
-  // @ts-ignore
-  const ContainerTag = isMobile ? "div" : motion.div;
+  const ContainerTag = (isMobile ? "div" : motion.div) as any;
   const containerProps = isMobile ? {} : {
     initial: { opacity: 0, y: 15 },
     animate: { opacity: 1, y: 0 },
@@ -197,7 +196,6 @@ export function HeroSectionDemo() {
       </div>
 
       {/* Main Layout Container */}
-      {/* @ts-ignore */}
       <ContainerTag
         {...containerProps}
         className="relative z-30 w-full min-h-screen flex flex-col items-center justify-between px-6 pt-24 pb-8 md:justify-end lg:justify-center lg:items-start lg:px-24 lg:py-0"
@@ -427,7 +425,6 @@ export function HeroSectionDemo() {
           </div>
         </div>
 
-      {/* @ts-ignore */}
       </ContainerTag>
     </section>
   );
