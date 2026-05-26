@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { scrollToOferta } from "@/lib/scrollToOferta";
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
-import Script from "next/script";
 
 const UnicornBackground = dynamic(() => import("./UnicornBackground"), {
   ssr: false,
@@ -105,13 +104,30 @@ interface PlayerJSConstructor {
   new (element: HTMLIFrameElement | string): PlayerJSInstance;
 }
 
+// Subcomponente isolado para evitar qualquer re-render ou remontagem do iframe no DOM
+const BunnyPlayer = memo(({ iframeRef }: { iframeRef: React.RefObject<HTMLIFrameElement | null> }) => {
+  return (
+    <iframe
+      ref={iframeRef}
+      key="bunny-hero-iframe"
+      id="bunny-player"
+      src="https://player.mediadelivery.net/embed/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=true&muted=true&preload=true"
+      className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]"
+      allow="autoplay; encrypted-media"
+      {...{ allowtransparency: "true" }}
+    ></iframe>
+  );
+});
+
+BunnyPlayer.displayName = "BunnyPlayer";
+
 export function HeroSectionDemo() {
   const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const [isPlayerReadyToReveal, setIsPlayerReadyToReveal] = useState(false);
 
   const playerRef = useRef<PlayerJSInstance | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -134,12 +150,11 @@ export function HeroSectionDemo() {
     const checkInterval = setInterval(() => {
       try {
         const PlayerConstructor = (window as unknown as { playerjs?: { Player: PlayerJSConstructor } }).playerjs?.Player;
-        const iframeElement = document.getElementById("bunny-player") as HTMLIFrameElement;
+        const iframeElement = iframeRef.current;
         
         if (PlayerConstructor && iframeElement && !playerRef.current) {
           const player = new PlayerConstructor(iframeElement);
           playerRef.current = player;
-          setIsIframeLoaded(true);
 
           let hasTriggeredReveal = false;
           const triggerRevealWithBuffer = () => {
@@ -168,12 +183,9 @@ export function HeroSectionDemo() {
   const handlePlayClick = () => {
     setIsVideoPlaying(true);
 
-    // Unmute and play player natively via Player.js API
+    // Unmute player natively via Player.js API
     try {
       if (playerRef.current) {
-        if (typeof playerRef.current.play === "function") {
-          playerRef.current.play();
-        }
         if (typeof playerRef.current.unmute === "function") {
           playerRef.current.unmute();
         } else if (typeof playerRef.current.setMuted === "function") {
@@ -183,7 +195,7 @@ export function HeroSectionDemo() {
         }
       }
     } catch (err) {
-      console.log("Player.js play/unmute failed:", err);
+      console.log("Player.js unmute failed:", err);
     }
 
     // Safety Fallback: Reveal after 2.5s anyway to prevent getting stuck
@@ -435,14 +447,8 @@ export function HeroSectionDemo() {
 
                 {/* Video / Player Area Container */}
                 <div className="relative w-full aspect-video bg-[#0a0a0a] overflow-hidden">
-                  {/* Iframe with PlayerJS communication - Zero Re-render visual layer */}
-                  <iframe 
-                    id="bunny-player"
-                    src={`https://player.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/${BUNNY_VIDEO_ID}?autoplay=true&muted=true&preload=true`}
-                    className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]"
-                    allow="autoplay; encrypted-media"
-                    {...{ allowtransparency: "true" }}
-                  ></iframe>
+                  {/* Highly isolated memoized iframe player component */}
+                  <BunnyPlayer iframeRef={iframeRef} />
 
                   {/* Cover image sits on top (z-20) and is visible until the user clicks and the iframe has fully loaded */}
                   <div 
