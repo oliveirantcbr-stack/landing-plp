@@ -117,15 +117,24 @@ export function HeroSectionDemo() {
     const video = videoRef.current;
     if (!video) return;
 
+    let active = true;
+
     if (video.canPlayType('application/vnd.apple.mpegurl')) {
       // ✅ Safari — native HLS support, no library needed
       video.src = BUNNY_HLS_URL;
       video.load();
       video.play().catch(() => {}); // muted autoplay is allowed by all browsers
     } else {
-      // ✅ Chrome / Firefox / Edge — use hls.js (dynamic import = zero bundle cost until needed)
-      import('hls.js').then(({ default: Hls }) => {
-        if (!Hls.isSupported() || !videoRef.current) return;
+      // ✅ Chrome / Firefox / Edge — load hls.js from CDN (bypassing webpack at build-time)
+      const SCRIPT_ID = "hls-js-cdn";
+      const HLS_CDN = "https://cdn.jsdelivr.net/npm/hls.js@1.6.16/dist/hls.min.js";
+
+      const initHls = () => {
+        if (!active) return;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const Hls = (window as any).Hls;
+        if (!Hls || !Hls.isSupported() || !videoRef.current) return;
+
         const hls = new Hls({
           enableWorker: true,   // decode on a worker thread, keeps main thread free
           startLevel: -1,       // auto quality selection
@@ -135,13 +144,25 @@ export function HeroSectionDemo() {
         hls.loadSource(BUNNY_HLS_URL);
         hls.attachMedia(videoRef.current);
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          // Manifest loaded — begin muted background playback immediately
-          videoRef.current?.play().catch(() => {});
+          if (active) {
+            videoRef.current?.play().catch(() => {});
+          }
         });
-      });
+      };
+
+      if (document.getElementById(SCRIPT_ID)) {
+        initHls();
+      } else {
+        const script = document.createElement("script");
+        script.id = SCRIPT_ID;
+        script.src = HLS_CDN;
+        script.onload = initHls;
+        document.head.appendChild(script);
+      }
     }
 
     return () => {
+      active = false;
       // Destroy hls.js instance on component unmount to free memory and stop network requests
       hlsRef.current?.destroy();
       hlsRef.current = null;
