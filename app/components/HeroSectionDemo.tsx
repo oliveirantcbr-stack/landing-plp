@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AvatarGroup } from "@/components/ui/avatar-group";
@@ -86,57 +86,110 @@ function HeroCtaButton({ onClick, isMobile = false }: { onClick: () => void; isM
   );
 }
 
-interface PlayerInstance {
-  play: () => void;
-  unmute: () => void;
+// 🎥 Bunny Stream VSL Configuration (Placeholders / Environment Variables)
+// You can define these in your .env.local file or replace them directly here:
+// NEXT_PUBLIC_BUNNY_VIDEO_ID="your_video_id"
+// NEXT_PUBLIC_BUNNY_LIBRARY_ID="your_library_id"
+const BUNNY_VIDEO_ID = process.env.NEXT_PUBLIC_BUNNY_VIDEO_ID || "68d812a7-c226-4f41-8bd0-4bb2e2af6a1b";
+const BUNNY_LIBRARY_ID = process.env.NEXT_PUBLIC_BUNNY_LIBRARY_ID || "652088";
+
+interface PlayerJSInstance {
+  play?: () => void;
+  unmute?: () => void;
+  setMuted?: (muted: boolean) => void;
+  muted?: boolean;
+  on: (event: string, callback: () => void) => void;
 }
 
-interface PlayerJS {
-  Player: new (id: string) => PlayerInstance;
+interface PlayerJSConstructor {
+  new (element: HTMLIFrameElement | string): PlayerJSInstance;
 }
 
 export function HeroSectionDemo() {
   const [isMobile, setIsMobile] = useState(true); // Assume mobile initially for performance
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+  const [isPlayerReadyToReveal, setIsPlayerReadyToReveal] = useState(false);
+
+  const playerRef = useRef<PlayerJSInstance | null>(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize(); // Check immediately on mount
     window.addEventListener('resize', handleResize);
+
+    // Dynamic loading of the official Player.js library
+    const scriptId = "bunny-player-js-script";
+    let sdkScript = document.getElementById(scriptId) as HTMLScriptElement;
+
+    if (!sdkScript) {
+      sdkScript = document.createElement("script");
+      sdkScript.id = scriptId;
+      sdkScript.src = "https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js";
+      sdkScript.async = true;
+      document.body.appendChild(sdkScript);
+    }
+
+    // Polling interval to wait for both the script and DOM element to be ready
+    const checkInterval = setInterval(() => {
+      try {
+        const PlayerConstructor = (window as unknown as { playerjs?: { Player: PlayerJSConstructor } }).playerjs?.Player;
+        const iframeElement = document.getElementById("bunny-player") as HTMLIFrameElement;
+        
+        if (PlayerConstructor && iframeElement && !playerRef.current) {
+          const player = new PlayerConstructor(iframeElement);
+          playerRef.current = player;
+          setIsIframeLoaded(true);
+
+          let hasTriggeredReveal = false;
+          const triggerRevealWithBuffer = () => {
+            if (hasTriggeredReveal) return;
+            hasTriggeredReveal = true;
+            // Atraso sutil de 250ms para acomodar o "Hardware Decoding Lag" e pintar o frame na tela
+            setTimeout(() => {
+              setIsPlayerReadyToReveal(true);
+            }, 250);
+          };
+
+          // Registra o listener correto de play para comandar o fade-out
+          player.on("play", triggerRevealWithBuffer);
+        }
+      } catch (err) {
+        console.log("Player.js polling initialization failed:", err);
+      }
+    }, 100);
     
     return () => {
+      clearInterval(checkInterval);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   const handlePlayClick = () => {
     setIsVideoPlaying(true);
-    
-    // 1. Direct postMessage triggers (runs synchronously in the same callstack of the click gesture)
-    const iframe = document.getElementById("bunny-vsl-player") as HTMLIFrameElement;
-    if (iframe && iframe.contentWindow) {
-      try {
-        iframe.contentWindow.postMessage(JSON.stringify({ method: "play" }), "*");
-        iframe.contentWindow.postMessage(JSON.stringify({ method: "unmute" }), "*");
-        iframe.contentWindow.postMessage(JSON.stringify({ context: "player.js", method: "play" }), "*");
-        iframe.contentWindow.postMessage(JSON.stringify({ context: "player.js", method: "unmute" }), "*");
-      } catch (err) {
-        console.warn("Direct postMessage calls failed:", err);
-      }
-    }
 
-    // 2. Official PlayerJS API call as robust second layer
+    // Unmute and play player natively via Player.js API
     try {
-      const playerjs = (window as unknown as { playerjs?: PlayerJS }).playerjs;
-      if (playerjs) {
-        const player = new playerjs.Player("bunny-vsl-player");
-        player.unmute();
-        player.play();
+      if (playerRef.current) {
+        if (typeof playerRef.current.play === "function") {
+          playerRef.current.play();
+        }
+        if (typeof playerRef.current.unmute === "function") {
+          playerRef.current.unmute();
+        } else if (typeof playerRef.current.setMuted === "function") {
+          playerRef.current.setMuted(false);
+        } else {
+          playerRef.current.muted = false;
+        }
       }
     } catch (err) {
-      console.log("PlayerJS play/unmute failed:", err);
+      console.log("Player.js play/unmute failed:", err);
     }
+
+    // Safety Fallback: Reveal after 2.5s anyway to prevent getting stuck
+    setTimeout(() => {
+      setIsPlayerReadyToReveal(true);
+    }, 2500);
   };
 
   const ContainerTag = (isMobile ? "div" : motion.div) as React.ElementType;
@@ -353,43 +406,49 @@ export function HeroSectionDemo() {
           </div>
         </div>
 
-        {/* MOBILE MIDDLE GROUP: Bunnynet Video Presentation (Vibe VSL) */}
+        {/* MOBILE MIDDLE GROUP: Bunnynet Video Presentation (Vibe VSL) wrapped in macOS Window Mockup */}
         {USE_VIDEO_BACKGROUND_MOBILE && (
           <div className="md:hidden w-full max-w-[320px] xs:max-w-[340px] px-4 z-40 my-6">
             <div className="relative rounded-3xl p-[1px] bg-gradient-to-b from-purple-500/40 via-white/10 to-transparent shadow-[0_0_50px_rgba(168,85,247,0.2)] overflow-hidden">
               <div className="absolute inset-0 bg-zinc-950/80 backdrop-blur-xl" />
               
-              <div className="relative rounded-[23px] overflow-hidden bg-black aspect-video w-full">
-                {/* Iframe sits underneath (z-10) and is rendered from the start to preload in background */}
-                <iframe 
-                  id="bunny-vsl-player"
-                  src="https://player.mediadelivery.net/play/652088/68d812a7-c226-4f41-8bd0-4bb2e2af6a1b?autoplay=false&loop=false&muted=true&preload=true&responsive=true" 
-                  className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]" 
-                  allow="autoplay; encrypted-media; picture-in-picture" 
-                  allowFullScreen={true}
-                  loading="lazy"
-                  onLoad={() => {
-                    setIsIframeLoaded(true);
-                    // Tentativa imediata de reproduzir/desmutar assim que o iframe concluir a carga caso o usuário já tenha clicado
-                    if (isVideoPlaying) {
-                      try {
-                        const playerjs = (window as unknown as { playerjs?: PlayerJS }).playerjs;
-                        if (playerjs) {
-                          const player = new playerjs.Player("bunny-vsl-player");
-                          player.unmute();
-                          player.play();
-                        }
-                      } catch (err) {
-                        console.log("PlayerJS onLoad unmute failed:", err);
-                      }
-                    }
-                  }}
-                ></iframe>
+              {/* macOS Mockup Window Container */}
+              <div className="relative rounded-2xl overflow-hidden bg-[#0a0a0a] border border-zinc-800/50 shadow-2xl flex flex-col w-full">
+                
+                {/* macOS Browser Header / Top Bar */}
+                <div className="relative h-9 px-4 flex items-center bg-[#151515]/90 border-b border-white/[0.03] select-none z-30">
+                  {/* Traffic Light Windows Buttons */}
+                  <div className="flex items-center gap-1.5">
+                    <span className="size-2 rounded-full bg-[#ff5f56]" />
+                    <span className="size-2 rounded-full bg-[#ffbd2e]" />
+                    <span className="size-2 rounded-full bg-[#27c93f]" />
+                  </div>
+                  
+                  {/* Pill Search URL Bar */}
+                  <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-0.5 bg-black/45 border border-white/[0.03] rounded-md min-w-[120px] xs:min-w-[140px] justify-center">
+                    <svg className="size-2.5 text-zinc-500 fill-current opacity-80" viewBox="0 0 24 24">
+                      <path d="M12 2c-2.76 0-5 2.24-5 5v3H6c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2h-1v-3c0-2.76-2.24-5-5-5zm-3 8V7c0-1.66 1.34-3 3-3s3 1.34 3 3v3H9z" />
+                    </svg>
+                    <span className="text-[9px] text-zinc-400 font-mono tracking-tight leading-none">app.packlp.com</span>
+                  </div>
+                </div>
 
-                {/* Cover image sits on top (z-20) and is visible until the user clicks and the iframe has fully loaded */}
-                {(!isVideoPlaying || !isIframeLoaded) && (
+                {/* Video / Player Area Container */}
+                <div className="relative w-full aspect-video bg-[#0a0a0a] overflow-hidden">
+                  {/* Iframe with PlayerJS communication - Zero Re-render visual layer */}
+                  <iframe 
+                    id="bunny-player"
+                    src={`https://player.mediadelivery.net/embed/${BUNNY_LIBRARY_ID}/${BUNNY_VIDEO_ID}?autoplay=true&muted=true&preload=true`}
+                    className="border-0 w-full h-full absolute top-0 left-0 z-10 bg-[#0a0a0a]"
+                    allow="autoplay; encrypted-media"
+                    {...{ allowtransparency: "true" }}
+                  ></iframe>
+
+                  {/* Cover image sits on top (z-20) and is visible until the user clicks and the iframe has fully loaded */}
                   <div 
-                    className="absolute inset-0 w-full h-full z-20 cursor-pointer group/video bg-[#0a0a0a]"
+                    className={`absolute inset-0 w-full h-full z-20 cursor-pointer group/video bg-[#0a0a0a] transition-opacity duration-500 ease-in-out ${
+                      (isVideoPlaying && isPlayerReadyToReveal) ? "opacity-0 pointer-events-none" : "opacity-100"
+                    }`}
                     onClick={() => handlePlayClick()}
                   >
                     <Image 
@@ -397,24 +456,30 @@ export function HeroSectionDemo() {
                       alt="Aperte o Play" 
                       fill 
                       className="object-cover transition-transform duration-700 group-hover/video:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       priority
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover/video:bg-black/10 transition-colors duration-500" />
                     
-                    {/* Glass Pulsing Play Icon or Subtle Loading Spinner */}
+                    {/* Glass Pulsing Play Icon or Subtle Loading Spinner (Strict DOM Isolation - Zero Layout Shift) */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      {!isVideoPlaying ? (
-                        <div className="size-14 rounded-full bg-purple-600/90 border border-purple-400/40 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse">
-                          <svg className="size-6 text-white fill-current translate-x-[2px]" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </div>
-                      ) : (
-                        <div className="size-10 rounded-full border-2 border-purple-500/20 border-t-purple-500 animate-spin" />
-                      )}
+                      {/* Play Button Icon */}
+                      <div className={`size-14 rounded-full bg-purple-600/90 border border-purple-400/40 backdrop-blur-md flex items-center justify-center text-white shadow-[0_0_30px_rgba(168,85,247,0.6)] animate-pulse transition-opacity duration-300 ${
+                        isVideoPlaying ? "opacity-0" : "opacity-100"
+                      }`}>
+                        <svg className="size-6 text-white fill-current translate-x-[2px]" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                      
+                      {/* Loading Spinner */}
+                      <div className={`absolute size-10 rounded-full border-2 border-purple-500/20 border-t-purple-500 animate-spin transition-opacity duration-300 ${
+                        isVideoPlaying ? "opacity-100" : "opacity-0"
+                      }`} />
                     </div>
                   </div>
-                )}
+                </div>
+
               </div>
             </div>
           </div>
@@ -491,11 +556,8 @@ export function HeroSectionDemo() {
 
       </ContainerTag>
 
-      {/* Bunnynet Stream PlayerJS API SDK for unified cross-origin player control */}
-      <Script 
-        src="https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js" 
-        strategy="afterInteractive" 
-      />
+
+
     </section>
   );
 }
