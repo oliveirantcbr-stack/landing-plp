@@ -357,12 +357,15 @@ export function HeroSectionDemo() {
           </div>
 
           {/* Headline */}
-          <h1 className="flex flex-col text-center font-black tracking-tighter leading-[0.95] w-full">
-            <span className="text-[25px] xs:text-[30px] sm:text-4xl text-white uppercase drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-              Entregue em Minutos.
+          <h1 className="flex flex-col text-center font-black tracking-tighter leading-[1.0] w-full">
+            <span className="text-[21px] xs:text-[25px] sm:text-3xl text-white uppercase drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+              O Segredo para Entregar
             </span>
             <span className="text-[20px] xs:text-[24px] sm:text-3xl italic text-purple-400 mt-0.5 uppercase drop-shadow-[0_4px_10px_rgba(168,85,247,0.45)]">
-              Cobre em Reais.
+              Sites Profissionais
+            </span>
+            <span className="text-[21px] xs:text-[25px] sm:text-3xl text-white uppercase drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] mt-0.5">
+              em Menos de 1 Hora.
             </span>
           </h1>
 
@@ -473,9 +476,9 @@ export function HeroSectionDemo() {
         <div className="md:hidden flex flex-col items-center w-full gap-5 z-40 mt-auto">
           {/* Description */}
           <p className="text-[11px] xs:text-xs sm:text-sm text-zinc-200 leading-relaxed text-center max-w-[290px] xs:max-w-xs font-medium drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-            Mais de <span className="text-purple-400 font-bold">250 seções prontas</span> para copiar e colar no Elementor.
+            Acesse <span className="text-purple-400 font-bold">+250 seções prontas</span> para copiar e colar no Elementor.
             <span className="block mt-1 text-zinc-400 font-semibold">
-              Sem saber código. Sem depender de designer.
+              Trabalhe menos, entregue mais rápido e cobre mais caro.
             </span>
           </p>
 
